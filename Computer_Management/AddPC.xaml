@@ -1,0 +1,61 @@
+﻿<Window x:Class="Computer_Management.AddPC"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Computer_Management"
+        mc:Ignorable="d"
+        Icon="Icons\add_pc_icon.png"
+        Title="Add computer" WindowStartupLocation="CenterScreen" Height="450" Width="800" ResizeMode="CanMinimize">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="421*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- LABELS-->
+        <DockPanel Grid.ColumnSpan="2">
+            <StackPanel>
+                <Label Content="Specifications:" FontWeight="Bold" FontSize="20" Margin="0,3,0,0"/>
+                <Label Content="User Name:" Margin="0,10,0,0" FontSize="13"/>
+                <Label Content="OS:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Content="Processor:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Content="Graphic card:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Content="RAM:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Content="Motherboard:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Content="Paste:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Content="Next cleaning:" Margin="0,14,0,0" FontSize="13"/>
+            </StackPanel>
+        </DockPanel>
+
+        <!-- TEXT BOXES -->
+        <DockPanel Grid.Column="1">
+            <StackPanel>
+                <Image Name="thisPCBTN" Height="23" Width="23" Margin="0,10,10,-30" HorizontalAlignment="Right" Source="Icons\thisPC.png" MouseDown="thisPCBTN_Click" Cursor="Hand" ToolTip="This PC"/>
+                <TextBox Name="userNameTxtBox" Margin="10,50,10,8" Height="25" VerticalContentAlignment="Center"/>
+                <TextBox Name="operatingSystemTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
+                <TextBox Name="cpuTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
+                <TextBox Name="gpuTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
+                <TextBox Name="ramTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
+                <TextBox Name="mbTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
+                <ComboBox Name="pasteTypeComboBox" Margin="10,8,10,8" Height="25" SelectedIndex="0" VerticalContentAlignment="Center"/>
+                <DatePicker Name="datePicker" Margin="10,8,10,8" VerticalContentAlignment="Center"/>
+                
+            </StackPanel>
+        </DockPanel>
+        
+        <!-- NOTES -->
+        <DockPanel Grid.Column="2">
+            <StackPanel Margin="15,0,15,0">
+                <Label Name="notesL" Content="Notes:" FontWeight="Bold" FontSize="20"/>
+                <TextBox Name="noteTextBox" Height="311" Margin="0,13,0,0" TextWrapping="Wrap" AcceptsReturn="True" TextChanged="noteTextBox_TextChanged"/>
+                <Button Name="addPcBTN" Content="Save computer" Margin="0,10,0,0" HorizontalAlignment="Right" Width="200" Height="25" Click="addPcBTN_Click" />
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>
+

@@ -1,0 +1,15 @@
+﻿<Window x:Class="Computer_Management.ChangeData"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Computer_Management"
+        mc:Ignorable="d"
+        Title="Change Data" Icon="Icons/change_icon.png" Height="135" Width="357" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FF0097FF" KeyDown="Window_KeyDown">
+    <Grid>
+        <TextBox Name="textBoxData" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10" Height="20" Width="330"/>
+        <ComboBox Name="pasteCombobox" Height="23" Width="330" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,9"/>
+        <Button Name="SaveBTN" Content="Save" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" Width="76" Click="SaveBTN_Click"/>
+        <Label Name="labelTxt" Content="" HorizontalAlignment="Left" Margin="2,10,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold"/>
+    </Grid>
+</Window>

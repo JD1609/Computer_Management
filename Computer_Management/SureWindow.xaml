@@ -1,0 +1,16 @@
+﻿<Window x:Class="Computer_Management.SureWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Computer_Management"
+        mc:Ignorable="d"
+        Icon="Icons\SureWindow_icon.png"
+        Title="Window title" Height="135" Width="357" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFFDFDFD" Foreground="Black" KeyDown="Window_KeyDown">
+    <Grid>
+        <Label Name="mainText" Content="MainText" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="309" FontSize="14"/>
+        <Button Name="yesBTN" Content="Yes" HorizontalAlignment="Left" Margin="163,65,0,0" VerticalAlignment="Top" Width="75" Click="yesBTN_Click"/>
+        <Button Name="noBTN" Content="No" HorizontalAlignment="Left" Margin="253,65,0,0" VerticalAlignment="Top" Width="75" Click="noBTN_Click"/>
+
+    </Grid>
+</Window>
