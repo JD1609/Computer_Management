@@ -196,9 +196,6 @@
     <Resource Include="Icons\Refresh.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\Settings_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icons\Folder_icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +203,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\thisPC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Settings_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

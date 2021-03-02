@@ -22,6 +22,8 @@ namespace Computer_Management
     public partial class SettingsWindow : Window
     {
         public string[] Months { get; private set; }
+        public byte CrossPlatform { get; private set; }
+
         public SettingsWindow()
         {
             InitializeComponent();
@@ -53,11 +55,19 @@ namespace Computer_Management
             }
         }
 
+        private void CrossPlatformCHB_Checked(object sender, RoutedEventArgs e)
+        {
+            CrossPlatform = 1;
+        }
+        private void CrossPlatformCHB_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CrossPlatform = 0;
+        }
+        // --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- |
         private void RDBTN_Click(object sender, RoutedEventArgs e)
         {
             Settings.RestoreDefault(this);
         }
-
         private void OkBTN_Click(object sender, RoutedEventArgs e)
         {
             Settings.SaveSettings(this);

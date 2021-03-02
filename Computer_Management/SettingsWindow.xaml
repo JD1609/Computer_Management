@@ -22,7 +22,9 @@
 
         <Button Name="RDBTN" Content="Restore default" HorizontalAlignment="Left" Margin="220,155,0,0" VerticalAlignment="Top" Width="90" Click="RDBTN_Click" Height="20"/>
         <Button Name="OkBTN" Content="OK" HorizontalAlignment="Left" Margin="327,155,0,0" VerticalAlignment="Top" Width="60" Click="OkBTN_Click" Height="20"/>
-        <Label Content="This window doesn't work..." HorizontalAlignment="Left" Margin="73,91,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="Red"/>
+        <Label Content="This window doesn't work yet..." HorizontalAlignment="Left" Margin="51,113,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="Red"/>
+        <CheckBox Name="CrossPlatformCHB" HorizontalAlignment="Left" Margin="125,80,0,0" VerticalAlignment="Top" Checked="CrossPlatformCHB_Checked" Unchecked="CrossPlatformCHB_Unchecked"/>
+        <Label Content="Cross-platform data" ToolTip="Save data on Google disk or other &#10; and set path to the data file" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

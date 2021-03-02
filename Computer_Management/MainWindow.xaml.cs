@@ -43,12 +43,12 @@ namespace Computer_Management
                 this.Close();
             }
 
-            // --- DATA FILE --- // --- DATA FILE --- // --- DATA FILE --- // --- DATA FILE --- // --- DATA FILE --- // --- DATA FILE --- // --- DATA FILE --- //
-            bool fileExist = true;
+            // --- DATA FILE --- | --- DATA FILE --- | --- DATA FILE --- | --- DATA FILE --- | --- DATA FILE --- | --- DATA FILE --- | --- DATA FILE --- | --- DATA FILE --- |
             try
             {
-                if (!File.Exists(database.DataPath))
-                    File.Create(database.DataPath);
+                string dataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.csv");
+                if (!File.Exists(dataPath))
+                    File.Create(dataPath);
                 /*
                 if (!File.Exists(database.SettingsPath)) 
                 {
@@ -65,7 +65,7 @@ namespace Computer_Management
                 MessageBox.Show("Application couldn't be started...\nPlease check your authorization!" + MsgBoxEditor.EditText("\nError[0x00001010]"), "Data file creating error", MessageBoxButton.OK, MessageBoxImage.Error);
                 this.Close();
             }
-
+            // --- BUTTONS --- |
             PasteChange = false;
             DustClean = false;
             CancelPicBTN.Visibility = Visibility.Hidden;
@@ -74,21 +74,13 @@ namespace Computer_Management
             SaveNotePicBTN.Visibility = Visibility.Hidden;
 
             // --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- |
-            // --- PŘEPRACOVAT ---
-            if (File.Exists(database.DataPath))
+            try
             {
-                try
-                {
-                    database.LoadData(database.DataPath);
-                }
-                catch
-                {
-                    MessageBox.Show(MsgBoxEditor.EditText("Something went wrong...") + "\nError[0xD0010001]", "Data not loaded", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                database.LoadData(database.DataPath);
             }
-            else { }
-            //MessageBox.Show(MsgBoxEditor.EditText("Something went wrong...") + "\nError[0xD0010001]", "Data not loaded", MessageBoxButton.OK, MessageBoxImage.Error); }
-        }
+            catch { }
+            //MessageBox.Show(MsgBoxEditor.EditText("Something went wrong...") + "\nError[0xD0010001]", "Data not loaded", MessageBoxButton.OK, MessageBoxImage.Error);
+         }
 
         // --- LABEL CONTENTS, NOTES & TOOLTIPS --- | --- LABEL CONTENTS, NOTES & TOOLTIPS --- | --- LABEL CONTENTS, NOTES & TOOLTIPS --- |
         private void pcList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -96,7 +88,7 @@ namespace Computer_Management
             SavePicBTN.Visibility = Visibility.Hidden;
             CancelPicBTN.Visibility = Visibility.Hidden;
 
-            if (pcList.SelectedItem != null) 
+            if (pcList.SelectedItem != null)
             {
                 Computer computer = (Computer)pcList.SelectedItem;
 
@@ -132,6 +124,7 @@ namespace Computer_Management
                 CachedNote = computer.Note.Replace('$', '\n').Remove(0, 1);
                 noteTextBox.Text = computer.Note.Replace('$', '\n').Remove(0, 1);//cause 1st char is '$'
             }
+            else { }
         }
 
         // --- CHANGING ACTUAL DATA --- | --- CHANGING ACTUAL DATA --- | --- CHANGING ACTUAL DATA --- | --- CHANGING ACTUAL DATA --- | --- CHANGING ACTUAL DATA --- |
@@ -167,7 +160,7 @@ namespace Computer_Management
             }
         }
 
-        // --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- |
+        // --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- |
         private void addBTN_Click(object sender, RoutedEventArgs e)
         {
             new AddPC(this, database, "", "", "", "", "", "").Show();
@@ -345,6 +338,15 @@ namespace Computer_Management
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             new SettingsWindow().ShowDialog();
+        }
+
+        // --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- |
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.LeftAlt) && Keyboard.IsKeyDown(Key.W))
+            {
+                MessageBox.Show("asdasdasd");
+            }
         }
     }
 }

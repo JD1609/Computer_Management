@@ -32,11 +32,11 @@ namespace Computer_Management
             }
         }
 
-        public static int GetMonth()
+        public static byte GetMonth()
         {
             if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.csv")))
             {
-                int r = 0;
+                byte r = 0;
                 using (StreamReader streamreader = new StreamReader(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.csv")))
                 {
                     if (streamreader.ReadLine() != null)
@@ -45,7 +45,7 @@ namespace Computer_Management
                         while ((s = streamreader.ReadLine()) != null)
                         {
                             string[] splitted = s.Split(';');
-                            r = int.Parse(splitted[1]);
+                            r = byte.Parse(splitted[1]);
                         }
                     }
                 }
@@ -84,7 +84,7 @@ namespace Computer_Management
             string settingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.csv");
             using (StreamWriter sw = new StreamWriter(settingsPath)) 
             {
-                sw.WriteLine(String.Format("{0};{1};", swindow.dataPathLabel.Content, swindow.monthsComboBox.SelectedIndex));
+                sw.WriteLine(String.Format("{0};{1};{2};", swindow.dataPathLabel.Content, swindow.monthsComboBox.SelectedIndex, swindow.CrossPlatform));
                 sw.Flush();
             }
         }

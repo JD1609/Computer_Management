@@ -5,7 +5,6 @@ using Microsoft.Win32;
 using System.Windows;
 
 /*using System.Linq;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
@@ -17,7 +16,7 @@ namespace Computer_Management
     {
         public ObservableCollection<Computer> Computers { get; private set; }
         private MainWindow mw;
-        public int Month { get; private set; }
+        public byte Month { get; private set; }
         public string DataPath { get; private set; }
         public string BackUpPath { get; private set; }
         public string SettingsPath { get; private set; }
@@ -49,7 +48,7 @@ namespace Computer_Management
                         {
                             string[] splitted = s.Split(';');
                             DataPath = splitted[0].Trim();
-                            Month = int.Parse(splitted[1]);
+                            Month = byte.Parse(splitted[1]);
                         }
                     }
                 }
@@ -68,7 +67,7 @@ namespace Computer_Management
                         {
                             string[] splitted = s.Split(';');
                             DataPath = splitted[0].Trim();
-                            Month = int.Parse(splitted[1]);
+                            Month = byte.Parse(splitted[1]);
                         }
                     }
                 }
@@ -93,7 +92,7 @@ namespace Computer_Management
                 mw.pasteChangeCheckBox.IsEnabled = false;
                 mw.noteTextBox.IsEnabled = false;
                 mw.noteTextBox.Text = "";
-                MsgBoxEditor.EditMessage("No PCs found...", "Data missing");
+                MsgBoxEditor.EditMessage("No PCs found...", "Missing data");
             }
 
             else
@@ -130,6 +129,7 @@ namespace Computer_Management
                     mw.pcList.ItemsSource = Computers;
                     mw.pcList.SelectedIndex = 0;
                 }
+                else { }
                 ListCountCheck();
             }
         }
