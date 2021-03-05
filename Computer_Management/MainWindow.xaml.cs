@@ -49,6 +49,14 @@ namespace Computer_Management
                 string dataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.csv");
                 if (!File.Exists(dataPath))
                     File.Create(dataPath);
+                else 
+                {
+                    try
+                    {
+                        database.LoadData(database.DataPath);
+                    }
+                    catch { MessageBox.Show(MsgBoxEditor.EditText("Something went wrong...") + "\nError[0xD0010001]", "Data not loaded", MessageBoxButton.OK, MessageBoxImage.Error); }
+                }
                 /*
                 if (!File.Exists(database.SettingsPath)) 
                 {
@@ -72,14 +80,6 @@ namespace Computer_Management
             SavePicBTN.Visibility = Visibility.Hidden;
             CancelNotePicBTN.Visibility = Visibility.Hidden;
             SaveNotePicBTN.Visibility = Visibility.Hidden;
-
-            // --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- |
-            try
-            {
-                database.LoadData(database.DataPath);
-            }
-            catch { }
-            //MessageBox.Show(MsgBoxEditor.EditText("Something went wrong...") + "\nError[0xD0010001]", "Data not loaded", MessageBoxButton.OK, MessageBoxImage.Error);
          }
 
         // --- LABEL CONTENTS, NOTES & TOOLTIPS --- | --- LABEL CONTENTS, NOTES & TOOLTIPS --- | --- LABEL CONTENTS, NOTES & TOOLTIPS --- |
@@ -317,6 +317,9 @@ namespace Computer_Management
         private void deleteALL_Click(object sender, RoutedEventArgs e)
         {
             new SureWindow(database, ((MenuItem)sender).Name).ShowDialog();
+            CancelNotePicBTN.Visibility = Visibility.Hidden;
+            SaveNotePicBTN.Visibility = Visibility.Hidden;
+            CachedNote = noteTextBox.Text;
         }
 
         private void exportPC_Click(object sender, RoutedEventArgs e)
