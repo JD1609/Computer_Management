@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Icon="Icons/pc_icon.png"
-        Title="Computer management" Height="450" Width="800" ResizeMode="CanMinimize" KeyDown="Window_KeyDown">
+        Title="Computer management"
+        Height="450" Width="800" ResizeMode="CanMinimize" KeyDown="Window_KeyDown">
 
     <Grid Margin="5" MouseDown="CancelSaveNoteBTN">
         <Grid.ColumnDefinitions>
@@ -46,9 +47,7 @@
 
         <!-- BUTTONS & LIST -->
         <Label Content="Computers:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Width="178" Height="28" Grid.RowSpan="2" FontWeight="Bold"/>
-        <ListBox Name="pcList" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="358" Width="178" Margin="10,0,0,0" Grid.Row="1" Grid.RowSpan="2" SelectionChanged="pcList_SelectionChanged">
-            
-        </ListBox>
+        <ListBox Name="pcList" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="358" Width="178" Margin="10,0,0,0" Grid.Row="1" Grid.RowSpan="2" SelectionChanged="pcList_SelectionChanged"/>
 
         <Image Name="Refresh" HorizontalAlignment="Right" Height="16" Margin="0,14,53,0" VerticalAlignment="Top" Width="16" Source="Icons\Refresh.png" Cursor="Hand" ToolTip="Reload list" MouseDown="refreshListBTN_Click"/>
         <Image Name="addPC" HorizontalAlignment="Right" Height="16" Margin="0,14,33,0" VerticalAlignment="Top" Width="16" Source="Icons\Database-Add.png" MouseDown="addBTN_Click" Cursor="Hand" ToolTip="Add computer"/>

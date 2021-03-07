@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Linq;
 using System.IO;
 using System.Diagnostics;
+using System.Threading;
 
 /*using System.Text;
 using Microsoft.Win32;
@@ -24,9 +25,21 @@ namespace Computer_Management
         public bool PasteChange { get; private set; }
         public bool DustClean { get; private set; }
         private Database database;
+        Mutex oneInstance;
+        private void Application_Startup()
+        {
+            bool aIsNewInstance = false;
+            oneInstance = new Mutex(true, "Computer_Management", out aIsNewInstance);
+            if (!aIsNewInstance)
+            {
+                MsgBoxEditor.EditMessage("This application is already running...", "");
+                App.Current.Shutdown();
+            }
+        }
 
         public MainWindow()
         {
+            Application_Startup();
             InitializeComponent();
             database = new Database(this);
 
