@@ -103,6 +103,7 @@ namespace Computer_Management
 
             if (pcList.SelectedItem != null)
             {
+                noteTextBox.IsEnabled = true;
                 Computer computer = (Computer)pcList.SelectedItem;
 
                 if (computer.UserName.Contains('_'))
@@ -153,6 +154,19 @@ namespace Computer_Management
 
         private void noteTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (noteTextBox.Text.Contains("$"))
+            {
+                MsgBoxEditor.EditMessage("Notes can not contains '$' & ';' symobols!", "");
+                noteTextBox.Text = noteTextBox.Text.Replace('$', '\0');
+            }
+            else { }
+            if (noteTextBox.Text.Contains(";"))
+            {
+                MsgBoxEditor.EditMessage("Notes can not contains '$' and ';' symobols!", "");
+                noteTextBox.Text = noteTextBox.Text.Replace(';', '\0');
+            }
+            else { }
+
             if (CachedNote == noteTextBox.Text) 
             {
             }
