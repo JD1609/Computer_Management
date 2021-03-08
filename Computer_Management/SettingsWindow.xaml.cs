@@ -4,19 +4,6 @@ using System.Windows.Input;
 using System.IO;
 using System.Diagnostics;
 
-/*
-using System.Windows.Shapes;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-*/
-
 namespace Computer_Management
 {
     public partial class SettingsWindow : Window
@@ -30,6 +17,8 @@ namespace Computer_Management
             monthsComboBox.ItemsSource = months;
             monthsComboBox.SelectedIndex = Settings.Default.Month;
             dataPathLabel.Content = Settings.Default.DataPath;
+            string dataPath = Settings.Default.DataPath;
+            if (Settings.Default.DataPath.Length > 45) { ToolTipTxtBox.ToolTip = dataPath; dataPathLabel.ToolTip = dataPath; }
         }
 
         private void dataPathClick(object sender, MouseButtonEventArgs e)
@@ -46,8 +35,13 @@ namespace Computer_Management
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     string newPath = Path.Combine(dialog.SelectedPath, "Data.csv");
-                    dataPathLabel.Content = newPath;
-                    dataPathLabel.ToolTip = newPath;
+                    if (!File.Exists(newPath))
+                        MsgBoxEditor.EditMessage("Datafile doesn't exist in this directory...!", "");
+                    else 
+                    {
+                        dataPathLabel.Content = newPath;
+                        if (newPath.Length > 45) { ToolTipTxtBox.ToolTip = newPath; dataPathLabel.ToolTip = newPath; }
+                    }
                 }
             }
         }
@@ -63,7 +57,7 @@ namespace Computer_Management
             Settings.Default.DataPath = dataPathLabel.Content.ToString().Trim();
             Settings.Default.Month = byte.Parse(monthsComboBox.SelectedIndex.ToString());
             Settings.Default.Save();
-            SavingSettings.Save();
+            SettingsClass.Save();
             this.Close();
         }
     }

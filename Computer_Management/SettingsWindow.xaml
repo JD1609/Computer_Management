@@ -7,22 +7,19 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Settings" Height="229" Width="420" ResizeMode="NoResize" Background="WhiteSmoke" Icon="Icons/Settings_icon.png">
+    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-
+        
         <Label Content="Data path: " HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Height="26" Width="68" Grid.Column="0"/>
-        <TextBox HorizontalAlignment="Left" Height="20" Margin="73,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284" IsEnabled="False" Background="White"/>
+        <TextBox Name="ToolTipTxtBox" HorizontalAlignment="Left" Height="20" Margin="73,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284" IsEnabled="False" Background="White"/>
         <Label Name="dataPathLabel" Content="Label" HorizontalAlignment="Left" Margin="73,12,0,0" VerticalAlignment="Top" Width="284" Foreground="Black" MouseDoubleClick="dataPathClick"/>
         <Image Name="dataPathPic" HorizontalAlignment="Left" Height="15" Width="15" Margin="362,18,0,0" VerticalAlignment="Top" ToolTip="Choose folder" Source="Icons/Folder_icon.png" Cursor="Hand" MouseDown="dataPathPic_MouseDown"/>
 
         <Label Content="Next paste replace for:" Margin="10,45,137,0" VerticalAlignment="Top" Height="26"/>
         <ComboBox Name="monthsComboBox" HorizontalAlignment="Left" Margin="142,48,0,0" VerticalAlignment="Top" Width="90" Height="22"/>
 
-        <Button Name="RDBTN" Content="Restore default" HorizontalAlignment="Left" Margin="220,155,0,0" VerticalAlignment="Top" Width="90" Click="RDBTN_Click" Height="20"/>
-        <Button Name="OkBTN" Content="OK" HorizontalAlignment="Left" Margin="327,155,0,0" VerticalAlignment="Top" Width="60" Click="OkBTN_Click" Height="20"/>
-        <Label Content="This window doesn't work yet..." HorizontalAlignment="Left" Margin="51,113,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="Red"/>
+        <Button Name="RDBTN" Content="Restore default" HorizontalAlignment="Left" Margin="205,150,0,0" VerticalAlignment="Top" Width="100" Height="22" Click="RDBTN_Click"/>
+        <Button Name="OkBTN" Content="OK" HorizontalAlignment="Left" Margin="320,150,0,0" VerticalAlignment="Top" Width="65" Height="22" Click="OkBTN_Click"/>
 
     </Grid>
 </Window>

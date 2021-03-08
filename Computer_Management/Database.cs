@@ -16,10 +16,8 @@ namespace Computer_Management
     {
         public ObservableCollection<Computer> Computers { get; private set; }
         private MainWindow mw;
-        public byte Month { get; private set; }
         public string DataPath { get; private set; }
         public string BackUpPath { get; private set; }
-        public string SettingsPath { get; private set; }
         public string[] Pastas { get; private set; }
 
         public Database(MainWindow mw)
@@ -29,10 +27,8 @@ namespace Computer_Management
             string[] pastas = { "Cheap", "Expensive" };
             Pastas = pastas;
             mw.pasteType.ItemsSource = Pastas;
-            SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.settings");
             BackUpPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data_Backup.csv");
             DataPath = Settings.Default.DataPath;
-            Month = Settings.Default.Month;
         }
 
         // --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- |
