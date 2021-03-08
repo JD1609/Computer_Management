@@ -4,12 +4,6 @@ using System.Collections.ObjectModel;
 using Microsoft.Win32;
 using System.Windows;
 
-/*using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using System.Xml.Serialization;*/
-
 namespace Computer_Management
 {
     public class Database
