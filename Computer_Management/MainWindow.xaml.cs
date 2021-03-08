@@ -24,6 +24,7 @@ namespace Computer_Management
     {
         public bool PasteChange { get; private set; }
         public bool DustClean { get; private set; }
+        private object zamek = new object();
         private Database database;
         Mutex oneInstance;
         private void Application_Startup()
@@ -40,52 +41,27 @@ namespace Computer_Management
         public MainWindow()
         {
             Application_Startup();
+            Thread filesThread = new Thread(DefaultFileCreator.DataCheck);
+            filesThread.Start();
+            filesThread.Join();
+
+            Thread settingsThread = new Thread(SettingsClass.CorrectSettings);
+            settingsThread.Start();
+            settingsThread.Join();
+
+            SettingsClass.Save();
             InitializeComponent();
+
             database = new Database(this);
-
-            // --- DATA FOLDER --- | --- DATA FOLDER --- | --- DATA FOLDER --- | --- DATA FOLDER --- | --- DATA FOLDER --- | --- DATA FOLDER --- | --- DATA FOLDER --- |
             try
             {
-                string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management");
-                if (!Directory.Exists(folderPath))
-                    Directory.CreateDirectory(folderPath);
+                database.LoadData(database.DataPath);
             }
             catch
             {
-                MessageBox.Show("Application couldn't be started...\nPlease check your authorization!" + MsgBoxEditor.EditText("\nError[0x00001001]"), "Folder creating error", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.Close();
+                MessageBox.Show(MsgBoxEditor.EditText("Something went wrong...") + "\nError[0xD0010001]", "Data not loaded", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            // --- DATA FILE --- | --- DATA FILE --- | --- DATA FILE --- | --- DATA FILE --- | --- DATA FILE --- | --- DATA FILE --- | --- DATA FILE --- | --- DATA FILE --- |
-            try
-            {
-                string dataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.csv");
-                if (!File.Exists(dataPath))
-                    File.Create(dataPath);
-                else 
-                {
-                    try
-                    {
-                        database.LoadData(database.DataPath);
-                    }
-                    catch { MessageBox.Show(MsgBoxEditor.EditText("Something went wrong...") + "\nError[0xD0010001]", "Data not loaded", MessageBoxButton.OK, MessageBoxImage.Error); }
-                }
-                /*
-                if (!File.Exists(database.SettingsPath)) 
-                {
-                    File.Create(database.SettingsPath);
-                    fileExist = false;
-                }
-                if(fileExist == false)
-                    Settings.RestoreDefault(null); //---upper -> SetSettings();
-                
-                for .THC*/
-            }
-            catch
-            {
-                MessageBox.Show("Application couldn't be started...\nPlease check your authorization!" + MsgBoxEditor.EditText("\nError[0x00001010]"), "Data file creating error", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.Close();
-            }
             // --- BUTTONS --- |
             PasteChange = false;
             DustClean = false;
@@ -220,9 +196,10 @@ namespace Computer_Management
             SavePicBTN.Visibility = Visibility.Hidden;
 
             if (PasteChange == true || DustClean == true) 
-            { 
-                nextCleaningDate.Content = "Next maintenance: " + DateTime.Today.AddMonths(3).ToString("dd.MM. yyyy");
-                ((Computer)pcList.SelectedItem).Change("date", DateTime.Today.AddMonths(3).ToString("dd.MM. yyyy"));
+            {
+                int i = Settings.Default.Month;
+                nextCleaningDate.Content = "Next maintenance: " + DateTime.Today.AddMonths(i + 1).ToString("dd.MM. yyyy");
+                ((Computer)pcList.SelectedItem).Change("date", DateTime.Today.AddMonths(i + 1).ToString("dd.MM. yyyy"));
 
                 if (PasteChange == true) 
                 {
@@ -231,7 +208,7 @@ namespace Computer_Management
                 }
             }
 
-            try { database.SaveData(database.DataPath); } //change title + make erroor NO.
+            try { database.SaveData(database.DataPath); }
             catch { MessageBox.Show(MsgBoxEditor.EditText("Something went wrong...") + "\nError[0xD0110010]", "Changing note failed", MessageBoxButton.OK, MessageBoxImage.Error);  }
 
             pasteChangeCheckBox.IsChecked = false;
@@ -270,6 +247,11 @@ namespace Computer_Management
         {
             pasteType.IsEnabled = false;
             PasteChange = false;
+            if (!DustClean) 
+            {
+                CancelPicBTN.Visibility = Visibility.Hidden;
+                SavePicBTN.Visibility = Visibility.Hidden;
+            }
         }
 
         private void dustClearCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -282,6 +264,11 @@ namespace Computer_Management
         private void dustClearCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             DustClean = false;
+            if (!PasteChange) 
+            {
+                CancelPicBTN.Visibility = Visibility.Hidden;
+                SavePicBTN.Visibility = Visibility.Hidden;
+            }
         }
 
         // --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- |
@@ -362,7 +349,7 @@ namespace Computer_Management
 
         private void Version_Click(object sender, RoutedEventArgs e)
         {
-            MsgBoxEditor.EditMessage(MsgBoxEditor.EditText("Computer management") + "\nVersion: 0.1.5 -BETA\n\n                                     Created by JD_1609\n", "About");
+            MsgBoxEditor.EditMessage(MsgBoxEditor.EditText("Computer management") + "\nVersion: 1.0.0.\n\n                                     Created by JD_1609\n", "About");
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
