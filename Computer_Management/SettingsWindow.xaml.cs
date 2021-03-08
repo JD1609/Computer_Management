@@ -22,17 +22,14 @@ namespace Computer_Management
     public partial class SettingsWindow : Window
     {
         public string[] Months { get; private set; }
-        public byte CrossPlatform { get; private set; }
 
         public SettingsWindow()
         {
             InitializeComponent();
             string[] months = { "1 month", "2 months", "3 months", "4 months", "5 months", "6 months", "7 months", "8 months", "9 months", "10 months", "11 months", "12 months", };
             monthsComboBox.ItemsSource = months;
-            monthsComboBox.SelectedIndex = 0;
-            dataPathLabel.Content = Settings.DataPath();
-            if (Settings.DataPath().Length >= 50) { dataPathLabel.ToolTip = Settings.DataPath(); }
-            else { }
+            monthsComboBox.SelectedIndex = Settings.Default.Month;
+            dataPathLabel.Content = Settings.Default.DataPath;
         }
 
         private void dataPathClick(object sender, MouseButtonEventArgs e)
@@ -55,22 +52,18 @@ namespace Computer_Management
             }
         }
 
-        private void CrossPlatformCHB_Checked(object sender, RoutedEventArgs e)
-        {
-            CrossPlatform = 1;
-        }
-        private void CrossPlatformCHB_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CrossPlatform = 0;
-        }
         // --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- |
         private void RDBTN_Click(object sender, RoutedEventArgs e)
         {
-            Settings.RestoreDefault(this);
+            dataPathLabel.Content = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.csv");
+            monthsComboBox.SelectedIndex = 2;
         }
         private void OkBTN_Click(object sender, RoutedEventArgs e)
         {
-            Settings.SaveSettings(this);
+            Settings.Default.DataPath = dataPathLabel.Content.ToString().Trim();
+            Settings.Default.Month = byte.Parse(monthsComboBox.SelectedIndex.ToString());
+            Settings.Default.Save();
+            SavingSettings.Save();
             this.Close();
         }
     }

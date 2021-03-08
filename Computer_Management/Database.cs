@@ -29,49 +29,10 @@ namespace Computer_Management
             string[] pastas = { "Cheap", "Expensive" };
             Pastas = pastas;
             mw.pasteType.ItemsSource = Pastas;
-            SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.csv");
+            SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.settings");
             BackUpPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data_Backup.csv");
-            DataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.csv");
-            //LoadSettings(); for .THC
-        }
-
-        public void LoadSettings()
-        {
-            if (File.Exists(SettingsPath))
-            {
-                using (StreamReader streamreader = new StreamReader(SettingsPath))
-                {
-                    if (streamreader.ReadLine() != null)
-                    {
-                        string s;
-                        while ((s = streamreader.ReadLine()) != null)
-                        {
-                            string[] splitted = s.Split(';');
-                            DataPath = splitted[0].Trim();
-                            Month = byte.Parse(splitted[1]);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                File.Create(SettingsPath);
-                Settings.RestoreDefault(null);
-
-                using (StreamReader streamreader = new StreamReader(SettingsPath))
-                {
-                    if (streamreader.ReadLine() != null)
-                    {
-                        string s;
-                        while ((s = streamreader.ReadLine()) != null)
-                        {
-                            string[] splitted = s.Split(';');
-                            DataPath = splitted[0].Trim();
-                            Month = byte.Parse(splitted[1]);
-                        }
-                    }
-                }
-            }
+            DataPath = Settings.Default.DataPath;
+            Month = Settings.Default.Month;
         }
 
         // --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- |

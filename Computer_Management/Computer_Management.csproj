@@ -85,7 +85,12 @@
     <Compile Include="MsgBoxEditor.cs" />
     <Compile Include="NoteCorrector.cs" />
     <Compile Include="RAMinfo.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="SavingSettings.cs" />
+    <Compile Include="Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -151,6 +156,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

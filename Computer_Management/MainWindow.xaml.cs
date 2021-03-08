@@ -25,6 +25,7 @@ namespace Computer_Management
         public bool PasteChange { get; private set; }
         public bool DustClean { get; private set; }
         private Database database;
+        private object zamek = new object();
         Mutex oneInstance;
         private void Application_Startup()
         {
@@ -36,13 +37,21 @@ namespace Computer_Management
                 App.Current.Shutdown();
             }
         }
+        private void CorrectSettings() 
+        {
+            if (!Settings.Default.DataPath.Contains(Environment.UserName)) 
+            {
+                string defaultDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.csv");
+                Settings.Default.DataPath = defaultDataPath;
+                Settings.Default.Month = 2;
+                Settings.Default.Save();
+            }
+        }
 
         public MainWindow()
         {
             Application_Startup();
-            InitializeComponent();
-            database = new Database(this);
-
+            CorrectSettings();
             // --- DATA FOLDER --- | --- DATA FOLDER --- | --- DATA FOLDER --- | --- DATA FOLDER --- | --- DATA FOLDER --- | --- DATA FOLDER --- | --- DATA FOLDER --- |
             try
             {
@@ -60,32 +69,37 @@ namespace Computer_Management
             try
             {
                 string dataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.csv");
+                string settingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.settings");
+
                 if (!File.Exists(dataPath))
                     File.Create(dataPath);
-                else 
+
+                if (!File.Exists(settingsPath)) 
                 {
-                    try
-                    {
-                        database.LoadData(database.DataPath);
-                    }
-                    catch { MessageBox.Show(MsgBoxEditor.EditText("Something went wrong...") + "\nError[0xD0010001]", "Data not loaded", MessageBoxButton.OK, MessageBoxImage.Error); }
+                    lock (zamek) { File.Create(settingsPath); }
+
+                    Settings.Default.DataPath = SavingSettings.Load("Path");
+                    Settings.Default.Month = byte.Parse(SavingSettings.Load("Month"));
                 }
-                /*
-                if (!File.Exists(database.SettingsPath)) 
-                {
-                    File.Create(database.SettingsPath);
-                    fileExist = false;
-                }
-                if(fileExist == false)
-                    Settings.RestoreDefault(null); //---upper -> SetSettings();
-                
-                for .THC*/
+                    
             }
             catch
             {
                 MessageBox.Show("Application couldn't be started...\nPlease check your authorization!" + MsgBoxEditor.EditText("\nError[0x00001010]"), "Data file creating error", MessageBoxButton.OK, MessageBoxImage.Error);
                 this.Close();
             }
+
+            InitializeComponent();
+            database = new Database(this);
+            try
+            {
+                database.LoadData(database.DataPath);
+            }
+            catch
+            {
+                MessageBox.Show(MsgBoxEditor.EditText("Something went wrong...") + "\nError[0xD0010001]", "Data not loaded", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             // --- BUTTONS --- |
             PasteChange = false;
             DustClean = false;
