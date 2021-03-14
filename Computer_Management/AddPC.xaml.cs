@@ -121,12 +121,23 @@ namespace Computer_Management
         // --- BUTTON --- | --- BUTTON --- | --- BUTTON --- | --- BUTTON --- |
         private void thisPCBTN_Click(object sender, RoutedEventArgs e)
         {
-            userNameTxtBox.Text = HwFinder.GetUser();
-            operatingSystemTxtBox.Text = HwFinder.GetOS();
-            cpuTxtBox.Text = HwFinder.GetCpu();
-            gpuTxtBox.Text = HwFinder.GetGpu();
-            ramTxtBox.Text = HwFinder.GetRam();
-            mbTxtBox.Text = HwFinder.GetMB();
+            try { userNameTxtBox.Text = HwFinder.GetUser(); }
+            catch { MessageBox.Show("Failed to load user..!", "", MessageBoxButton.OK, MessageBoxImage.Error); }
+
+            try { operatingSystemTxtBox.Text = HwFinder.GetOS(); }
+            catch { MessageBox.Show("Failed to load OS..!", "", MessageBoxButton.OK, MessageBoxImage.Error); }
+
+            try { cpuTxtBox.Text = HwFinder.GetCpu(); }
+            catch { MessageBox.Show("Failed to load CPU..!", "", MessageBoxButton.OK, MessageBoxImage.Error); }
+
+            try { gpuTxtBox.Text = HwFinder.GetGpu(); }
+            catch { MessageBox.Show("Failed to load GPU..!", "", MessageBoxButton.OK, MessageBoxImage.Error); }
+
+            try { ramTxtBox.Text = HwFinder.GetRam(); }
+            catch { MessageBox.Show("Failed to load RAM..!", "", MessageBoxButton.OK, MessageBoxImage.Error); }
+
+            try { mbTxtBox.Text = HwFinder.GetMB(); }
+            catch { MessageBox.Show("Failed to load motherboard..!", "", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private void noteTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
