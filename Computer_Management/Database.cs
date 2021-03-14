@@ -57,7 +57,6 @@ namespace Computer_Management
         // --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- |
         public void LoadData(string dataPath)
         {
-            Computers.Clear();
             using (StreamReader streamreader = new StreamReader(dataPath))
             {
                 if (streamreader.ReadLine() != null)

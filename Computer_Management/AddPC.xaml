@@ -20,7 +20,7 @@
         <!-- LABELS-->
         <DockPanel Grid.ColumnSpan="2">
             <StackPanel>
-                <Label Content="Specifications:" FontWeight="Bold" FontSize="20" Margin="0,3,0,0"/>
+                <Label Content="Specifications:" FontWeight="Bold" FontSize="20"/>
                 <Label Content="User Name:" Margin="0,10,0,0" FontSize="13"/>
                 <Label Content="OS:" Margin="0,14,0,0" FontSize="13"/>
                 <Label Content="Processor:" Margin="0,14,0,0" FontSize="13"/>
@@ -35,7 +35,7 @@
         <!-- TEXT BOXES -->
         <DockPanel Grid.Column="1">
             <StackPanel>
-                <Image Name="thisPCBTN" Height="23" Width="23" Margin="0,10,10,-30" HorizontalAlignment="Right" Source="Icons\thisPC.png" MouseDown="thisPCBTN_Click" Cursor="Hand" ToolTip="This PC"/>
+                <Image Name="thisPCBTN" Height="23" Width="23" Margin="0,7,10,-30" HorizontalAlignment="Right" Source="Icons\thisPC.png" MouseDown="thisPCBTN_Click" Cursor="Hand" ToolTip="Load HW of this PC"/>
                 <TextBox Name="userNameTxtBox" Margin="10,50,10,8" Height="25" VerticalContentAlignment="Center"/>
                 <TextBox Name="operatingSystemTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
                 <TextBox Name="cpuTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>

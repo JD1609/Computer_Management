@@ -47,7 +47,7 @@ namespace Computer_Management
 
             if (Sender == "LoadBackup")
             {
-                try { database.LoadData(database.BackUpPath); }
+                try { database.Computers.Clear(); database.LoadData(database.BackUpPath); }
                 catch { MsgBoxEditor.EditMessage("Loading backup failed...", "Loading backup failed"); }
 
                 try { database.SaveData(database.DataPath); }

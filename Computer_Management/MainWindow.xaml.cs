@@ -66,6 +66,16 @@ namespace Computer_Management
             SavePicBTN.Visibility = Visibility.Hidden;
             CancelPicBTN.Visibility = Visibility.Hidden;
 
+            int linesCount = noteTextBox.Text.Split('\n').Length;
+            if (linesCount >= 21)
+            {
+                noteTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+            }
+            else
+            {
+                noteTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            }
+
             if (pcList.SelectedItem != null)
             {
                 noteTextBox.IsEnabled = true;
@@ -166,9 +176,14 @@ namespace Computer_Management
         private void refreshListBTN_Click(object sender, MouseButtonEventArgs e)
         {
             database.Computers.Clear();
-            try { database.LoadData(database.DataPath); }
+            try { database.Computers.Clear(); database.LoadData(database.DataPath); }
             catch { MessageBox.Show(MsgBoxEditor.EditText("Refreshing data failed...") + "\nError[0xD0110001]", "Refreshing failed", MessageBoxButton.OK, MessageBoxImage.Error); }
             MsgBoxEditor.EditMessage("Computer list reloaded...", "");
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            new AddPC(this, database, "", ((Computer)pcList.SelectedItem).OS, ((Computer)pcList.SelectedItem).Cpu, ((Computer)pcList.SelectedItem).Gpu, ((Computer)pcList.SelectedItem).Ram, ((Computer)pcList.SelectedItem).Motherboard).Show();
         }
 
         private void CancelPicClick(object sender, MouseButtonEventArgs e)
@@ -338,7 +353,7 @@ namespace Computer_Management
 
         private void Version_Click(object sender, RoutedEventArgs e)
         {
-            MsgBoxEditor.EditMessage(MsgBoxEditor.EditText("Computer management") + "\nVersion: 1.0.0.\n\n                                     Created by JD_1609\n", "About");
+            MsgBoxEditor.EditMessage(MsgBoxEditor.EditText("Computer management") + "\nVersion: 1.0.0.1.\n\n                                     Created by JD_1609\n", "About");
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
