@@ -361,15 +361,12 @@ namespace Computer_Management
 
         private void Shortcuts_Click(object sender, RoutedEventArgs e)
         {
-            string text = MsgBoxEditor.EditText("Shortcuts:\n") + "\nImport PC - CTRL+I" + "\nExport PC - CTRL+E" + "\nOpen data folder - CTRL+F" + "\nDelete ALL data - CTRL+D"
-                + "\nAdd PC - CTRL+A" + "\nRemove PC - CTRL+R" + "\nDuplicate PC - CTRL+C" + "\nImport backup - CTRL+SHIFT+I" + "\nExport backup - CTRL+SHIFT+E";
-            MessageBox.Show(text);
+            new ShortcutsWindow().ShowDialog();
         }
 
         private void Version_Click(object sender, RoutedEventArgs e)
         {
-            string version = Assembly.GetEntryAssembly().GetName().Version.ToString();
-            MessageBox.Show(MsgBoxEditor.EditText("Computer management") + "\nVersion: " + version + "\n\n                                     Created by JD_1609\n", "About");
+            new About().ShowDialog();
         }
 
         // --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- |

@@ -1,0 +1,47 @@
+﻿<Window x:Class="Computer_Management.ShortcutsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Computer_Management"
+        mc:Ignorable="d"
+        Title="Shortcuts" Height="353" Width="315" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFFDFDFD">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="18*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="127*"/>
+            <ColumnDefinition Width="152*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <Label Content="Import PC" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Left" Width="68"/>
+            <Label Content="Export PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Open data folder" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Delete ALL data" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Add PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Remove PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Duplicate PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Import backup" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Export backup" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+        </StackPanel>
+
+        <DockPanel Grid.Column="1" Grid.Row="0">
+            <Border BorderBrush="Black" BorderThickness="0.3,0,0,0">
+                <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                    <Label Content="CTRL+I" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="CTRL+E" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="CTRL+F" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="CTRL+D" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="CTRL+A" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="CTRL+R" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="CTRL+C" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="CTRL+SHIFT+I" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="CTRL+SHIFT+E" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+        <Button Content="OK" Width="80" Height="23" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="1" Click="Button_Click"/>
+    </Grid>
+</Window>
