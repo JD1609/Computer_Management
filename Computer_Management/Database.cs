@@ -2,7 +2,6 @@
 using System.IO;
 using System.Collections.ObjectModel;
 using Microsoft.Win32;
-using System.Windows;
 
 namespace Computer_Management
 {

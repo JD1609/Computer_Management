@@ -67,6 +67,9 @@ namespace Computer_Management
             SavePicBTN.Visibility = Visibility.Hidden;
             CancelPicBTN.Visibility = Visibility.Hidden;
 
+            SaveNotePicBTN.Visibility = Visibility.Hidden;
+            CancelNotePicBTN.Visibility = Visibility.Hidden;
+
             int linesCount = noteTextBox.Text.Split('\n').Length;
             if (linesCount >= 21)
             {
@@ -177,11 +180,11 @@ namespace Computer_Management
         private void RefreshListBTN_Click(object sender, MouseButtonEventArgs e)
         {
             database.Computers.Clear();
-            try { database.Computers.Clear(); database.LoadData(database.DataPath); MessageBox.Show(MsgBoxEditor.EditText("Computer list reloaded..."), ""); }
+            try { database.Computers.Clear(); database.LoadData(Settings.Default.DataPath); MessageBox.Show(MsgBoxEditor.EditText("Computer list reloaded..."), ""); }
             catch { MsgBoxEditor.EditErrorMessage("Refreshing data failed...\nError[0xD0110001]", "Refreshing failed"); }
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        private void DuplicatePC_MouseDown(object sender, MouseButtonEventArgs e)
         {
             new AddPC(this, database, "", ((Computer)pcList.SelectedItem).OS, ((Computer)pcList.SelectedItem).Cpu, ((Computer)pcList.SelectedItem).Gpu, ((Computer)pcList.SelectedItem).Ram, ((Computer)pcList.SelectedItem).Motherboard).Show();
         }
@@ -386,9 +389,13 @@ namespace Computer_Management
                 }
                 catch { MsgBoxEditor.EditErrorMessage("Saving backup failed...\nError[0xD0111001]", "Error"); }
             }
-            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.I)) //Import PC
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.C)) //Import PC
             {
-                database.ImportPC("importPC"); //Already have error_No;
+                new AddPC(this, database, "", ((Computer)pcList.SelectedItem).OS, ((Computer)pcList.SelectedItem).Cpu, ((Computer)pcList.SelectedItem).Gpu, ((Computer)pcList.SelectedItem).Ram, ((Computer)pcList.SelectedItem).Motherboard).Show();
+            }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.I)) //Duplicate current PC
+            {
+                new AddPC(this, database, "", ((Computer)pcList.SelectedItem).OS, ((Computer)pcList.SelectedItem).Cpu, ((Computer)pcList.SelectedItem).Gpu, ((Computer)pcList.SelectedItem).Ram, ((Computer)pcList.SelectedItem).Motherboard).Show();
             }
             if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.E)) //Export PC
             {

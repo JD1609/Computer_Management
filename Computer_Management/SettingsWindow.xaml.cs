@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.IO;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace Computer_Management
 {
@@ -29,20 +30,20 @@ namespace Computer_Management
 
         private void dataPathPic_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.FileName = "";
+            dlg.DefaultExt = ".cvs";
+            dlg.Filter = ".csv|*csv*|.txt|*txt*";
+            dlg.FileName = "Data";
+
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
             {
-                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-                if (result == System.Windows.Forms.DialogResult.OK)
-                {
-                    string newPath = Path.Combine(dialog.SelectedPath, "Data.csv");
-                    if (!File.Exists(newPath))
-                        MsgBoxEditor.EditErrorMessage("Datafile doesn't exist in this directory...!", "");
-                    else 
-                    {
-                        dataPathLabel.Content = newPath;
-                        if (newPath.Length > 45) { ToolTipTxtBox.ToolTip = newPath; dataPathLabel.ToolTip = newPath; }
-                    }
-                }
+                dataPathLabel.Content = dlg.FileName;
+                if (dataPathLabel.Content.ToString().Length > 45) { ToolTipTxtBox.ToolTip = dlg.FileName; dataPathLabel.ToolTip = dlg.FileName; }
+                Settings.Default.DataPath = dlg.FileName;
+                Settings.Default.Save();
             }
         }
 
