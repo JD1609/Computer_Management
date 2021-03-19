@@ -363,11 +363,56 @@ namespace Computer_Management
         }
 
         // --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- |
+        // --- SHORTCUTS --- ||
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.LeftAlt) && Keyboard.IsKeyDown(Key.W))
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.LeftShift) && Keyboard.IsKeyDown(Key.I)) //Import backup from external file
             {
-                MessageBox.Show("asdasdasd");
+                database.ImportPC("LoadBackupFEF"); //Already have Error No.
+            }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.LeftShift) && Keyboard.IsKeyDown(Key.E)) //Export backup from external file
+            {
+                try
+                {
+                    using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+                    {
+                        System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+                        if (result == System.Windows.Forms.DialogResult.OK)
+                        {
+                            database.SaveData(Path.Combine(dialog.SelectedPath, "Data_Backup.csv"));
+                            MessageBox.Show(MsgBoxEditor.EditText("Backup saved successfully!"), "");
+                        }
+                    }
+                }
+                catch { MsgBoxEditor.EditErrorMessage("Saving backup failed...\nError[0xD0111001]", "Error"); }
+            }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.I)) //Import PC
+            {
+                database.ImportPC("importPC"); //Already have error_No;
+            }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.E)) //Export PC
+            {
+                try { database.ExportPC(); }
+                catch { MsgBoxEditor.EditErrorMessage("Exporting PC failed...\nInternal error[0xD0111010]", "Exporting PC failed"); }
+            }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.F)) //Open data folder
+            {
+                Process.Start(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management"));
+            }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.D)) //Delete ALL data
+            {
+                new SureWindow(database, "deleteALL").ShowDialog();
+                CancelNotePicBTN.Visibility = Visibility.Hidden;
+                SaveNotePicBTN.Visibility = Visibility.Hidden;
+                CachedNote = noteTextBox.Text;
+            }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.A)) //Add PC
+            {
+                new AddPC(this, database, "", "", "", "", "", "").Show();
+            }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.R)) //Delete current selected pc
+            {
+                new SureWindow(database, "removePC").ShowDialog();
             }
         }
     }
