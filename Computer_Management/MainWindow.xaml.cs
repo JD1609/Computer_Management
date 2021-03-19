@@ -174,7 +174,9 @@ namespace Computer_Management
 
         private void RemoveBTN_Click(object sender, MouseButtonEventArgs e)
         {
-            new SureWindow(database, ((Image)sender).Name).ShowDialog();
+            if (pcList.SelectedItem != null)
+                new SureWindow(database, ((Image)sender).Name).ShowDialog();
+            else { MsgBoxEditor.EditErrorMessage("There is not any PC to remove...!", "Error"); }
         }
 
         private void RefreshListBTN_Click(object sender, MouseButtonEventArgs e)
@@ -186,7 +188,9 @@ namespace Computer_Management
 
         private void DuplicatePC_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            new AddPC(this, database, "", ((Computer)pcList.SelectedItem).OS, ((Computer)pcList.SelectedItem).Cpu, ((Computer)pcList.SelectedItem).Gpu, ((Computer)pcList.SelectedItem).Ram, ((Computer)pcList.SelectedItem).Motherboard).Show();
+            if (pcList.SelectedItem != null)
+                new AddPC(this, database, "", ((Computer)pcList.SelectedItem).OS, ((Computer)pcList.SelectedItem).Cpu, ((Computer)pcList.SelectedItem).Gpu, ((Computer)pcList.SelectedItem).Ram, ((Computer)pcList.SelectedItem).Motherboard).Show();
+            else { MsgBoxEditor.EditErrorMessage("You have not selected any PC to duplicate...!", "Error"); }
         }
 
         private void CancelPicClick(object sender, MouseButtonEventArgs e)
