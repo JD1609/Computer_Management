@@ -39,7 +39,7 @@ namespace Computer_Management
             // --- ADDING PC --- | --- ADDING PC --- | --- ADDING PC --- | --- ADDING PC --- | --- ADDING PC --- | --- ADDING PC --- | --- ADDING PC --- | --- ADDING PC --- |
             if (sameName == true)
             {
-                MessageBox.Show("Choosen username is already in computer list!", "Name duplication", MessageBoxButton.OK, MessageBoxImage.Information);
+                MsgBoxEditor.EditInfoMessage("Choosen username is already in computer list!", "Name duplication");
             }
             else 
             {
@@ -52,31 +52,31 @@ namespace Computer_Management
                             DateTime dateTime = datePicker.SelectedDate.Value;
 
                             if (datePicker.SelectedDate.Value <= DateTime.Today)
-                                MessageBox.Show("Cleaning date must be in future!", "Wrong date", MessageBoxButton.OK, MessageBoxImage.Information);
+                                MsgBoxEditor.EditInfoMessage("Cleaning date must be in future!", "Wrong date");
                             else
                             {
                                 //  --- ADD PC --- |  --- ADD PC --- |  --- ADD PC --- |  --- ADD PC --- |  --- ADD PC --- |  --- ADD PC --- |  --- ADD PC --- |  --- ADD PC --- |
                                 try
                                 {
                                     string os = operatingSystemTxtBox.Text.Trim();
-                                        if (os == "")
-                                            os = "None";
+                                    if (os == "")
+                                        os = "None";
 
                                     string cpu = cpuTxtBox.Text.Trim();
-                                        if (cpu == "")
-                                            cpu = "None";
+                                    if (cpu == "")
+                                        cpu = "None";
 
                                     string gpu = gpuTxtBox.Text.Trim();
-                                        if (gpu == "")
-                                            gpu = "None";
+                                    if (gpu == "")
+                                        gpu = "None";
 
                                     string ram = ramTxtBox.Text.Trim();
-                                        if (ram == "")
-                                            ram = "None";
+                                    if (ram == "")
+                                        ram = "None";
 
                                     string mb = mbTxtBox.Text.Trim();
-                                        if(mb == "")
-                                            mb = "None";
+                                    if (mb == "")
+                                        mb = "None";
 
                                     string paste = pasteTypeComboBox.SelectedItem.ToString();
                                     string note = NoteCorrector.CorrectNote(noteTextBox.Text);
@@ -88,10 +88,7 @@ namespace Computer_Management
 
                                     Close();
                                 }
-                                catch
-                                {
-                                    MessageBox.Show("An error has been occurred! Computer wasn't added...\nError[Ax00011001]", "Adding PC failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                                }
+                                catch { MsgBoxEditor.EditErrorMessage("An error has been occurred! Computer wasn't added...\nError[Ax00011001]", "Adding PC failed"); }
 
                                 // --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- |
                                 try
@@ -100,44 +97,28 @@ namespace Computer_Management
                                     Close();
                                 }
                                 catch
-                                {
-                                    MessageBox.Show("An error has been occurred! Data wasn't saved.\nError[Ax00100001]", "Saving failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                                }
+                                { MsgBoxEditor.EditErrorMessage("An error has been occurred! Data wasn't saved.\nError[Ax00100001]", "Saving failed"); }
                             }
                         }
-                        catch
-                        {
-                            MessageBox.Show("Wrong selected date.\nPlease enter date in format: DD.MM.YYYY", "Date selection error", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
+                        catch { MsgBoxEditor.EditInfoMessage("Wrong selected date.\nPlease enter date in format: DD.MM.YYYY", ""); }
                     }
                     else
-                        MessageBox.Show("Username can't be longer than 25 characters.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MsgBoxEditor.EditInfoMessage("Username can't be longer than 25 characters.", "");
                 }
                 else
-                    MessageBox.Show("Username can't be shortly than 4 characters.", "UserName", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MsgBoxEditor.EditInfoMessage("Username can't be shortly than 4 characters.", "");
             }
         }
 
         // --- BUTTON --- | --- BUTTON --- | --- BUTTON --- | --- BUTTON --- |
         private void thisPCBTN_Click(object sender, RoutedEventArgs e)
         {
-            try { userNameTxtBox.Text = HwFinder.GetUser(); }
-            catch { MessageBox.Show("Failed to load user..!", "", MessageBoxButton.OK, MessageBoxImage.Error); }
-
-            try { operatingSystemTxtBox.Text = HwFinder.GetOS(); }
-            catch { MessageBox.Show("Failed to load OS..!", "", MessageBoxButton.OK, MessageBoxImage.Error); }
-
-            try { cpuTxtBox.Text = HwFinder.GetCpu(); }
-            catch { MessageBox.Show("Failed to load CPU..!", "", MessageBoxButton.OK, MessageBoxImage.Error); }
-
-            try { gpuTxtBox.Text = HwFinder.GetGpu(); }
-            catch { MessageBox.Show("Failed to load GPU..!", "", MessageBoxButton.OK, MessageBoxImage.Error); }
-
-            try { ramTxtBox.Text = HwFinder.GetRam(); }
-            catch { MessageBox.Show("Failed to load RAM..!", "", MessageBoxButton.OK, MessageBoxImage.Error); }
-
-            try { mbTxtBox.Text = HwFinder.GetMB(); }
-            catch { MessageBox.Show("Failed to load motherboard..!", "", MessageBoxButton.OK, MessageBoxImage.Error); }
+            userNameTxtBox.Text = HwFinder.GetUser();
+            operatingSystemTxtBox.Text = HwFinder.GetOS();
+            cpuTxtBox.Text = HwFinder.GetCpu();
+            gpuTxtBox.Text = HwFinder.GetGpu();
+            ramTxtBox.Text = HwFinder.GetRam();
+            mbTxtBox.Text = HwFinder.GetMB();
         }
 
         private void noteTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)

@@ -43,7 +43,7 @@ namespace Computer_Management
                 mw.pasteChangeCheckBox.IsEnabled = false;
                 mw.noteTextBox.IsEnabled = false;
                 mw.noteTextBox.Text = "";
-                MsgBoxEditor.EditMessage("No PCs found...", "Missing data");
+                MsgBoxEditor.EditErrorMessage("No PCs found...", "Missing data");
             }
 
             else
@@ -128,14 +128,14 @@ namespace Computer_Management
                     string[] values = { c.UserName, c.OS, c.Cpu, c.Gpu, c.Ram, c.Motherboard, c.Paste, note, c.NextCleaning.ToShortDateString() };
                     string row = String.Join(";", values);
                     streamwriter.WriteLine(row);
-                    MsgBoxEditor.EditMessage("PC was successfully exported!", "Exporting successfull");
+                    MsgBoxEditor.EditInfoMessage("PC was successfully exported!", "Exporting successfull");
                     streamwriter.Flush();
                 }
             }
 
             else 
             {
-                MsgBoxEditor.EditMessage("You have not selected PC...", "Not PC selected");
+                MsgBoxEditor.EditInfoMessage("You have not selected PC...", "Not PC selected");
             }
         }
 
@@ -178,11 +178,11 @@ namespace Computer_Management
                     LoadData(filePath);
 
                     try { SaveData(DataPath); }
-                    catch { MessageBox.Show(MsgBoxEditor.EditText("Importing PC failed...") + "\nInternal error[Dx00110001]", "Importing PC failed", MessageBoxButton.OK, MessageBoxImage.Error); }
+                    catch { MsgBoxEditor.EditErrorMessage("Importing PC failed...\nInternal error[Dx00110001]", "Importing PC failed"); }
                 }
-                catch { MessageBox.Show(MsgBoxEditor.EditText("Importing PC failed...") + "\nInternal error[Dx00110010]", "Importing PC failed", MessageBoxButton.OK, MessageBoxImage.Error); }
-
-                MsgBoxEditor.EditMessage("PC imported successfully!", "PC imported");
+                catch { MsgBoxEditor.EditErrorMessage("Importing PC failed...\nInternal error[Dx00110010]", "Importing PC failed"); }
+                
+                MsgBoxEditor.EditInfoMessage("PC imported successfully!", "PC imported");
             }
         }
     }

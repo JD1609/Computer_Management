@@ -81,10 +81,10 @@ namespace Computer_Management
                     c.Change(((Label)Sender).Name, data);
                     ((Label)Sender).Content = data;
                 }
-                catch { MessageBox.Show("Changing data failed...!\nError[Cx00000001]", "Changing failed", MessageBoxButton.OK, MessageBoxImage.Error); }
-
+                catch { MsgBoxEditor.EditErrorMessage("Changing data failed...!\nError[Cx00000001]", "Changing failed"); }
+                
                 try { database.SaveData(database.DataPath); }
-                catch { MessageBox.Show("Changing data failed...!\nError[Cx00000010]", "Changing failed", MessageBoxButton.OK, MessageBoxImage.Error); }
+                catch { MsgBoxEditor.EditErrorMessage("Changing data failed...!\nError[Cx00000010]", "Changing failed"); }
             }
             else 
             {
@@ -93,10 +93,10 @@ namespace Computer_Management
                     c.Change(((Label)Sender).Name, paste);
                     ((Label)Sender).Content = paste;
                 }
-                catch { MessageBox.Show("Changing data failed...!\nError[Cx00000011]", "Changing failed", MessageBoxButton.OK, MessageBoxImage.Error); }
+                catch { MsgBoxEditor.EditErrorMessage("Changing data failed...!\nError[Cx00000011]", "Changing failed"); }
                 
                 try { database.SaveData(database.DataPath); }
-                catch { MessageBox.Show("Changing data failed...!\nError[Cx00000100]", "Changing failed", MessageBoxButton.OK, MessageBoxImage.Error); }
+                catch { MsgBoxEditor.EditErrorMessage("Changing data failed...!\nError[Cx00000100]", "Changing failed"); }
             }
         }
 
@@ -105,7 +105,7 @@ namespace Computer_Management
         {
             string data = textBoxData.Text.Trim();
             if (data.Contains(";"))
-                MsgBoxEditor.EditMessage("Component can not contains \';\' symbol", "");
+                MsgBoxEditor.EditInfoMessage("Component can not contains \';\' symbol", "");
             else 
             {
                 Change();
@@ -122,7 +122,7 @@ namespace Computer_Management
             {
                 string data = textBoxData.Text.Trim();
                 if (data.Contains(";"))
-                    MsgBoxEditor.EditMessage("Component can not contains \';\' symbol", "");
+                    MsgBoxEditor.EditInfoMessage("Component can not contains \';\' symbol", "");
                 else
                 {
                     Change();

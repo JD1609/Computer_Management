@@ -24,7 +24,7 @@ namespace Computer_Management
         private void dataPathClick(object sender, MouseButtonEventArgs e)
         {
             try { Process.Start(dataPathLabel.Content.ToString().Remove(dataPathLabel.Content.ToString().Length - 8, 8)); }
-            catch { MessageBox.Show(MsgBoxEditor.EditText("Datapath not found..."), "Datapath not found", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch { MsgBoxEditor.EditErrorMessage("Datapath not found...", "Error"); }
         }
 
         private void dataPathPic_MouseDown(object sender, MouseButtonEventArgs e)
@@ -36,7 +36,7 @@ namespace Computer_Management
                 {
                     string newPath = Path.Combine(dialog.SelectedPath, "Data.csv");
                     if (!File.Exists(newPath))
-                        MsgBoxEditor.EditMessage("Datafile doesn't exist in this directory...!", "");
+                        MsgBoxEditor.EditErrorMessage("Datafile doesn't exist in this directory...!", "");
                     else 
                     {
                         dataPathLabel.Content = newPath;

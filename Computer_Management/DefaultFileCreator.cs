@@ -20,7 +20,7 @@ namespace Computer_Management
             }
             catch
             {
-                MessageBox.Show("Application couldn't be started...\nPlease check your authorization!" + MsgBoxEditor.EditText("\nError[0x00001001]"), "Folder creating error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MsgBoxEditor.EditErrorMessage("Application couldn't be started...\nPlease check your authorization!\nError[0x00001001]", "Folder creating error");
                 App.Current.Shutdown();
             }
 
@@ -32,7 +32,7 @@ namespace Computer_Management
             }
             catch
             {
-                MessageBox.Show("Application couldn't be started...\nPlease check your authorization!" + MsgBoxEditor.EditText("\nError[0x00001001]"), "Settings creating error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MsgBoxEditor.EditErrorMessage("Application couldn't be started...\nPlease check your authorization!\nError[0x00001001]", "Settings creating error");
                 App.Current.Shutdown();
             }
 
@@ -44,7 +44,7 @@ namespace Computer_Management
             }
             catch
             {
-                MessageBox.Show("Application couldn't be started...\nPlease check your authorization!" + MsgBoxEditor.EditText("\nError[0x00001010]"), "Data file creating error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MsgBoxEditor.EditErrorMessage("Application couldn't be started...\nPlease check your authorization!\nError[0x00001010]", "Data file creating error");
                 App.Current.Shutdown();
             }
         }

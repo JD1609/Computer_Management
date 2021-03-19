@@ -12,13 +12,22 @@ namespace Computer_Management
             return text;
         }
 
-
-        public static void EditMessage(string message, string title) 
+        public static void EditInfoMessage(string message, string title) 
         {
-            for (int i = message.Length; i < 80; i++)
+            string[] msgLine = message.Split('\n');
+            for (int i = msgLine[0].Length; i < 80; i++)
                 message += " ";
 
-            MessageBox.Show(message, title);
+            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public static void EditErrorMessage(string message, string title)
+        {
+            string[] msgLine = message.Split('\n');
+            for (int i = msgLine[0].Length; i < 80; i++)
+                message += " ";
+
+            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

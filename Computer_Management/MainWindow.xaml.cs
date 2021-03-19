@@ -6,6 +6,7 @@ using System.Linq;
 using System.IO;
 using System.Diagnostics;
 using System.Threading;
+using System.Reflection;
 
 namespace Computer_Management
 {
@@ -22,7 +23,7 @@ namespace Computer_Management
             oneInstance = new Mutex(true, "Computer_Management", out aIsNewInstance);
             if (!aIsNewInstance)
             {
-                MsgBoxEditor.EditMessage("This application is already running...", "");
+                MsgBoxEditor.EditInfoMessage("This application is already running...", "");
                 App.Current.Shutdown();
             }
         }
@@ -48,7 +49,7 @@ namespace Computer_Management
             }
             catch
             {
-                MessageBox.Show(MsgBoxEditor.EditText("Something went wrong...") + "\nError[0xD0010001]", "Data not loaded", MessageBoxButton.OK, MessageBoxImage.Error);
+                MsgBoxEditor.EditErrorMessage("Something went wrong...\nError[0xD0010001]", "Data not loaded");
             }
 
             // --- BUTTONS --- |
@@ -61,7 +62,7 @@ namespace Computer_Management
          }
 
         // --- LABEL CONTENTS, NOTES & TOOLTIPS --- | --- LABEL CONTENTS, NOTES & TOOLTIPS --- | --- LABEL CONTENTS, NOTES & TOOLTIPS --- |
-        private void pcList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void PcList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SavePicBTN.Visibility = Visibility.Hidden;
             CancelPicBTN.Visibility = Visibility.Hidden;
@@ -127,17 +128,17 @@ namespace Computer_Management
             chdata.ShowDialog();
         }
 
-        private void noteTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void NoteTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (noteTextBox.Text.Contains("$"))
             {
-                MsgBoxEditor.EditMessage("Notes can not contains '$' & ';' symobols!", "");
+                MsgBoxEditor.EditErrorMessage("Notes can not contains '$' & ';' symobols!", "");
                 noteTextBox.Text = noteTextBox.Text.Replace('$', '\0');
             }
             else { }
             if (noteTextBox.Text.Contains(";"))
             {
-                MsgBoxEditor.EditMessage("Notes can not contains '$' and ';' symobols!", "");
+                MsgBoxEditor.EditErrorMessage("Notes can not contains '$' and ';' symobols!", "");
                 noteTextBox.Text = noteTextBox.Text.Replace(';', '\0');
             }
             else { }
@@ -163,22 +164,21 @@ namespace Computer_Management
         }
 
         // --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- |
-        private void addBTN_Click(object sender, RoutedEventArgs e)
+        private void AddBTN_Click(object sender, RoutedEventArgs e)
         {
             new AddPC(this, database, "", "", "", "", "", "").Show();
         }
 
-        private void removeBTN_Click(object sender, MouseButtonEventArgs e)
+        private void RemoveBTN_Click(object sender, MouseButtonEventArgs e)
         {
             new SureWindow(database, ((Image)sender).Name).ShowDialog();
         }
 
-        private void refreshListBTN_Click(object sender, MouseButtonEventArgs e)
+        private void RefreshListBTN_Click(object sender, MouseButtonEventArgs e)
         {
             database.Computers.Clear();
-            try { database.Computers.Clear(); database.LoadData(database.DataPath); }
-            catch { MessageBox.Show(MsgBoxEditor.EditText("Refreshing data failed...") + "\nError[0xD0110001]", "Refreshing failed", MessageBoxButton.OK, MessageBoxImage.Error); }
-            MsgBoxEditor.EditMessage("Computer list reloaded...", "");
+            try { database.Computers.Clear(); database.LoadData(database.DataPath); MessageBox.Show(MsgBoxEditor.EditText("Computer list reloaded..."), ""); }
+            catch { MsgBoxEditor.EditErrorMessage("Refreshing data failed...\nError[0xD0110001]", "Refreshing failed"); }
         }
 
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
@@ -213,8 +213,8 @@ namespace Computer_Management
             }
 
             try { database.SaveData(database.DataPath); }
-            catch { MessageBox.Show(MsgBoxEditor.EditText("Something went wrong...") + "\nError[0xD0110010]", "Changing note failed", MessageBoxButton.OK, MessageBoxImage.Error);  }
-
+            catch { MsgBoxEditor.EditErrorMessage("Something went wrong...\nError[0xD0110010]", "Changing note failed"); }
+            
             pasteChangeCheckBox.IsChecked = false;
             dustClearCheckBox.IsChecked = false;
         }
@@ -233,21 +233,21 @@ namespace Computer_Management
             CachedNote = noteTextBox.Text;
 
             try { ((Computer)pcList.SelectedItem).Change("changeNote", NoteCorrector.CorrectNote(noteTextBox.Text)); }
-            catch { MessageBox.Show(MsgBoxEditor.EditText("Changing note failed...") + "\nError[0xD0110011]", "Changing note failed", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch { MsgBoxEditor.EditErrorMessage("Changing note failed...\nError[0xD0110011]", "Error"); }
             
             try { database.SaveData(database.DataPath); }
-            catch { MessageBox.Show(MsgBoxEditor.EditText("Changing note failed...") + "\nError[0xD0110100]", "Changing note failed", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch { MsgBoxEditor.EditErrorMessage("Changing note failed...\nError[0xD0110100]", "Error"); }
         }
 
         // --- CHECKBOXES --- | --- CHECKBOXES --- | --- CHECKBOXES --- | --- CHECKBOXES --- | --- CHECKBOXES --- | --- CHECKBOXES --- | --- CHECKBOXES --- |
-        private void pasteChangeCheckBox_Checked(object sender, RoutedEventArgs e)
+        private void PasteChangeCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CancelPicBTN.Visibility = Visibility.Visible;
             SavePicBTN.Visibility = Visibility.Visible;
             pasteType.IsEnabled = true;
             PasteChange = true;
         }
-        private void pasteChangeCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void PasteChangeCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             pasteType.IsEnabled = false;
             PasteChange = false;
@@ -258,14 +258,14 @@ namespace Computer_Management
             }
         }
 
-        private void dustClearCheckBox_Checked(object sender, RoutedEventArgs e)
+        private void DustClearCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CancelPicBTN.Visibility = Visibility.Visible;
             SavePicBTN.Visibility = Visibility.Visible;
             DustClean = true;
         }
 
-        private void dustClearCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void DustClearCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             DustClean = false;
             if (!PasteChange) 
@@ -287,7 +287,7 @@ namespace Computer_Management
                     new SureWindow(database, sndr).ShowDialog();
                 }
                 else
-                    MsgBoxEditor.EditMessage("Backup file doesn't exist", "File doesn't exist");
+                    MsgBoxEditor.EditErrorMessage("Backup file doesn't exist", "File doesn't exist");
             }
 
             if (sndr == "LoadBackupFEF")
@@ -300,7 +300,7 @@ namespace Computer_Management
         {
             string sndr = ((MenuItem)sender).Name;
 
-            if (database.Computers.Count == 0) { MsgBoxEditor.EditMessage("No computers to save...", ""); }
+            if (database.Computers.Count == 0) { MsgBoxEditor.EditErrorMessage("No computers to save...", ""); }
             else 
             {
                 if (sndr == "SaveBackup")
@@ -318,11 +318,11 @@ namespace Computer_Management
                             if (result == System.Windows.Forms.DialogResult.OK)
                             {
                                 database.SaveData(Path.Combine(dialog.SelectedPath, "Data_Backup.csv"));
-                                MsgBoxEditor.EditMessage("Backup saved successfully!", "Backup saved");
+                                MessageBox.Show(MsgBoxEditor.EditText("Backup saved successfully!"), "");
                             }
                         }
                     }
-                    catch { MessageBox.Show(MsgBoxEditor.EditText("Saving backup failed...") + "\nError[0xD0111001]", "Saving backup failed", MessageBoxButton.OK, MessageBoxImage.Error); }
+                    catch { MsgBoxEditor.EditErrorMessage("Saving backup failed...\nError[0xD0111001]", "Error"); }
                 }
             }
         }
@@ -332,7 +332,7 @@ namespace Computer_Management
             Process.Start(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management"));
         }
 
-        private void deleteALL_Click(object sender, RoutedEventArgs e)
+        private void DeleteALL_Click(object sender, RoutedEventArgs e)
         {
             new SureWindow(database, ((MenuItem)sender).Name).ShowDialog();
             CancelNotePicBTN.Visibility = Visibility.Hidden;
@@ -340,20 +340,21 @@ namespace Computer_Management
             CachedNote = noteTextBox.Text;
         }
 
-        private void exportPC_Click(object sender, RoutedEventArgs e)
+        private void ExportPC_Click(object sender, RoutedEventArgs e)
         {
             try { database.ExportPC(); }
-            catch { MsgBoxEditor.EditMessage("Exporting PC failed...\nInternal error[0xD0111010]", "Exporting PC failed"); }
+            catch { MsgBoxEditor.EditErrorMessage("Exporting PC failed...\nInternal error[0xD0111010]", "Exporting PC failed"); }
         }
 
-        private void importPC_Click(object sender, RoutedEventArgs e)
+        private void ImportPC_Click(object sender, RoutedEventArgs e)
         {
             database.ImportPC("importPC"); //Already have error_No;
         }
 
         private void Version_Click(object sender, RoutedEventArgs e)
         {
-            MsgBoxEditor.EditMessage(MsgBoxEditor.EditText("Computer management") + "\nVersion: 1.0.0.1.\n\n                                     Created by JD_1609\n", "About");
+            string version = Assembly.GetEntryAssembly().GetName().Version.ToString();
+            MessageBox.Show(MsgBoxEditor.EditText("Computer management") + "\nVersion: " + version + "\n\n                                     Created by JD_1609\n", "About");
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)

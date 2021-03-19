@@ -19,11 +19,7 @@ namespace Computer_Management
                         note = note + "$" + row.Trim();
                     else
                     {
-                        /*if (row.Trim().StartsWith(":"))
-                        {
-                            note = note + "$" + row.Trim();
-                        }
-                        else */if (!row.Trim().StartsWith("-"))
+                        if (!row.Trim().StartsWith("-"))
                         {
                             note = note + "$-" + row.Trim();
                         }

@@ -35,25 +35,25 @@ namespace Computer_Management
             {
                 database.Computers.Clear();
                 database.SaveData(database.DataPath);
-                MsgBoxEditor.EditMessage("All data successfully deleted", "All data deleted");
+                MsgBoxEditor.EditInfoMessage("All data successfully deleted", "All data deleted");
                 database.ListCountCheck();
             }
 
             if (Sender == "SaveBackup")
             {
-                try { database.SaveData(database.BackUpPath); MsgBoxEditor.EditMessage("Backup successfully saved!", "Backup saved"); }
-                catch { MsgBoxEditor.EditMessage("Saving backup failed...", "Saving backup failed"); }
+                try { database.SaveData(database.BackUpPath); MsgBoxEditor.EditInfoMessage("Backup successfully saved!", "Backup saved"); }
+                catch { MsgBoxEditor.EditErrorMessage("Saving backup failed...", "Error"); }
             }
 
             if (Sender == "LoadBackup")
             {
                 try { database.Computers.Clear(); database.LoadData(database.BackUpPath); }
-                catch { MsgBoxEditor.EditMessage("Loading backup failed...", "Loading backup failed"); }
+                catch { MsgBoxEditor.EditErrorMessage("Loading backup failed...", "Error"); }
 
                 try { database.SaveData(database.DataPath); }
-                catch { MsgBoxEditor.EditMessage("Uploading backup failed...", "Uploading backup failed"); }
+                catch { MsgBoxEditor.EditErrorMessage("Uploading backup failed...", "Error"); }
 
-                MsgBoxEditor.EditMessage("Backup uploaded successfully!", "Backup uploaded");
+                MsgBoxEditor.EditInfoMessage("Backup uploaded successfully!", "Backup uploaded");
             }
 
             this.Close();
