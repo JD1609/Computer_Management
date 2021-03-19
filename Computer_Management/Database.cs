@@ -9,7 +9,6 @@ namespace Computer_Management
     {
         public ObservableCollection<Computer> Computers { get; private set; }
         private MainWindow mw;
-        public string DataPath { get; private set; }
         public string BackUpPath { get; private set; }
         public string[] Pastas { get; private set; }
 
@@ -21,7 +20,6 @@ namespace Computer_Management
             Pastas = pastas;
             mw.pasteType.ItemsSource = Pastas;
             BackUpPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data_Backup.csv");
-            DataPath = Settings.Default.DataPath;
         }
 
         // --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- |
@@ -87,12 +85,32 @@ namespace Computer_Management
         public void RemovePc()
         {
             Computers.Remove((Computer)mw.pcList.SelectedItem);
-            SaveData(DataPath);
+            SaveData();
             mw.pcList.SelectedIndex = 0;
             ListCountCheck();
         }
 
         // --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- |
+        public void SaveData()
+        {
+            string dataPath = Settings.Default.DataPath;
+            using (StreamWriter streamwriter = new StreamWriter(dataPath))
+            {
+                streamwriter.WriteLine(); //cause 1st line isn't added to list
+                foreach (Computer c in Computers)
+                {
+                    string note = c.Note;
+                    if (note == "")
+                        note = " "; //cause if is null delete all data
+
+                    string[] values = { c.UserName, c.OS, c.Cpu, c.Gpu, c.Ram, c.Motherboard, c.Paste, note, c.NextCleaning.ToShortDateString() };
+                    string row = String.Join(";", values);
+                    streamwriter.WriteLine(row);
+                }
+                streamwriter.Flush();
+            }
+        }
+
         public void SaveData(string dataPath)
         {
             using (StreamWriter streamwriter = new StreamWriter(dataPath))
@@ -103,7 +121,7 @@ namespace Computer_Management
                     string note = c.Note;
                     if (note == "")
                         note = " "; //cause if is null delete all data
-                    
+
                     string[] values = { c.UserName, c.OS, c.Cpu, c.Gpu, c.Ram, c.Motherboard, c.Paste, note, c.NextCleaning.ToShortDateString() };
                     string row = String.Join(";", values);
                     streamwriter.WriteLine(row);
@@ -176,7 +194,7 @@ namespace Computer_Management
                 { 
                     LoadData(filePath);
 
-                    try { SaveData(DataPath); }
+                    try { SaveData(); }
                     catch { MsgBoxEditor.EditErrorMessage("Importing PC failed...\nInternal error[Dx00110001]", "Importing PC failed"); }
                 }
                 catch { MsgBoxEditor.EditErrorMessage("Importing PC failed...\nInternal error[Dx00110010]", "Importing PC failed"); }

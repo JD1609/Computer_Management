@@ -45,7 +45,7 @@ namespace Computer_Management
             database = new Database(this);
             try
             {
-                database.LoadData(database.DataPath);
+                database.LoadData(Settings.Default.DataPath);
             }
             catch
             {
@@ -219,7 +219,7 @@ namespace Computer_Management
                 }
             }
 
-            try { database.SaveData(database.DataPath); }
+            try { database.SaveData(); }
             catch { MsgBoxEditor.EditErrorMessage("Something went wrong...\nError[0xD0110010]", "Changing note failed"); }
             
             pasteChangeCheckBox.IsChecked = false;
@@ -242,7 +242,7 @@ namespace Computer_Management
             try { ((Computer)pcList.SelectedItem).Change("changeNote", NoteCorrector.CorrectNote(noteTextBox.Text)); }
             catch { MsgBoxEditor.EditErrorMessage("Changing note failed...\nError[0xD0110011]", "Error"); }
             
-            try { database.SaveData(database.DataPath); }
+            try { database.SaveData(); }
             catch { MsgBoxEditor.EditErrorMessage("Changing note failed...\nError[0xD0110100]", "Error"); }
         }
 

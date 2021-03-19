@@ -34,14 +34,14 @@ namespace Computer_Management
             if (Sender == "deleteALL")
             {
                 database.Computers.Clear();
-                database.SaveData(database.DataPath);
+                database.SaveData();
                 MsgBoxEditor.EditInfoMessage("All data successfully deleted", "All data deleted");
                 database.ListCountCheck();
             }
 
             if (Sender == "SaveBackup")
             {
-                try { database.SaveData(database.BackUpPath); MsgBoxEditor.EditInfoMessage("Backup successfully saved!", "Backup saved"); }
+                try { database.SaveData(); MsgBoxEditor.EditInfoMessage("Backup successfully saved!", "Backup saved"); }
                 catch { MsgBoxEditor.EditErrorMessage("Saving backup failed...", "Error"); }
             }
 
@@ -50,7 +50,7 @@ namespace Computer_Management
                 try { database.Computers.Clear(); database.LoadData(database.BackUpPath); }
                 catch { MsgBoxEditor.EditErrorMessage("Loading backup failed...", "Error"); }
 
-                try { database.SaveData(database.DataPath); }
+                try { database.SaveData(); }
                 catch { MsgBoxEditor.EditErrorMessage("Uploading backup failed...", "Error"); }
 
                 MsgBoxEditor.EditInfoMessage("Backup uploaded successfully!", "Backup uploaded");

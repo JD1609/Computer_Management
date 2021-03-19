@@ -93,7 +93,7 @@ namespace Computer_Management
                                 // --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- |
                                 try
                                 {
-                                    database.SaveData(database.DataPath);
+                                    database.SaveData();
                                     Close();
                                 }
                                 catch

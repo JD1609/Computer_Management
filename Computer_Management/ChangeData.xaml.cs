@@ -83,7 +83,7 @@ namespace Computer_Management
                 }
                 catch { MsgBoxEditor.EditErrorMessage("Changing data failed...!\nError[Cx00000001]", "Changing failed"); }
                 
-                try { database.SaveData(database.DataPath); }
+                try { database.SaveData(); }
                 catch { MsgBoxEditor.EditErrorMessage("Changing data failed...!\nError[Cx00000010]", "Changing failed"); }
             }
             else 
@@ -95,7 +95,7 @@ namespace Computer_Management
                 }
                 catch { MsgBoxEditor.EditErrorMessage("Changing data failed...!\nError[Cx00000011]", "Changing failed"); }
                 
-                try { database.SaveData(database.DataPath); }
+                try { database.SaveData(); }
                 catch { MsgBoxEditor.EditErrorMessage("Changing data failed...!\nError[Cx00000100]", "Changing failed"); }
             }
         }
