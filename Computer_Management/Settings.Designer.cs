@@ -38,12 +38,24 @@ namespace Computer_Management {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public byte Month {
+        public byte PasteReplaceMonth {
             get {
-                return ((byte)(this["Month"]));
+                return ((byte)(this["PasteReplaceMonth"]));
             }
             set {
-                this["Month"] = value;
+                this["PasteReplaceMonth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte SortingBy {
+            get {
+                return ((byte)(this["SortingBy"]));
+            }
+            set {
+                this["SortingBy"] = value;
             }
         }
     }

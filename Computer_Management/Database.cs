@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Collections.ObjectModel;
 using Microsoft.Win32;
 
@@ -73,7 +74,14 @@ namespace Computer_Management
                         DateTime nextCleaning = DateTime.Parse(splitted[8]);
                         Computers.Add(new Computer(user, os, cpu, gpu, ram, mb, paste, note, nextCleaning));
                     }
-                    mw.pcList.ItemsSource = Computers;
+
+                    if(Settings.Default.SortingBy == 0)
+                        mw.pcList.ItemsSource = Computers;
+                    if(Settings.Default.SortingBy == 1)
+                        mw.pcList.ItemsSource = Computers.OrderBy(c => c.UserName);
+                    if (Settings.Default.SortingBy == 2)
+                        mw.pcList.ItemsSource = Computers.OrderByDescending(c => c.UserName);
+
                     mw.pcList.SelectedIndex = 0;
                 }
                 else { }

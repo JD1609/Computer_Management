@@ -27,15 +27,16 @@ namespace Computer_Management
                         else
                         {
                             Settings.Default.DataPath = DefaultDataPath;
-                            Settings.Default.Month = 2;
+                            Settings.Default.PasteReplaceMonth = 2;
                             Settings.Default.Save();
                         }
                     }
                 }
             }
-            if (s == "Month") 
+
+            if (s == "Month")
             {
-                lock (zamek) 
+                lock (zamek)
                 {
                     using (StreamReader sr = new StreamReader(SettingsPath))
                     {
@@ -43,13 +44,36 @@ namespace Computer_Management
                         if (line != null)
                         {
                             string[] splitted = line.Split(';');
-                            Settings.Default.Month = byte.Parse(splitted[1]);
+                            Settings.Default.PasteReplaceMonth = byte.Parse(splitted[1]);
                             Settings.Default.Save();
                         }
                         else
                         {
                             Settings.Default.DataPath = DefaultDataPath;
-                            Settings.Default.Month = 2;
+                            Settings.Default.PasteReplaceMonth = 2;
+                            Settings.Default.Save();
+                        }
+                    }
+                }
+            }
+
+            if (s == "SortingBy")
+            {
+                lock (zamek)
+                {
+                    using (StreamReader sr = new StreamReader(SettingsPath))
+                    {
+                        string line = sr.ReadLine();
+                        if (line != null)
+                        {
+                            string[] splitted = line.Split(';');
+                            Settings.Default.SortingBy = byte.Parse(splitted[2]);
+                            Settings.Default.Save();
+                        }
+                        else
+                        {
+                            Settings.Default.DataPath = DefaultDataPath;
+                            Settings.Default.SortingBy = 0;
                             Settings.Default.Save();
                         }
                     }
@@ -63,7 +87,8 @@ namespace Computer_Management
             {
                 string defaultDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.csv");
                 Settings.Default.DataPath = defaultDataPath;
-                Settings.Default.Month = 2;
+                Settings.Default.PasteReplaceMonth = 2;
+                Settings.Default.SortingBy = 0;
                 Settings.Default.Save();
             }
 
@@ -71,6 +96,7 @@ namespace Computer_Management
             {
                 Load("Path");
                 Load("Month");
+                Load("SortingBy");
             }
         }
 
@@ -78,7 +104,7 @@ namespace Computer_Management
         {
             using (StreamWriter sw = new StreamWriter(SettingsPath))
             {
-                sw.WriteLine("{0};{1}", Settings.Default.DataPath, Settings.Default.Month);
+                sw.WriteLine("{0};{1};{2}", Settings.Default.DataPath, Settings.Default.PasteReplaceMonth, Settings.Default.SortingBy);
                 sw.Flush();
             }
         }

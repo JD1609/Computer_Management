@@ -206,7 +206,7 @@ namespace Computer_Management
 
             if (PasteChange == true || DustClean == true) 
             {
-                int i = Settings.Default.Month;
+                int i = Settings.Default.PasteReplaceMonth;
                 nextCleaningDate.Content = "Next maintenance: " + DateTime.Today.AddMonths(i + 1).ToString("dd.MM. yyyy");
                 ((Computer)pcList.SelectedItem).Change("date", DateTime.Today.AddMonths(i + 1).ToString("dd.MM. yyyy"));
 
