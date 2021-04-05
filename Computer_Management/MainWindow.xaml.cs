@@ -6,7 +6,6 @@ using System.Linq;
 using System.IO;
 using System.Diagnostics;
 using System.Threading;
-using System.Reflection;
 
 namespace Computer_Management
 {
@@ -14,7 +13,6 @@ namespace Computer_Management
     {
         public bool PasteChange { get; private set; }
         public bool DustClean { get; private set; }
-        private object zamek = new object();
         private Database database;
         Mutex oneInstance;
         private void Application_Startup()

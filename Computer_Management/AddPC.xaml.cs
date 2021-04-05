@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace Computer_Management
@@ -11,6 +12,8 @@ namespace Computer_Management
         public AddPC(MainWindow mw, Database database, string username, string os, string cpu, string gpu, string ram, string mb)
         {
             InitializeComponent();
+            loadingBorder.Visibility = Visibility.Hidden;
+            loadingProgressBar.Value = 0;
             this.database = database;
             this.mw = mw;
             pasteTypeComboBox.ItemsSource = database.Pastas;
@@ -111,14 +114,73 @@ namespace Computer_Management
         }
 
         // --- BUTTON --- | --- BUTTON --- | --- BUTTON --- | --- BUTTON --- |
-        private void thisPCBTN_Click(object sender, RoutedEventArgs e)
+        private async void thisPCBTN_Click(object sender, RoutedEventArgs e)
         {
+            loadingBorder.Visibility = Visibility.Visible;
+            await Task.Delay(1);
+
             userNameTxtBox.Text = HwFinder.GetUser();
+            {
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 7;
+                await Task.Delay(1);
+            }
+
             operatingSystemTxtBox.Text = HwFinder.GetOS();
+            {
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 7;
+                await Task.Delay(1);
+            }
+
             cpuTxtBox.Text = HwFinder.GetCpu();
+            {
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 7;
+                await Task.Delay(1);
+            }
+
             gpuTxtBox.Text = HwFinder.GetGpu();
+            {
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 7;
+                await Task.Delay(1);
+            }
+
             ramTxtBox.Text = HwFinder.GetRam();
+            {
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 7;
+                await Task.Delay(1);
+            }
+
             mbTxtBox.Text = HwFinder.GetMB();
+            {
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 7;
+                await Task.Delay(100);
+            }
+
+            loadingProgressBar.Value = 0;
+            loadingBorder.Visibility = Visibility.Hidden;
         }
 
         private void noteTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
