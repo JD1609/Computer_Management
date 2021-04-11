@@ -38,6 +38,7 @@ namespace Computer_Management
             settingsThread.Join();
 
             SettingsClass.Save();
+
             InitializeComponent();
 
             database = new Database(this);
@@ -322,7 +323,7 @@ namespace Computer_Management
                             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
                             if (result == System.Windows.Forms.DialogResult.OK)
                             {
-                                database.SaveData(Path.Combine(dialog.SelectedPath, "Data_Backup.csv"));
+                                database.SaveData(Path.Combine(dialog.SelectedPath, "Data_Backup.xml"));
                                 MessageBox.Show(MsgBoxEditor.EditText("Backup saved successfully!"), "");
                             }
                         }

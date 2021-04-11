@@ -26,7 +26,7 @@ namespace Computer_Management
 
         private void dataPathClick(object sender, MouseButtonEventArgs e)
         {
-            try { Process.Start(dataPathLabel.Content.ToString().Remove(dataPathLabel.Content.ToString().Length - 8, 8)); }
+            try { Process.Start(Path.GetDirectoryName(dataPathLabel.Content.ToString())); }
             catch { MsgBoxEditor.EditErrorMessage("Datapath not found...", "Error"); }
         }
 
@@ -53,7 +53,7 @@ namespace Computer_Management
         // --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- |
         private void RDBTN_Click(object sender, RoutedEventArgs e)
         {
-            dataPathLabel.Content = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.csv");
+            dataPathLabel.Content = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.xml");
             monthsComboBox.SelectedIndex = 2;
             sortingComboBox.SelectedIndex = 0;
             if (Settings.Default.DataPath != dataPathLabel.Content.ToString())
