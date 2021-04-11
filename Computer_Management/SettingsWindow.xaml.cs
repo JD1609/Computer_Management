@@ -34,8 +34,8 @@ namespace Computer_Management
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.FileName = "";
-            dlg.DefaultExt = ".cvs";
-            dlg.Filter = ".csv|*csv*|.txt|*txt*";
+            dlg.DefaultExt = ".xml";
+            dlg.Filter = ".xml|*xml*|.txt|*txt*";
             dlg.FileName = "Data";
 
             Nullable<bool> result = dlg.ShowDialog();
