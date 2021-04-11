@@ -41,7 +41,7 @@ namespace Computer_Management
 
             if (Sender == "SaveBackup")
             {
-                try { database.SaveData(); MsgBoxEditor.EditInfoMessage("Backup successfully saved!", "Backup saved"); }
+                try { database.SaveData(database.BackUpPath); MsgBoxEditor.EditInfoMessage("Backup successfully saved!", "Backup saved"); }
                 catch { MsgBoxEditor.EditErrorMessage("Saving backup failed...", "Error"); }
             }
 
