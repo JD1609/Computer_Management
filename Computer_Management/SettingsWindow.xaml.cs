@@ -26,7 +26,7 @@ namespace Computer_Management
 
         private void dataPathClick(object sender, MouseButtonEventArgs e)
         {
-            try { Process.Start(dataPathLabel.Content.ToString().Remove(dataPathLabel.Content.ToString().Length - 8, 8)); }
+            try { Process.Start(Path.GetDirectoryName(dataPathLabel.Content.ToString())); }
             catch { MsgBoxEditor.EditErrorMessage("Datapath not found...", "Error"); }
         }
 
