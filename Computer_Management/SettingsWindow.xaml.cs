@@ -9,11 +9,13 @@ namespace Computer_Management
 {
     public partial class SettingsWindow : Window
     {
+        MainWindow mw;
         public string[] Months { get; private set; }
 
-        public SettingsWindow()
+        public SettingsWindow(MainWindow mw)
         {
             InitializeComponent();
+            this.mw = mw;
             string[] months = { "1 month", "2 months", "3 months", "4 months", "5 months", "6 months", "7 months", "8 months", "9 months", "10 months", "11 months", "12 months", };
             monthsComboBox.ItemsSource = months;
             sortingComboBox.SelectedIndex = Settings.Default.SortingBy;
@@ -66,6 +68,8 @@ namespace Computer_Management
             Settings.Default.SortingBy = byte.Parse(sortingComboBox.SelectedIndex.ToString());
             Settings.Default.Save();
             SettingsClass.Save();
+            Database database = new Database(mw);
+            database.LoadData(Settings.Default.DataPath);
             this.Close();
         }
     }

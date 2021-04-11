@@ -138,12 +138,6 @@ namespace Computer_Management
                 noteTextBox.Text = noteTextBox.Text.Replace('$', '\0');
             }
             else { }
-            if (noteTextBox.Text.Contains(";"))
-            {
-                MsgBoxEditor.EditErrorMessage("Notes can not contains '$' and ';' symobols!", "");
-                noteTextBox.Text = noteTextBox.Text.Replace(';', '\0');
-            }
-            else { }
 
             if (CachedNote == noteTextBox.Text) 
             {
@@ -359,7 +353,7 @@ namespace Computer_Management
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            new SettingsWindow().ShowDialog();
+            new SettingsWindow(this).ShowDialog();
         }
 
         private void Shortcuts_Click(object sender, RoutedEventArgs e)
@@ -389,7 +383,7 @@ namespace Computer_Management
                         System.Windows.Forms.DialogResult result = dialog.ShowDialog();
                         if (result == System.Windows.Forms.DialogResult.OK)
                         {
-                            database.SaveData(Path.Combine(dialog.SelectedPath, "Data_Backup.csv"));
+                            database.SaveData(Path.Combine(dialog.SelectedPath, "Data_Backup.xml"));
                             MessageBox.Show(MsgBoxEditor.EditText("Backup saved successfully!"), "");
                         }
                     }
