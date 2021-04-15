@@ -111,10 +111,10 @@ namespace Computer_Management
 
                 pasteLabel.Content = computer.Paste;
 
-                nextCleaningDate.Content = "Next maintenance: " + ((Computer)pcList.SelectedItem).NextCleaning.ToString("dd.MM. yyyy");
+                nextCleaningDate.Content = "Next maintenance: " + ((Computer)pcList.SelectedItem).Maintenance.ToString("dd.MM. yyyy");
                 // --- NOTE ---
-                CachedNote = computer.Note.Replace('$', '\n').Remove(0, 1);
-                noteTextBox.Text = computer.Note.Replace('$', '\n').Remove(0, 1);//cause 1st char is '$'
+                CachedNote = computer.Note;
+                noteTextBox.Text = computer.Note;
             }
             else { }
         }
@@ -132,13 +132,6 @@ namespace Computer_Management
 
         private void NoteTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (noteTextBox.Text.Contains("$"))
-            {
-                MsgBoxEditor.EditErrorMessage("Notes can not contains '$' & ';' symobols!", "");
-                noteTextBox.Text = noteTextBox.Text.Replace('$', '\0');
-            }
-            else { }
-
             if (CachedNote == noteTextBox.Text) 
             {
             }
@@ -232,7 +225,7 @@ namespace Computer_Management
             SaveNotePicBTN.Visibility = Visibility.Hidden;
             CachedNote = noteTextBox.Text;
 
-            try { ((Computer)pcList.SelectedItem).Change("changeNote", NoteCorrector.CorrectNote(noteTextBox.Text)); }
+            try { ((Computer)pcList.SelectedItem).Change("changeNote", noteTextBox.Text); }
             catch { MsgBoxEditor.EditErrorMessage("Changing note failed...\nError[0xD0110011]", "Error"); }
             
             try { database.SaveData(); }

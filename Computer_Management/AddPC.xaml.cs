@@ -82,9 +82,9 @@ namespace Computer_Management
                                         mb = "None";
 
                                     string paste = pasteTypeComboBox.SelectedItem.ToString();
-                                    string note = NoteCorrector.CorrectNote(noteTextBox.Text);
+                                    string note = noteTextBox.Text;
 
-                                    database.Computers.Add(new Computer(user, os, cpu, gpu, ram, mb, paste, note, datePicker.SelectedDate.Value));
+                                    database.Computers.Add(new Computer(DateTime.Now, user, os, cpu, gpu, ram, mb, paste, note, datePicker.SelectedDate.Value));
 
                                     mw.dustClearCheckBox.IsEnabled = true;
                                     mw.pasteChangeCheckBox.IsEnabled = true;
@@ -94,13 +94,8 @@ namespace Computer_Management
                                 catch { MsgBoxEditor.EditErrorMessage("An error has been occurred! Computer wasn't added...\nError[Ax00011001]", "Adding PC failed"); }
 
                                 // --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- |
-                                try
-                                {
-                                    database.SaveData();
-                                    Close();
-                                }
-                                catch
-                                { MsgBoxEditor.EditErrorMessage("An error has been occurred! Data wasn't saved.\nError[Ax00100001]", "Saving failed"); }
+                                database.SaveData();
+                                Close();
                             }
                         }
                         catch { MsgBoxEditor.EditInfoMessage("Wrong selected date.\nPlease enter date in format: DD.MM.YYYY", ""); }
@@ -116,6 +111,7 @@ namespace Computer_Management
         // --- BUTTON --- | --- BUTTON --- | --- BUTTON --- | --- BUTTON --- |
         private async void thisPCBTN_Click(object sender, RoutedEventArgs e)
         {
+            addPcBTN.IsEnabled = false;
             loadingBorder.Visibility = Visibility.Visible;
             await Task.Delay(1);
 
@@ -181,6 +177,7 @@ namespace Computer_Management
 
             loadingProgressBar.Value = 0;
             loadingBorder.Visibility = Visibility.Hidden;
+            addPcBTN.IsEnabled = true;
         }
 
         private void noteTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)

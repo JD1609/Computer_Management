@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Xml;
+using System.Xml.Linq;
 using System.Linq;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
@@ -10,6 +10,7 @@ namespace Computer_Management
     public class Database
     {
         public ObservableCollection<Computer> Computers { get; private set; }
+        private XDocument dataDocument;
         private MainWindow mw;
         public string BackUpPath { get; private set; }
         public string[] Pastas { get; private set; }
@@ -20,8 +21,10 @@ namespace Computer_Management
             Computers = new ObservableCollection<Computer>();
             string[] pastas = { "Cheap", "Expensive" };
             Pastas = pastas;
+            dataDocument = XDocument.Load(Settings.Default.DataPath);
             mw.pasteType.ItemsSource = Pastas;
             BackUpPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data_Backup.xml");
+            ListCountCheck();
         }
 
         // --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- |
@@ -31,22 +34,39 @@ namespace Computer_Management
             {
                 mw.userLabel.Content = null;
                 mw.osLabel.Content = null;
+                mw.osLabel.IsEnabled = false;
                 mw.cpuLabel.Content = null;
+                mw.cpuLabel.IsEnabled = false;
                 mw.gpuLabel.Content = null;
+                mw.gpuLabel.IsEnabled = false;
                 mw.ramLabel.Content = null;
+                mw.ramLabel.IsEnabled = false;
                 mw.mbLabel.Content = null;
+                mw.mbLabel.IsEnabled = false;
                 mw.pasteLabel.Content = null;
+                mw.pasteLabel.IsEnabled = false;
                 mw.nextCleaningDate.Content = null;
 
+                mw.duplicatePC.Visibility = System.Windows.Visibility.Hidden;
+                mw.noteTextBox.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Hidden;
                 mw.dustClearCheckBox.IsEnabled = false;
                 mw.pasteChangeCheckBox.IsEnabled = false;
                 mw.noteTextBox.IsEnabled = false;
                 mw.noteTextBox.Text = "";
-                MsgBoxEditor.EditErrorMessage("No PCs found...", "Missing data");
+                MsgBoxEditor.EditInfoMessage("No PCs found...", "No data");
             }
 
             else
             {
+                mw.osLabel.IsEnabled = true;
+                mw.cpuLabel.IsEnabled = true;
+                mw.gpuLabel.IsEnabled = true;
+                mw.ramLabel.IsEnabled = true;
+                mw.mbLabel.IsEnabled = true;
+                mw.pasteLabel.IsEnabled = false;
+
+                mw.noteTextBox.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Hidden;
+                mw.duplicatePC.Visibility = System.Windows.Visibility.Visible;
                 mw.dustClearCheckBox.IsEnabled = true;
                 mw.pasteChangeCheckBox.IsEnabled = true;
                 mw.noteTextBox.IsEnabled = true;
@@ -56,76 +76,50 @@ namespace Computer_Management
         // --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- |
         public void LoadData(string dataPath)
         {
-            using (XmlReader xmlReader = XmlReader.Create(dataPath)) 
+            DateTime added = DateTime.Now;
+            string user = "Username";
+            string os = "Operating system";
+            string cpu = "CPU";
+            string gpu = "GPU";
+            string ram = "RAM";
+            string mb = "Motherboard";
+            string paste = "Paste";
+            string note = "";
+            DateTime maintenance = DateTime.Now.AddMonths(3);
+
+            if (dataDocument.Elements("Computer").Count() > 0)
             {
-                string element = "";
-
-                string userName = "";
-                string os = "";
-                string cpu = "";
-                string gpu = "";
-                string ram = "";
-                string mb = "";
-                string paste = "";
-                string note = "";
-                DateTime maintenance = DateTime.Today;
-
-                while (xmlReader.Read()) 
+                foreach (XElement c in dataDocument.Elements("Computer"))
                 {
-                    if (xmlReader.NodeType == XmlNodeType.Element)
-                    {
-                        element = xmlReader.Name;
-                        if (element == "Computer")
-                        {
-                            userName = xmlReader.GetAttribute("UserName");
-                        }
-                    }
+                    added = DateTime.Parse(c.Attribute("Added").Value);
+                    user = c.Attribute("userName").Value;
+                    os = c.Element("OS").Value;
+                    cpu = c.Element("CPU").Value;
+                    gpu = c.Element("GPU").Value;
+                    ram = c.Element("RAM").Value;
+                    mb = c.Element("Motherboard").Value;
+                    paste = c.Element("Paste").Value;
+                    foreach (XElement row in c.Element("Note").Elements("Row"))
+                        note += row.Value.Trim() + "\n";
+                    maintenance = DateTime.Parse(c.Element("Maintenance").Value);
 
-                    else if (xmlReader.NodeType == XmlNodeType.Text)
-                    {
-                        switch (element)
-                        {
-                            case "OS":
-                                os = xmlReader.Value;
-                                break;
-                            case "CPU":
-                                cpu = xmlReader.Value;
-                                break;
-                            case "GPU":
-                                gpu = xmlReader.Value;
-                                break;
-                            case "RAM":
-                                ram = xmlReader.Value;
-                                break;
-                            case "Motherboard":
-                                mb = xmlReader.Value;
-                                break;
-                            case "Paste":
-                                paste = xmlReader.Value;
-                                break;
-                            case "Note":
-                                note = xmlReader.Value;
-                                break;
-                            case "Maintenance":
-                                maintenance = DateTime.Parse(xmlReader.Value);
-                                break;
-                        }
-                    }
-
-                    else if ((xmlReader.NodeType == XmlNodeType.EndElement) && (xmlReader.Name == "Computer"))
-                        Computers.Add(new Computer(userName, os, cpu, gpu, ram, mb, paste, note, maintenance));
+                    Computers.Add(new Computer(added, user, os, cpu, gpu, ram, mb, paste, note, maintenance));
                 }
+
+                if (Settings.Default.SortingBy == 0)
+                    mw.pcList.ItemsSource = Computers.OrderBy(c => c.Added);
+                if (Settings.Default.SortingBy == 1)
+                    mw.pcList.ItemsSource = Computers.OrderBy(c => c.UserName);
+                if (Settings.Default.SortingBy == 2)
+                    mw.pcList.ItemsSource = Computers.OrderByDescending(c => c.UserName);
+
+                mw.pcList.SelectedIndex = 0;
+                ListCountCheck();
             }
-
-            if (Settings.Default.SortingBy == 0)
-                mw.pcList.ItemsSource = Computers;
-            if (Settings.Default.SortingBy == 1)
-                mw.pcList.ItemsSource = Computers.OrderBy(c => c.UserName);
-            if (Settings.Default.SortingBy == 2)
-                mw.pcList.ItemsSource = Computers.OrderByDescending(c => c.UserName);
-
-            mw.pcList.SelectedIndex = 0;
-            ListCountCheck();
+            else 
+            {
+                MsgBoxEditor.EditInfoMessage("No PCs found", "No data");
+            }
         }
 
         // --- REMOVE DATA --- | --- REMOVE DATA --- | --- REMOVE DATA --- | --- REMOVE DATA --- | --- REMOVE DATA --- | --- REMOVE DATA --- | --- REMOVE DATA --- |
@@ -140,96 +134,93 @@ namespace Computer_Management
         // --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- |
         public void SaveData()
         {
-            XmlWriterSettings xmlSettings = new XmlWriterSettings();
-            xmlSettings.Indent = true;
-
-            using (XmlWriter xmlWriter = XmlWriter.Create(Settings.Default.DataPath, xmlSettings)) 
+            XDocument data = new XDocument(new XDeclaration("1.O", "UTF-8", null));
+            try 
             {
-                xmlWriter.WriteStartDocument();
-                xmlWriter.WriteStartElement("Computers");
+                data.Add(new XElement("Computers"));
 
-                foreach (Computer c in Computers) 
+                if (Computers.Count != 0)
                 {
-                    xmlWriter.WriteStartElement("Computer");
-                    xmlWriter.WriteAttributeString("UserName", c.UserName);
+                    foreach (Computer c in Computers)
+                    {
+                        XElement noteRows = new XElement("Note");
+                        foreach (var s in c.Note.Split('\n'))
+                        {
+                            noteRows.Add(new XElement("Row", s.Trim()));
+                        }
 
-                    xmlWriter.WriteElementString("OS", c.OS);
-                    xmlWriter.WriteElementString("CPU", c.Cpu);
-                    xmlWriter.WriteElementString("GPU", c.Gpu);
-                    xmlWriter.WriteElementString("RAM", c.Ram);
-                    xmlWriter.WriteElementString("Motherboard", c.Motherboard);
-                    xmlWriter.WriteElementString("Paste", c.Paste);
-                    xmlWriter.WriteElementString("Note", c.Note);
-                    xmlWriter.WriteElementString("Maintenance", c.NextCleaning.ToString());
-
-                    xmlWriter.WriteEndElement();
+                        data.Element("Computers").Add(new XElement("Computer", new XAttribute("userName", c.UserName), new XAttribute("Added", c.Added),
+                                            new XElement("OS", c.OS),
+                                            new XElement("CPU", c.Cpu),
+                                            new XElement("GPU", c.Gpu),
+                                            new XElement("RAM", c.Ram),
+                                            new XElement("Motherboard", c.Motherboard),
+                                            new XElement("Paste", c.Paste),
+                                            noteRows,
+                                            new XElement("Maintenance", c.Maintenance)
+                                            ));
+                    }
                 }
-
-                xmlWriter.WriteEndElement();
-                xmlWriter.Flush();
             }
+            catch { MsgBoxEditor.EditInfoMessage("sdasdasdad - " + Computers.Count, ""); }
+
+            try { data.Save(Settings.Default.DataPath); }
+            catch { MsgBoxEditor.EditErrorMessage("Saving data failed...\nError[Dx00100010]", "Saving data failed"); }
         }
 
         public void SaveData(string dataPath)
         {
-            XmlWriterSettings xmlSettings = new XmlWriterSettings();
-            xmlSettings.Indent = true;
-
-            using (XmlWriter xmlWriter = XmlWriter.Create(dataPath, xmlSettings))
+            XDocument dataDocument = new XDocument(new XDeclaration("1.0", "UTF-8", null));
+            foreach (Computer c in Computers)
             {
-                xmlWriter.WriteStartDocument();
-                xmlWriter.WriteStartElement("Computers");
+                XElement noteRows = new XElement("Note");
 
-                foreach (Computer c in Computers)
+                foreach (var s in c.Note.Split('\n'))
                 {
-                    xmlWriter.WriteStartElement("Computer");
-                    xmlWriter.WriteAttributeString("UserName", c.UserName);
-
-                    xmlWriter.WriteElementString("OS", c.OS);
-                    xmlWriter.WriteElementString("CPU", c.Cpu);
-                    xmlWriter.WriteElementString("GPU", c.Gpu);
-                    xmlWriter.WriteElementString("RAM", c.Ram);
-                    xmlWriter.WriteElementString("Motherboard", c.Motherboard);
-                    xmlWriter.WriteElementString("Paste", c.Paste);
-                    xmlWriter.WriteElementString("Note", c.Note);
-                    xmlWriter.WriteElementString("Maintenance", c.NextCleaning.ToString());
-
-                    xmlWriter.WriteEndElement();
+                    noteRows.Add(new XElement("Row", s));
                 }
 
-                xmlWriter.WriteEndElement();
-                xmlWriter.Flush();
+                dataDocument.Add(new XElement("Computer", new XAttribute("userName", c.UserName), new XAttribute("Added", c.Added),
+                                    new XElement("OS", c.OS),
+                                    new XElement("CPU", c.Cpu),
+                                    new XElement("GPU", c.Gpu),
+                                    new XElement("RAM", c.Ram),
+                                    new XElement("Motherboard", c.Motherboard),
+                                    new XElement("Paste", c.Paste),
+                                    noteRows,
+                                    new XElement("Maintenance", c.Maintenance)
+                                    ));
             }
+
+            try { dataDocument.Save(dataPath); }
+            catch { MsgBoxEditor.EditErrorMessage("Saving data...\nInternal error[Dx00100010]", "Saving data failed"); }
         }
 
         public void SaveOne(string dataPath) 
         {
             if (mw.pcList.SelectedItem != null)
             {
-                XmlWriterSettings xmlSettings = new XmlWriterSettings();
-                xmlSettings.Indent = true;
-
-                using (XmlWriter xmlWriter = XmlWriter.Create(dataPath, xmlSettings)) 
+                XDocument dataDocument = new XDocument(new XDeclaration("1.0", "UTF-8", null));
+                XElement noteRows = new XElement("Note");
+                foreach (var s in ((Computer)mw.pcList.SelectedItem).Note.Split('\n'))
                 {
-                    xmlWriter.WriteStartDocument();
-                    xmlWriter.WriteStartElement("Computers");
-
-                    xmlWriter.WriteStartElement("Computer");
-                    xmlWriter.WriteAttributeString("UserNname", ((Computer)mw.pcList.SelectedItem).UserName);
-
-                    xmlWriter.WriteElementString("OS", ((Computer)mw.pcList.SelectedItem).OS);
-                    xmlWriter.WriteElementString("CPU", ((Computer)mw.pcList.SelectedItem).Cpu);
-                    xmlWriter.WriteElementString("GPU", ((Computer)mw.pcList.SelectedItem).Gpu);
-                    xmlWriter.WriteElementString("RAM", ((Computer)mw.pcList.SelectedItem).Ram);
-                    xmlWriter.WriteElementString("Motherboard", ((Computer)mw.pcList.SelectedItem).Motherboard);
-                    xmlWriter.WriteElementString("Paste", ((Computer)mw.pcList.SelectedItem).Paste);
-                    xmlWriter.WriteElementString("Note", ((Computer)mw.pcList.SelectedItem).Note);
-                    xmlWriter.WriteElementString("Maintenance", ((Computer)mw.pcList.SelectedItem).NextCleaning.ToString());
-                    xmlWriter.WriteEndElement();
-
-                    xmlWriter.WriteEndElement();
-                    xmlWriter.Flush();
+                    noteRows.Add(new XElement("Row", s));
                 }
+
+                dataDocument.Add(new XElement("Computer", new XAttribute("userName", ((Computer)mw.pcList.SelectedItem).UserName)), new XAttribute("Added", ((Computer)mw.pcList.SelectedItem).Added),
+                                    new XElement("OS", ((Computer)mw.pcList.SelectedItem).OS),
+                                    new XElement("CPU", ((Computer)mw.pcList.SelectedItem).Cpu),
+                                    new XElement("GPU", ((Computer)mw.pcList.SelectedItem).Gpu),
+                                    new XElement("RAM", ((Computer)mw.pcList.SelectedItem).Ram),
+                                    new XElement("Motherboard", ((Computer)mw.pcList.SelectedItem).Motherboard),
+                                    new XElement("Paste", ((Computer)mw.pcList.SelectedItem).Paste),
+                                    noteRows,
+                                    new XElement("Maintenance", ((Computer)mw.pcList.SelectedItem).Maintenance)
+                                    );
+
+            
+                try { dataDocument.Save(dataPath); }
+                catch { MsgBoxEditor.EditErrorMessage("Importing PC failed...\nInternal error[Dx00100011]", "Saving PC failed"); }
             }
 
             else 
