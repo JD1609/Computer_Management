@@ -97,7 +97,7 @@
         <Image Name="SaveNotePicBTN" HorizontalAlignment="Right" Height="21" Width="21" Margin="0,25,6,0" VerticalAlignment="Top" ToolTip="Save changes" Source="Icons\SaveChange.png" Cursor="Hand" MouseDown="SaveNoteBTN" Grid.Column="2" Grid.RowSpan="2"/>
         <Label Height="30" Width="80" Grid.Column="2" Margin="0,22,198,163" Content="Notes:" FontWeight="Bold" Grid.RowSpan="2"/>
         <TextBox Name="noteTextBox" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Margin="5,15,5,11" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="NoteTextBox_TextChanged"/>
-        <Image Source="Icons/Duplicate.png" ToolTip="Duplicate computer" Cursor="Hand" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="265,5,0,0" VerticalAlignment="Top" Width="16" Grid.Row="1" MouseDown="DuplicatePC_MouseDown"/>
+        <Image Name="duplicatePC" Source="Icons/Duplicate.png" ToolTip="Duplicate computer" Cursor="Hand" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="265,5,0,0" VerticalAlignment="Top" Width="16" Grid.Row="1" MouseDown="DuplicatePC_MouseDown"/>
 
     </Grid>
 </Window>

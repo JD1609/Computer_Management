@@ -21,6 +21,7 @@ namespace Computer_Management
             Pastas = pastas;
             mw.pasteType.ItemsSource = Pastas;
             BackUpPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data_Backup.csv");
+            ListCountCheck();
         }
 
         // --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- |
@@ -30,22 +31,39 @@ namespace Computer_Management
             {
                 mw.userLabel.Content = null;
                 mw.osLabel.Content = null;
+                mw.osLabel.IsEnabled = false;
                 mw.cpuLabel.Content = null;
+                mw.cpuLabel.IsEnabled = false;
                 mw.gpuLabel.Content = null;
+                mw.gpuLabel.IsEnabled = false;
                 mw.ramLabel.Content = null;
+                mw.ramLabel.IsEnabled = false;
                 mw.mbLabel.Content = null;
+                mw.mbLabel.IsEnabled = false;
                 mw.pasteLabel.Content = null;
+                mw.pasteLabel.IsEnabled = false;
                 mw.nextCleaningDate.Content = null;
 
+                mw.duplicatePC.Visibility = System.Windows.Visibility.Hidden;
+                mw.noteTextBox.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Hidden;
                 mw.dustClearCheckBox.IsEnabled = false;
                 mw.pasteChangeCheckBox.IsEnabled = false;
                 mw.noteTextBox.IsEnabled = false;
                 mw.noteTextBox.Text = "";
-                MsgBoxEditor.EditErrorMessage("No PCs found...", "Missing data");
+                MsgBoxEditor.EditInfoMessage("No PCs found...", "No data");
             }
 
             else
             {
+                mw.osLabel.IsEnabled = true;
+                mw.cpuLabel.IsEnabled = true;
+                mw.gpuLabel.IsEnabled = true;
+                mw.ramLabel.IsEnabled = true;
+                mw.mbLabel.IsEnabled = true;
+                mw.pasteLabel.IsEnabled = false;
+
+                mw.noteTextBox.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Hidden;
+                mw.duplicatePC.Visibility = System.Windows.Visibility.Visible;
                 mw.dustClearCheckBox.IsEnabled = true;
                 mw.pasteChangeCheckBox.IsEnabled = true;
                 mw.noteTextBox.IsEnabled = true;

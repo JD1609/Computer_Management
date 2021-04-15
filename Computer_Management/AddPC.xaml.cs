@@ -117,6 +117,7 @@ namespace Computer_Management
         private async void thisPCBTN_Click(object sender, RoutedEventArgs e)
         {
             loadingBorder.Visibility = Visibility.Visible;
+            addPcBTN.IsEnabled = false;
             await Task.Delay(1);
 
             userNameTxtBox.Text = HwFinder.GetUser();
@@ -181,6 +182,7 @@ namespace Computer_Management
 
             loadingProgressBar.Value = 0;
             loadingBorder.Visibility = Visibility.Hidden;
+            addPcBTN.IsEnabled = true;
         }
 
         private void noteTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
