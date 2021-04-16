@@ -5,7 +5,7 @@ namespace Computer_Management
 {
     public static class SettingsClass
     {
-        private static string DefaultDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.csv");
+        private static string DefaultDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.xml");
         private static string SettingsPath { get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.settings"); } }
         private static object zamek = new object();
         
@@ -85,7 +85,7 @@ namespace Computer_Management
         {
             lock (zamek)
             {
-                string defaultDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.csv");
+                string defaultDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.xml");
                 Settings.Default.DataPath = defaultDataPath;
                 Settings.Default.PasteReplaceMonth = 2;
                 Settings.Default.SortingBy = 0;

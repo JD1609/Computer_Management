@@ -112,7 +112,6 @@
     <Compile Include="DefaultFileCreator.cs" />
     <Compile Include="HwFinder.cs" />
     <Compile Include="MsgBoxEditor.cs" />
-    <Compile Include="NoteCorrector.cs" />
     <Compile Include="RAMinfo.cs" />
     <Compile Include="SettingsClass.cs" />
     <Compile Include="Settings.Designer.cs">

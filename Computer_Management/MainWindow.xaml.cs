@@ -38,6 +38,7 @@ namespace Computer_Management
             settingsThread.Join();
 
             SettingsClass.Save();
+
             InitializeComponent();
 
             database = new Database(this);
@@ -110,10 +111,10 @@ namespace Computer_Management
 
                 pasteLabel.Content = computer.Paste;
 
-                nextCleaningDate.Content = "Next maintenance: " + ((Computer)pcList.SelectedItem).NextCleaning.ToString("dd.MM. yyyy");
+                nextCleaningDate.Content = "Next maintenance: " + ((Computer)pcList.SelectedItem).Maintenance.ToString("dd.MM. yyyy");
                 // --- NOTE ---
-                CachedNote = computer.Note.Replace('$', '\n').Remove(0, 1);
-                noteTextBox.Text = computer.Note.Replace('$', '\n').Remove(0, 1);//cause 1st char is '$'
+                CachedNote = computer.Note;
+                noteTextBox.Text = computer.Note;
             }
             else { }
         }
@@ -131,19 +132,6 @@ namespace Computer_Management
 
         private void NoteTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (noteTextBox.Text.Contains("$"))
-            {
-                MsgBoxEditor.EditErrorMessage("Notes can not contains '$' & ';' symobols!", "");
-                noteTextBox.Text = noteTextBox.Text.Replace('$', '\0');
-            }
-            else { }
-            if (noteTextBox.Text.Contains(";"))
-            {
-                MsgBoxEditor.EditErrorMessage("Notes can not contains '$' and ';' symobols!", "");
-                noteTextBox.Text = noteTextBox.Text.Replace(';', '\0');
-            }
-            else { }
-
             if (CachedNote == noteTextBox.Text) 
             {
             }
@@ -237,7 +225,7 @@ namespace Computer_Management
             SaveNotePicBTN.Visibility = Visibility.Hidden;
             CachedNote = noteTextBox.Text;
 
-            try { ((Computer)pcList.SelectedItem).Change("changeNote", NoteCorrector.CorrectNote(noteTextBox.Text)); }
+            try { ((Computer)pcList.SelectedItem).Change("changeNote", noteTextBox.Text); }
             catch { MsgBoxEditor.EditErrorMessage("Changing note failed...\nError[0xD0110011]", "Error"); }
             
             try { database.SaveData(); }
@@ -322,7 +310,7 @@ namespace Computer_Management
                             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
                             if (result == System.Windows.Forms.DialogResult.OK)
                             {
-                                database.SaveData(Path.Combine(dialog.SelectedPath, "Data_Backup.csv"));
+                                database.SaveData(Path.Combine(dialog.SelectedPath, "Data_Backup.xml"));
                                 MessageBox.Show(MsgBoxEditor.EditText("Backup saved successfully!"), "");
                             }
                         }
@@ -358,7 +346,7 @@ namespace Computer_Management
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            new SettingsWindow().ShowDialog();
+            new SettingsWindow(this).ShowDialog();
         }
 
         private void Shortcuts_Click(object sender, RoutedEventArgs e)
@@ -388,7 +376,7 @@ namespace Computer_Management
                         System.Windows.Forms.DialogResult result = dialog.ShowDialog();
                         if (result == System.Windows.Forms.DialogResult.OK)
                         {
-                            database.SaveData(Path.Combine(dialog.SelectedPath, "Data_Backup.csv"));
+                            database.SaveData(Path.Combine(dialog.SelectedPath, "Data_Backup.xml"));
                             MessageBox.Show(MsgBoxEditor.EditText("Backup saved successfully!"), "");
                         }
                     }
