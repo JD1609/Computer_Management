@@ -112,6 +112,8 @@ namespace Computer_Management
         private async void thisPCBTN_Click(object sender, RoutedEventArgs e)
         {
             addPcBTN.IsEnabled = false;
+            textBoxStackPanel.IsEnabled = false;
+            noteTextBox.IsEnabled = false;
             loadingBorder.Visibility = Visibility.Visible;
             await Task.Delay(1);
 
@@ -177,6 +179,8 @@ namespace Computer_Management
 
             loadingProgressBar.Value = 0;
             loadingBorder.Visibility = Visibility.Hidden;
+            textBoxStackPanel.IsEnabled = true;
+            noteTextBox.IsEnabled = true;
             addPcBTN.IsEnabled = true;
         }
 

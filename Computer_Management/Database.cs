@@ -21,10 +21,8 @@ namespace Computer_Management
             Computers = new ObservableCollection<Computer>();
             string[] pastas = { "Cheap", "Expensive" };
             Pastas = pastas;
-            dataDocument = XDocument.Load(Settings.Default.DataPath);
             mw.pasteType.ItemsSource = Pastas;
             BackUpPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data_Backup.xml");
-            ListCountCheck();
         }
 
         // --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- | --- LIST COUNT CHECK --- |
@@ -63,7 +61,7 @@ namespace Computer_Management
                 mw.gpuLabel.IsEnabled = true;
                 mw.ramLabel.IsEnabled = true;
                 mw.mbLabel.IsEnabled = true;
-                mw.pasteLabel.IsEnabled = false;
+                mw.pasteLabel.IsEnabled = true;
 
                 mw.noteTextBox.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Hidden;
                 mw.duplicatePC.Visibility = System.Windows.Visibility.Visible;
@@ -76,50 +74,46 @@ namespace Computer_Management
         // --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- | --- LOADING DATA --- |
         public void LoadData(string dataPath)
         {
+            dataDocument = XDocument.Load(dataPath);
             DateTime added = DateTime.Now;
-            string user = "Username";
-            string os = "Operating system";
-            string cpu = "CPU";
-            string gpu = "GPU";
-            string ram = "RAM";
-            string mb = "Motherboard";
-            string paste = "Paste";
-            string note = "";
-            DateTime maintenance = DateTime.Now.AddMonths(3);
+            string user = "";
+            string os = "";
+            string cpu = "";
+            string gpu = "";
+            string ram = "";
+            string mb = "";
+            string paste = "Cheap";
+            DateTime maintenance = DateTime.Today.AddMonths(3);
 
-            if (dataDocument.Elements("Computer").Count() > 0)
+            foreach (XElement c in dataDocument.Element("Computers").Elements("Computer"))
             {
-                foreach (XElement c in dataDocument.Elements("Computer"))
-                {
-                    added = DateTime.Parse(c.Attribute("Added").Value);
-                    user = c.Attribute("userName").Value;
-                    os = c.Element("OS").Value;
-                    cpu = c.Element("CPU").Value;
-                    gpu = c.Element("GPU").Value;
-                    ram = c.Element("RAM").Value;
-                    mb = c.Element("Motherboard").Value;
-                    paste = c.Element("Paste").Value;
-                    foreach (XElement row in c.Element("Note").Elements("Row"))
-                        note += row.Value.Trim() + "\n";
-                    maintenance = DateTime.Parse(c.Element("Maintenance").Value);
+                string note = "";
+                added = DateTime.Parse(c.Attribute("Added").Value);
+                user = c.Attribute("userName").Value;
+                os = c.Element("OS").Value;
+                cpu = c.Element("CPU").Value;
+                gpu = c.Element("GPU").Value;
+                ram = c.Element("RAM").Value;
+                mb = c.Element("Motherboard").Value;
+                paste = c.Element("Paste").Value;
+                foreach (XElement row in c.Element("Note").Elements("Row"))
+                    note += row.Value.Trim() + "\n";
+                maintenance = DateTime.Parse(c.Element("Maintenance").Value);
 
-                    Computers.Add(new Computer(added, user, os, cpu, gpu, ram, mb, paste, note, maintenance));
-                }
-
-                if (Settings.Default.SortingBy == 0)
-                    mw.pcList.ItemsSource = Computers.OrderBy(c => c.Added);
-                if (Settings.Default.SortingBy == 1)
-                    mw.pcList.ItemsSource = Computers.OrderBy(c => c.UserName);
-                if (Settings.Default.SortingBy == 2)
-                    mw.pcList.ItemsSource = Computers.OrderByDescending(c => c.UserName);
-
-                mw.pcList.SelectedIndex = 0;
-                ListCountCheck();
+                Computers.Add(new Computer(added, user, os, cpu, gpu, ram, mb, paste, note, maintenance));
             }
-            else 
-            {
-                MsgBoxEditor.EditInfoMessage("No PCs found", "No data");
-            }
+
+            if (Settings.Default.SortingBy == 0)
+                mw.pcList.ItemsSource = Computers.OrderBy(c => c.Added);
+            if (Settings.Default.SortingBy == 1)
+                mw.pcList.ItemsSource = Computers.OrderByDescending(c => c.Added);
+            if (Settings.Default.SortingBy == 2)
+                mw.pcList.ItemsSource = Computers.OrderBy(c => c.UserName);
+            if (Settings.Default.SortingBy == 3)
+                mw.pcList.ItemsSource = Computers.OrderByDescending(c => c.UserName);
+
+            mw.pcList.SelectedIndex = 0;
+            ListCountCheck();
         }
 
         // --- REMOVE DATA --- | --- REMOVE DATA --- | --- REMOVE DATA --- | --- REMOVE DATA --- | --- REMOVE DATA --- | --- REMOVE DATA --- | --- REMOVE DATA --- |
@@ -132,68 +126,46 @@ namespace Computer_Management
         }
 
         // --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- | --- SAVING DATA --- |
-        public void SaveData()
+        private void MakeDocument()
         {
-            XDocument data = new XDocument(new XDeclaration("1.O", "UTF-8", null));
-            try 
+            dataDocument = new XDocument(new XDeclaration("1.O", "UTF-8", null));
+            dataDocument.Add(new XElement("Computers"));
+
+            if (Computers.Count != 0)
             {
-                data.Add(new XElement("Computers"));
-
-                if (Computers.Count != 0)
+                foreach (Computer c in Computers)
                 {
-                    foreach (Computer c in Computers)
+                    XElement noteRows = new XElement("Note");
+                    foreach (var s in c.Note.Split('\n'))
                     {
-                        XElement noteRows = new XElement("Note");
-                        foreach (var s in c.Note.Split('\n'))
-                        {
-                            noteRows.Add(new XElement("Row", s.Trim()));
-                        }
-
-                        data.Element("Computers").Add(new XElement("Computer", new XAttribute("userName", c.UserName), new XAttribute("Added", c.Added),
-                                            new XElement("OS", c.OS),
-                                            new XElement("CPU", c.Cpu),
-                                            new XElement("GPU", c.Gpu),
-                                            new XElement("RAM", c.Ram),
-                                            new XElement("Motherboard", c.Motherboard),
-                                            new XElement("Paste", c.Paste),
-                                            noteRows,
-                                            new XElement("Maintenance", c.Maintenance)
-                                            ));
+                        noteRows.Add(new XElement("Row", s.Trim()));
                     }
+
+                    dataDocument.Element("Computers").Add(new XElement("Computer", new XAttribute("userName", c.UserName), new XAttribute("Added", c.Added),
+                                        new XElement("OS", c.OS),
+                                        new XElement("CPU", c.Cpu),
+                                        new XElement("GPU", c.Gpu),
+                                        new XElement("RAM", c.Ram),
+                                        new XElement("Motherboard", c.Motherboard),
+                                        new XElement("Paste", c.Paste),
+                                        noteRows,
+                                        new XElement("Maintenance", c.Maintenance)
+                                        ));
                 }
             }
-            catch { MsgBoxEditor.EditInfoMessage("sdasdasdad - " + Computers.Count, ""); }
-
-            try { data.Save(Settings.Default.DataPath); }
-            catch { MsgBoxEditor.EditErrorMessage("Saving data failed...\nError[Dx00100010]", "Saving data failed"); }
+        }
+        public void SaveData()
+        {
+            MakeDocument();
+            try { dataDocument.Save(Settings.Default.DataPath); }
+            catch { MsgBoxEditor.EditErrorMessage("Saving data failed...\nError[Dx00100001]", "Saving data failed"); }
         }
 
         public void SaveData(string dataPath)
         {
-            XDocument dataDocument = new XDocument(new XDeclaration("1.0", "UTF-8", null));
-            foreach (Computer c in Computers)
-            {
-                XElement noteRows = new XElement("Note");
-
-                foreach (var s in c.Note.Split('\n'))
-                {
-                    noteRows.Add(new XElement("Row", s));
-                }
-
-                dataDocument.Add(new XElement("Computer", new XAttribute("userName", c.UserName), new XAttribute("Added", c.Added),
-                                    new XElement("OS", c.OS),
-                                    new XElement("CPU", c.Cpu),
-                                    new XElement("GPU", c.Gpu),
-                                    new XElement("RAM", c.Ram),
-                                    new XElement("Motherboard", c.Motherboard),
-                                    new XElement("Paste", c.Paste),
-                                    noteRows,
-                                    new XElement("Maintenance", c.Maintenance)
-                                    ));
-            }
-
+            MakeDocument();
             try { dataDocument.Save(dataPath); }
-            catch { MsgBoxEditor.EditErrorMessage("Saving data...\nInternal error[Dx00100010]", "Saving data failed"); }
+            catch { MsgBoxEditor.EditErrorMessage("Saving data failed...\nError[Dx00100010]", "Saving data failed"); }
         }
 
         public void SaveOne(string dataPath) 
@@ -207,16 +179,17 @@ namespace Computer_Management
                     noteRows.Add(new XElement("Row", s));
                 }
 
-                dataDocument.Add(new XElement("Computer", new XAttribute("userName", ((Computer)mw.pcList.SelectedItem).UserName)), new XAttribute("Added", ((Computer)mw.pcList.SelectedItem).Added),
-                                    new XElement("OS", ((Computer)mw.pcList.SelectedItem).OS),
-                                    new XElement("CPU", ((Computer)mw.pcList.SelectedItem).Cpu),
-                                    new XElement("GPU", ((Computer)mw.pcList.SelectedItem).Gpu),
-                                    new XElement("RAM", ((Computer)mw.pcList.SelectedItem).Ram),
-                                    new XElement("Motherboard", ((Computer)mw.pcList.SelectedItem).Motherboard),
-                                    new XElement("Paste", ((Computer)mw.pcList.SelectedItem).Paste),
-                                    noteRows,
-                                    new XElement("Maintenance", ((Computer)mw.pcList.SelectedItem).Maintenance)
-                                    );
+                dataDocument.Add(new XElement("Computers", new XElement("Computer", new XAttribute("userName", ((Computer)mw.pcList.SelectedItem).UserName),
+                                                                                    new XAttribute("Added", ((Computer)mw.pcList.SelectedItem).Added),
+                                                                                         new XElement("OS", ((Computer)mw.pcList.SelectedItem).OS),
+                                                                                         new XElement("CPU", ((Computer)mw.pcList.SelectedItem).Cpu),
+                                                                                         new XElement("GPU", ((Computer)mw.pcList.SelectedItem).Gpu),
+                                                                                         new XElement("RAM", ((Computer)mw.pcList.SelectedItem).Ram),
+                                                                                         new XElement("Motherboard", ((Computer)mw.pcList.SelectedItem).Motherboard),
+                                                                                         new XElement("Paste", ((Computer)mw.pcList.SelectedItem).Paste),
+                                                                                         noteRows,
+                                                                                         new XElement("Maintenance", ((Computer)mw.pcList.SelectedItem).Maintenance)
+                                    )));
 
             
                 try { dataDocument.Save(dataPath); }
