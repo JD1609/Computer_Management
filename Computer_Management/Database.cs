@@ -30,25 +30,21 @@ namespace Computer_Management
         {
             if (Computers.Count == 0)
             {
+                Computers.Clear();
+                mw.pcList.ItemsSource = Computers;
                 mw.userLabel.Content = null;
                 mw.osLabel.Content = null;
-                mw.osLabel.IsEnabled = false;
                 mw.cpuLabel.Content = null;
-                mw.cpuLabel.IsEnabled = false;
                 mw.gpuLabel.Content = null;
-                mw.gpuLabel.IsEnabled = false;
                 mw.ramLabel.Content = null;
-                mw.ramLabel.IsEnabled = false;
                 mw.mbLabel.Content = null;
-                mw.mbLabel.IsEnabled = false;
                 mw.pasteLabel.Content = null;
-                mw.pasteLabel.IsEnabled = false;
                 mw.nextCleaningDate.Content = null;
+
+                mw.dataStackpanel.IsEnabled = false;
 
                 mw.duplicatePC.Visibility = System.Windows.Visibility.Hidden;
                 mw.noteTextBox.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Hidden;
-                mw.dustClearCheckBox.IsEnabled = false;
-                mw.pasteChangeCheckBox.IsEnabled = false;
                 mw.noteTextBox.IsEnabled = false;
                 mw.noteTextBox.Text = "";
                 MsgBoxEditor.EditInfoMessage("No PCs found...", "No data");
@@ -56,17 +52,21 @@ namespace Computer_Management
 
             else
             {
-                mw.osLabel.IsEnabled = true;
-                mw.cpuLabel.IsEnabled = true;
-                mw.gpuLabel.IsEnabled = true;
-                mw.ramLabel.IsEnabled = true;
-                mw.mbLabel.IsEnabled = true;
-                mw.pasteLabel.IsEnabled = true;
+                if (Settings.Default.SortingBy == 0)
+                    mw.pcList.ItemsSource = Computers.OrderBy(c => c.Added);
+                if (Settings.Default.SortingBy == 1)
+                    mw.pcList.ItemsSource = Computers.OrderByDescending(c => c.Added);
+                if (Settings.Default.SortingBy == 2)
+                    mw.pcList.ItemsSource = Computers.OrderBy(c => c.UserName);
+                if (Settings.Default.SortingBy == 3)
+                    mw.pcList.ItemsSource = Computers.OrderByDescending(c => c.UserName);
+
+                mw.pcList.SelectedIndex = 0;
+
+                mw.dataStackpanel.IsEnabled = true;
 
                 mw.noteTextBox.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Hidden;
                 mw.duplicatePC.Visibility = System.Windows.Visibility.Visible;
-                mw.dustClearCheckBox.IsEnabled = true;
-                mw.pasteChangeCheckBox.IsEnabled = true;
                 mw.noteTextBox.IsEnabled = true;
             }
         }
@@ -89,7 +89,7 @@ namespace Computer_Management
             {
                 string note = "";
                 added = DateTime.Parse(c.Attribute("Added").Value);
-                user = c.Attribute("userName").Value;
+                user = c.Attribute("Username").Value;
                 os = c.Element("OS").Value;
                 cpu = c.Element("CPU").Value;
                 gpu = c.Element("GPU").Value;
@@ -103,16 +103,6 @@ namespace Computer_Management
                 Computers.Add(new Computer(added, user, os, cpu, gpu, ram, mb, paste, note, maintenance));
             }
 
-            if (Settings.Default.SortingBy == 0)
-                mw.pcList.ItemsSource = Computers.OrderBy(c => c.Added);
-            if (Settings.Default.SortingBy == 1)
-                mw.pcList.ItemsSource = Computers.OrderByDescending(c => c.Added);
-            if (Settings.Default.SortingBy == 2)
-                mw.pcList.ItemsSource = Computers.OrderBy(c => c.UserName);
-            if (Settings.Default.SortingBy == 3)
-                mw.pcList.ItemsSource = Computers.OrderByDescending(c => c.UserName);
-
-            mw.pcList.SelectedIndex = 0;
             ListCountCheck();
         }
 
@@ -141,7 +131,7 @@ namespace Computer_Management
                         noteRows.Add(new XElement("Row", s.Trim()));
                     }
 
-                    dataDocument.Element("Computers").Add(new XElement("Computer", new XAttribute("userName", c.UserName), new XAttribute("Added", c.Added),
+                    dataDocument.Element("Computers").Add(new XElement("Computer", new XAttribute("Username", c.UserName), new XAttribute("Added", c.Added),
                                         new XElement("OS", c.OS),
                                         new XElement("CPU", c.Cpu),
                                         new XElement("GPU", c.Gpu),
@@ -179,7 +169,7 @@ namespace Computer_Management
                     noteRows.Add(new XElement("Row", s));
                 }
 
-                dataDocument.Add(new XElement("Computers", new XElement("Computer", new XAttribute("userName", ((Computer)mw.pcList.SelectedItem).UserName),
+                dataDocument.Add(new XElement("Computers", new XElement("Computer", new XAttribute("Username", ((Computer)mw.pcList.SelectedItem).UserName),
                                                                                     new XAttribute("Added", ((Computer)mw.pcList.SelectedItem).Added),
                                                                                          new XElement("OS", ((Computer)mw.pcList.SelectedItem).OS),
                                                                                          new XElement("CPU", ((Computer)mw.pcList.SelectedItem).Cpu),
@@ -221,7 +211,7 @@ namespace Computer_Management
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.FileName = "";
             dlg.DefaultExt = ".xml";
-            dlg.Filter = ".txt|*txt*|.xml|*xml*";
+            dlg.Filter = ".xml|*xml*|.txt|*txt*";
 
             if (sender == "importPC")
                 dlg.FileName = "Exported_PC";

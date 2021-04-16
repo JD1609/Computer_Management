@@ -95,6 +95,7 @@ namespace Computer_Management
 
                                 // --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- |
                                 database.SaveData();
+                                database.ListCountCheck();
                                 Close();
                             }
                         }

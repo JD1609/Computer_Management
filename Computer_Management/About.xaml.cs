@@ -10,7 +10,11 @@ namespace Computer_Management
             Version.Content = "Version: " + System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
         }
 
-        private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        private void Release_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/JD1609/Computer_Management/releases/tag/v1.1.0");
+        }
+        private void JDslink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
             System.Diagnostics.Process.Start("https://www.github.com/JD1609");
         }

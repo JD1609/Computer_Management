@@ -56,7 +56,7 @@
         <!--/////////////////// DATA ////////////////////-->
         <DockPanel Name="dataPanel" Margin="5,0,10,11" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
             <Border BorderBrush="Black" BorderThickness="0.3" Padding="5,0,5,0">
-                <StackPanel Orientation="Vertical">
+                <StackPanel Name="dataStackpanel" Orientation="Vertical">
 
                     <Label Content="User: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Label Name="userLabel" Content="User" HorizontalAlignment="Left"/>
