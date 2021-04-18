@@ -5,25 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Computer_Management"
         mc:Ignorable="d"
-        Title="About" Height="205" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="About" Height="205" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Name="aboutWindow">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="117*"/>
             <RowDefinition Height="38*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <Label Content="Computer Management" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2" FontWeight="Bold"/>
+            <Label Name="nameLabel" Content="Computer Management" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2" FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal">
-                <Label Name="Version" Content="---------" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2"/>
-                <Label FontStyle="Italic" FontWeight="Bold" Margin="0,2,0,0">
+                <Label Name="VersionLabel" Content="---------" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2"/>
+                <Label Name="releaseNotesLabel" FontStyle="Italic" FontWeight="Bold" Margin="0,2,0,0">
                     <Hyperlink NavigateUri="https://github.com/JD1609/Computer_Management/releases/tag/v1.1.0" RequestNavigate="Release_RequestNavigate" TextDecorations="None" Foreground="#FF00A200" >Release notes</Hyperlink>
                 </Label>
             </StackPanel>
         </StackPanel>
-        <Border BorderBrush="Black" BorderThickness="0,0,0,0.3" Width="200">
+        <Border Name="createdByBorder" BorderBrush="Black" BorderThickness="0,0,0,0.3" Width="200">
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,3">
-            <Label Content="Created by"/>
-            <Label Margin="-6,0,0,0">
+            <Label Name="createdBy" Content="Created by"/>
+            <Label Name="createdByName" Margin="-6,0,0,0">
                 <Hyperlink NavigateUri="https://www.github.com/JD1609" RequestNavigate="JDslink_RequestNavigate">@JD1609</Hyperlink>
             </Label>
         </StackPanel>

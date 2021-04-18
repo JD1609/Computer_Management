@@ -128,7 +128,16 @@ namespace Computer_Management
 
         public static void SetDarkMode(About about_window, string background_color, string midground_color, string foreground_color)
         {
+            // --- About Window
+            about_window.aboutWindow.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
 
+            about_window.nameLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            about_window.VersionLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            about_window.releaseNotesLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+                // --- Created By
+            about_window.createdBy.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            about_window.createdByName.Foreground = (Brush)new BrushConverter().ConvertFromString("#FFFF7400");
+            about_window.createdByBorder.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF7400");
         }
 
         public static void SetDarkMode(ChangeData changeData_window, string background_color, string midground_color, string foreground_color)
