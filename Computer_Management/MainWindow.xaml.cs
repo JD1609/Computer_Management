@@ -227,7 +227,7 @@ namespace Computer_Management
             SaveNotePicBTN.Visibility = Visibility.Hidden;
             CachedNote = noteTextBox.Text;
 
-            try { ((Computer)pcList.SelectedItem).Change("changeNote", noteTextBox.Text); }
+            try { ((Computer)pcList.SelectedItem).Change("changeNote", noteTextBox.Text.Trim()); }
             catch { MsgBoxEditor.EditErrorMessage("Changing note failed...\nError[0xD0110011]", "Error"); }
             
             try { database.SaveData(); }
@@ -271,11 +271,11 @@ namespace Computer_Management
         }
 
         // --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- | --- MENU --- |
-        private void BackupLoad_Click(object sender, RoutedEventArgs e)
+        private void LoadBackup_Click(object sender, RoutedEventArgs e)
         {
             string sndr = ((MenuItem)sender).Name;
 
-            if (sndr == "LoadBackup")
+            if (sndr == "menuItem_LoadBackup")
             {
                 if (File.Exists(database.BackUpPath))
                 {
@@ -285,7 +285,7 @@ namespace Computer_Management
                     MsgBoxEditor.EditErrorMessage("Backup file doesn't exist", "File doesn't exist");
             }
 
-            if (sndr == "LoadBackupFEF")
+            if (sndr == "menuItem_LoadBackupFEF")
             {
                 database.ImportPC(sndr); //Already have Error No.
             }
@@ -298,12 +298,12 @@ namespace Computer_Management
             if (database.Computers.Count == 0) { MsgBoxEditor.EditErrorMessage("No computers to save...", ""); }
             else 
             {
-                if (sndr == "SaveBackup")
+                if (sndr == "menuItem_SaveBackup")
                 {
                     new SureWindow(database, sndr).ShowDialog();
                 }
 
-                if (sndr == "SaveBackupTEF")
+                if (sndr == "menuItem_SaveBackupTEF")
                 {
                     try
                     {

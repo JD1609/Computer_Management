@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Computer_Management"
         mc:Ignorable="d"
         Icon="Icons\add_pc_icon.png"
-        Title="Add computer" WindowStartupLocation="CenterScreen" Height="450" Width="800" ResizeMode="CanMinimize" Name="addPCwindow">
+        Title="Add computer" WindowStartupLocation="CenterScreen" Height="450" Width="800" ResizeMode="CanMinimize" Name="addPCwindow" KeyDown="addPCwindow_KeyDown">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>

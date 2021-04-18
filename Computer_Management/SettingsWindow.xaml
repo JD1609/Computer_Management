@@ -37,6 +37,7 @@
                 <ComboBox Name="sortingComboBox" Margin="5,3,0,0" Width="130" Height="22">
                     <ComboBoxItem Content="Newest"/>
                     <ComboBoxItem Content="Oldest"/>
+                    <ComboBoxItem Content="Maintenance"/>
                     <ComboBoxItem Content="Name/Ascending"/>
                     <ComboBoxItem Content="Name/Descending"/>
                 </ComboBox>

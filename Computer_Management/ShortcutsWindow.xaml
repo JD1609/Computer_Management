@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Computer_Management"
         mc:Ignorable="d"
+        Name="shortcutsWindow"
         Title="Shortcuts" Height="353" Width="315" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFFDFDFD">
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -16,29 +17,29 @@
             <ColumnDefinition Width="152*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0">
-            <Label Content="Import PC" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Left" Width="68"/>
-            <Label Content="Export PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Content="Open data folder" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Content="Delete ALL data" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Content="Add PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Content="Remove PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Content="Duplicate PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Content="Import backup" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Content="Export backup" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Name="importPCHeader" Content="Import PC" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Left"/>
+            <Label Name="exportPCHeader" Content="Export PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Name="openFolderHeader" Content="Open data folder" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Name="deleteAllHeader" Content="Delete ALL data" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Name="addPCHeader" Content="Add PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Name="removePCHeader" Content="Remove PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Name="duplicatePCHeader" Content="Duplicate PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Name="importBackupHeader" Content="Import backup" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Name="exportBackupHeader" Content="Export backup" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
         </StackPanel>
 
         <DockPanel Grid.Column="1" Grid.Row="0">
-            <Border BorderBrush="Black" BorderThickness="0.3,0,0,0">
+            <Border Name="border" BorderBrush="Black" BorderThickness="0.3,0,0,0">
                 <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                    <Label Content="CTRL+I" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Content="CTRL+E" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Content="CTRL+F" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Content="CTRL+D" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Content="CTRL+A" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Content="CTRL+R" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Content="CTRL+C" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Content="CTRL+SHIFT+I" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Content="CTRL+SHIFT+E" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Name="importPCLabel" Content="CTRL+I" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Name="exportPCLabel" Content="CTRL+E" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Name="openFolderLabel" Content="CTRL+F" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Name="deleteAllLabel" Content="CTRL+D" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Name="addPCLabel" Content="CTRL+A" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Name="removePCLabel" Content="CTRL+R" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Name="duplicatePCLabel" Content="CTRL+C" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Name="importBackupLabel" Content="CTRL+SHIFT+I" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Name="exportBackupLabel" Content="CTRL+SHIFT+E" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 </StackPanel>
             </Border>
         </DockPanel>

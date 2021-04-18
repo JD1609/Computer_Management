@@ -34,8 +34,8 @@
                 <MenuItem Name="menuItem_SaveBackup" Header="Save backup" Click="SaveBackup_Click"/>
                 <MenuItem Name="menuItem_SaveBackupTEF" Header="Save backup..." Click="SaveBackup_Click"/>
 
-                <MenuItem Name="menuItem_LoadBackup" Header="Load backup" Click="BackupLoad_Click"/>
-                <MenuItem Name="menuItem_LoadBackupFEF" Header="Load backup..." Click="BackupLoad_Click"/>
+                <MenuItem Name="menuItem_LoadBackup" Header="Load backup" Click="LoadBackup_Click"/>
+                <MenuItem Name="menuItem_LoadBackupFEF" Header="Load backup..." Click="LoadBackup_Click"/>
             </MenuItem>
 
             <MenuItem Name="menuOptionsHeader" Header="Options">

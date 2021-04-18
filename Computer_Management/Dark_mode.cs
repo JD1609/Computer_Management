@@ -8,12 +8,12 @@ namespace Computer_Management
         {
             // --- Main_Window
             main_window.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
-            // --- Menu header
+                // --- Menu header
             main_window.menu.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
             main_window.menuDataHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.menuBackupsHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.menuOptionsHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
-            // --- Data menu
+                // --- Data menu
             main_window.menuItem_ImportPC.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
             main_window.menuItem_ImportPC.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.menuItem_ExportPC.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
@@ -22,7 +22,7 @@ namespace Computer_Management
             main_window.menuItem_DeleteALL.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.menuItem_OpenFolder.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
             main_window.menuItem_OpenFolder.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
-            // --- Backup menu
+                // --- Backup menu
             main_window.menuItem_SaveBackup.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
             main_window.menuItem_SaveBackup.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.menuItem_SaveBackupTEF.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
@@ -31,16 +31,16 @@ namespace Computer_Management
             main_window.menuItem_LoadBackup.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.menuItem_LoadBackupFEF.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
             main_window.menuItem_LoadBackupFEF.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
-            //--- Options menu
+                //--- Options menu
             main_window.menuItem_Settings.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
             main_window.menuItem_Settings.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.menuItem_Shortcuts.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
             main_window.menuItem_Shortcuts.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.menuItem_About.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
             main_window.menuItem_About.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
-            // --- PC list
-
+                // --- PC list
             main_window.pcListHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            main_window.pcList.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.pcList.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
             // --- dataStackpanel
             main_window.dataStackpanelBorder.BorderBrush = (Brush)new BrushConverter().ConvertFromString(foreground_color);
@@ -61,7 +61,8 @@ namespace Computer_Management
             main_window.nextCleaningDate.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.dustClearCheckBox.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.pasteChangeCheckBox.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
-            // --- Note
+                // --- Note
+            main_window.noteTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.noteTextBox.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
             main_window.noteLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
 
@@ -126,7 +127,7 @@ namespace Computer_Management
 
         }
 
-        public static void SetDarkMode(About about_window, string background_color, string midground_color, string foreground_color)
+        public static void SetDarkMode(About about_window, string background_color, string foreground_color)
         {
             // --- About Window
             about_window.aboutWindow.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
@@ -142,20 +143,43 @@ namespace Computer_Management
 
         public static void SetDarkMode(ChangeData changeData_window, string background_color, string midground_color, string foreground_color)
         {
+            // --- ChangeData Window
             changeData_window.changedataWindow.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
             changeData_window.textBoxData.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             changeData_window.textBoxData.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
         }
 
-        public static void SetDarkMode(ShortcutsWindow shortcuts_window, string background_color, string midground_color, string foreground_color)
+        public static void SetDarkMode(ShortcutsWindow shortcuts_window, string background_color, string foreground_color)
         {
+            // --- ShortCuts Window
+            shortcuts_window.shortcutsWindow.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
+            shortcuts_window.border.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF7400");
+                // --- Headers
+            shortcuts_window.importPCHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.exportPCHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.openFolderHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.deleteAllHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.addPCHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.removePCHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.duplicatePCHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.importBackupHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.exportBackupHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+                // --- Shortcuts
+            shortcuts_window.importPCLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.exportPCLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.openFolderLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.deleteAllLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.addPCLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.removePCLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.duplicatePCLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.importBackupLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            shortcuts_window.exportBackupLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+        }                    
 
-        }
-
-        public static void SetDarkMode(SureWindow sureWindow_window, string background_color, string midground_color, string foreground_color)
+        public static void SetDarkMode(SureWindow sureWindow_window, string background_color, string foreground_color)
         {
-            sureWindow_window.mainText.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             sureWindow_window.surewindowWindow.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
+            sureWindow_window.mainText.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
         }
     }
 }

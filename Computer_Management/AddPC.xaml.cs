@@ -187,11 +187,19 @@ namespace Computer_Management
             addPcBTN.IsEnabled = true;
         }
 
-        private void noteTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void noteTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             int linesCount = noteTextBox.Text.Split('\n').Length;
             if (linesCount >= 19) { noteTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Visible; }
             else { noteTextBox.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden; }
+        }
+
+        private void addPCwindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.Escape))
+            {
+                this.Close();
+            }
         }
     }
 }
