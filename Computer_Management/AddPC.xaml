@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Computer_Management"
         mc:Ignorable="d"
         Icon="Icons\add_pc_icon.png"
-        Title="Add computer" WindowStartupLocation="CenterScreen" Height="450" Width="800" ResizeMode="CanMinimize">
+        Title="Add computer" WindowStartupLocation="CenterScreen" Height="450" Width="800" ResizeMode="CanMinimize" Name="addPCwindow">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
@@ -20,15 +20,15 @@
         <!-- LABELS-->
         <DockPanel Grid.ColumnSpan="2">
             <StackPanel>
-                <Label Content="Specifications:" FontWeight="Bold" FontSize="20"/>
-                <Label Content="User Name:" Margin="0,10,0,0" FontSize="13"/>
-                <Label Content="OS:" Margin="0,14,0,0" FontSize="13"/>
-                <Label Content="Processor:" Margin="0,14,0,0" FontSize="13"/>
-                <Label Content="Graphic card:" Margin="0,14,0,0" FontSize="13"/>
-                <Label Content="RAM:" Margin="0,14,0,0" FontSize="13"/>
-                <Label Content="Motherboard:" Margin="0,14,0,0" FontSize="13"/>
-                <Label Content="Paste:" Margin="0,14,0,0" FontSize="13"/>
-                <Label Content="Next cleaning:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Name="specificationLabel" Content="Specifications:" FontWeight="Bold" FontSize="20"/>
+                <Label Name="usernameLabel" Content="User Name:" Margin="0,10,0,0" FontSize="13"/>
+                <Label Name="osLabel" Content="OS:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Name="cpuLabel" Content="Processor:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Name="gpuLabel" Content="Graphic card:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Name="ramLabel" Content="RAM:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Name="mbLabel" Content="Motherboard:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Name="pasteLabel" Content="Paste:" Margin="0,14,0,0" FontSize="13"/>
+                <Label Name="maintenanceLabel" Content="Maintenance:" Margin="0,14,0,0" FontSize="13"/>
             </StackPanel>
         </DockPanel>
 
@@ -42,7 +42,8 @@
                 <TextBox Name="gpuTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
                 <TextBox Name="ramTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
                 <TextBox Name="mbTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
-                <ComboBox Name="pasteTypeComboBox" Margin="10,8,10,8" Height="25" SelectedIndex="0" VerticalContentAlignment="Center"/>
+                <ComboBox Name="pasteTypeComboBox" Margin="10,8,10,8" Height="25" SelectedIndex="0" VerticalContentAlignment="Center" BorderBrush="Black"/>
+
                 <DatePicker Name="datePicker" Margin="10,8,10,8" VerticalContentAlignment="Center"/>
                 
             </StackPanel>
@@ -51,7 +52,7 @@
         <!-- NOTES -->
         <DockPanel Grid.Column="2">
             <StackPanel Margin="15,0,15,0">
-                <Label Name="notesL" Content="Notes:" FontWeight="Bold" FontSize="20"/>
+                <Label Name="notesLabel" Content="Notes:" FontWeight="Bold" FontSize="20"/>
                 <TextBox Name="noteTextBox" Height="311" Margin="0,13,0,0" TextWrapping="Wrap" AcceptsReturn="True" TextChanged="noteTextBox_TextChanged"/>
                 <Button Name="addPcBTN" Content="Save computer" Margin="0,10,0,0" HorizontalAlignment="Right" Width="200" Height="25" Click="addPcBTN_Click" />
             </StackPanel>

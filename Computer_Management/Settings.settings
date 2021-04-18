@@ -11,5 +11,17 @@
     <Setting Name="SortingBy" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="IsDarkModeEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Background" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF151B25</Value>
+    </Setting>
+    <Setting Name="Midground" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF202936</Value>
+    </Setting>
+    <Setting Name="Foreground" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#ffffff</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

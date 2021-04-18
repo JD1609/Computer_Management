@@ -9,6 +9,7 @@ namespace Computer_Management
         public SureWindow(Database database, string sender)
         {
             InitializeComponent();
+            if (Settings.Default.IsDarkModeEnabled) { Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground); }
             this.database = database;
             Sender = sender;
             SetMainText();

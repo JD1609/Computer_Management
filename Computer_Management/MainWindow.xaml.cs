@@ -40,6 +40,8 @@ namespace Computer_Management
             SettingsClass.Save();
 
             InitializeComponent();
+            
+            if (Settings.Default.IsDarkModeEnabled) { Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground); }
 
             database = new Database(this);
             try
@@ -167,6 +169,8 @@ namespace Computer_Management
 
         private void RefreshListBTN_Click(object sender, MouseButtonEventArgs e)
         {
+            Dark_mode.SetDarkMode(this, "#FF151B25", "#FF202936", "#ffffff");
+
             database.Computers.Clear();
             try { database.Computers.Clear(); database.LoadData(Settings.Default.DataPath); MessageBox.Show(MsgBoxEditor.EditText("Computer list reloaded..."), ""); }
             catch { MsgBoxEditor.EditErrorMessage("Refreshing data failed...\nError[0xD0110001]", "Refreshing failed"); }

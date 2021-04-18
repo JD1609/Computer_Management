@@ -58,5 +58,53 @@ namespace Computer_Management {
                 this["SortingBy"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsDarkModeEnabled {
+            get {
+                return ((bool)(this["IsDarkModeEnabled"]));
+            }
+            set {
+                this["IsDarkModeEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF151B25")]
+        public string Background {
+            get {
+                return ((string)(this["Background"]));
+            }
+            set {
+                this["Background"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF202936")]
+        public string Midground {
+            get {
+                return ((string)(this["Midground"]));
+            }
+            set {
+                this["Midground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#ffffff")]
+        public string Foreground {
+            get {
+                return ((string)(this["Foreground"]));
+            }
+            set {
+                this["Foreground"] = value;
+            }
+        }
     }
 }

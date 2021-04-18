@@ -12,6 +12,7 @@ namespace Computer_Management
         public AddPC(MainWindow mw, Database database, string username, string os, string cpu, string gpu, string ram, string mb)
         {
             InitializeComponent();
+            if (Settings.Default.IsDarkModeEnabled) { Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground); }
             loadingBorder.Visibility = Visibility.Hidden;
             loadingProgressBar.Value = 0;
             this.database = database;

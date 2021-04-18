@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Computer management"
-        Height="450" Width="800" ResizeMode="CanMinimize" KeyDown="Window_KeyDown">
+        Height="450" Width="800" ResizeMode="CanMinimize" KeyDown="Window_KeyDown" Name="mainwindow">
 
     <Grid Margin="5" MouseDown="CancelSaveNoteBTN">
         <Grid.ColumnDefinitions>
@@ -22,31 +22,31 @@
         </Grid.RowDefinitions>
 
         <!-- MENU -->
-        <Menu HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="178" Margin="10,-5,0,0">
-            <MenuItem Header="Data">
-                <MenuItem Name="importPC" Header="Import PC" ToolTip="Import PC from external file" Click="ImportPC_Click"/>
-                <MenuItem Name="exportPC" Header="Export PC" ToolTip="Export PC to external file" Click="ExportPC_Click"/>
-                <MenuItem Name="deleteALL"  Header="Delete ALL data" Click="DeleteALL_Click"/>
-                <MenuItem Header="Open data folder" Click="OpenDataFolder"/>
+        <Menu Name="menu" Background="White" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="178" Margin="2,-5,0,0">
+            <MenuItem Name="menuDataHeader" Header="Data">
+                <MenuItem Name="menuItem_ImportPC" Header="Import PC" ToolTip="Import PC from external file" Click="ImportPC_Click"/>
+                <MenuItem Name="menuItem_ExportPC" Header="Export PC" ToolTip="Export PC to external file" Click="ExportPC_Click"/>
+                <MenuItem Name="menuItem_DeleteALL"  Header="Delete ALL data" Click="DeleteALL_Click"/>
+                <MenuItem Name="menuItem_OpenFolder" Header="Open data folder" Click="OpenDataFolder"/>
             </MenuItem>
 
-            <MenuItem Header="Backups">
-                <MenuItem Name="SaveBackup" Header="Save backup" Click="SaveBackup_Click"/>
-                <MenuItem Name="SaveBackupTEF" Header="Save backup..." Click="SaveBackup_Click"/>
+            <MenuItem Name="menuBackupsHeader" Header="Backups">
+                <MenuItem Name="menuItem_SaveBackup" Header="Save backup" Click="SaveBackup_Click"/>
+                <MenuItem Name="menuItem_SaveBackupTEF" Header="Save backup..." Click="SaveBackup_Click"/>
 
-                <MenuItem Name="LoadBackup" Header="Load backup" Click="BackupLoad_Click"/>
-                <MenuItem Name="LoadBackupFEF" Header="Load backup..." Click="BackupLoad_Click"/>
+                <MenuItem Name="menuItem_LoadBackup" Header="Load backup" Click="BackupLoad_Click"/>
+                <MenuItem Name="menuItem_LoadBackupFEF" Header="Load backup..." Click="BackupLoad_Click"/>
             </MenuItem>
 
-            <MenuItem Header="Options">
-                <MenuItem Header="Settings..." Click="Settings_Click"/>
-                <MenuItem Header="Shortcuts..." Click="Shortcuts_Click"/>
-                <MenuItem Header="About" Click="Version_Click"/>
+            <MenuItem Name="menuOptionsHeader" Header="Options">
+                <MenuItem Name="menuItem_Settings" Header="Settings..." Click="Settings_Click"/>
+                <MenuItem Name="menuItem_Shortcuts" Header="Shortcuts..." Click="Shortcuts_Click"/>
+                <MenuItem Name="menuItem_About" Header="About" Click="Version_Click"/>
             </MenuItem>
         </Menu>
 
         <!-- BUTTONS & LIST -->
-        <Label Content="Computers:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Width="178" Height="28" Grid.RowSpan="2" FontWeight="Bold"/>
+        <Label Name="pcListHeader" Content="Computers:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Width="178" Height="28" Grid.RowSpan="2" FontWeight="Bold"/>
         <ListBox Name="pcList" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="358" Width="178" Margin="10,0,0,0" Grid.Row="1" Grid.RowSpan="2" SelectionChanged="PcList_SelectionChanged"/>
 
         <Image Name="Refresh" HorizontalAlignment="Right" Height="16" Margin="0,14,53,0" VerticalAlignment="Top" Width="16" Source="Icons\Refresh.png" Cursor="Hand" ToolTip="Reload list" MouseDown="RefreshListBTN_Click"/>
@@ -55,28 +55,28 @@
 
         <!--/////////////////// DATA ////////////////////-->
         <DockPanel Name="dataPanel" Margin="5,0,10,11" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
-            <Border BorderBrush="Black" BorderThickness="0.3" Padding="5,0,5,0">
+            <Border Name="dataStackpanelBorder" BorderBrush="Black" BorderThickness="0.3" Padding="5,0,5,0">
                 <StackPanel Name="dataStackpanel" Orientation="Vertical">
 
-                    <Label Content="User: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Label Name="userLabelHeader" Content="User: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Label Name="userLabel" Content="User" HorizontalAlignment="Left"/>
 
-                    <Label Content="Operating system: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Label Name="osLabelHeader" Content="Operating system: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Label Name="osLabel" Content="OS" HorizontalAlignment="Left" Cursor="Hand" MouseDown="ParametrClick"/>
 
-                    <Label Content="Processor: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Label Name="cpuLabelHeader" Content="Processor: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Label Name="cpuLabel" Content="Processor" HorizontalAlignment="Left" Cursor="Hand" MouseDown="ParametrClick"/>
 
-                    <Label Content="Graphic card: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Label Name="gpuLabelHeader" Content="Graphic card: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Label Name="gpuLabel" Content="Graphic card" HorizontalAlignment="Left" Cursor="Hand" MouseDown="ParametrClick"/>
 
-                    <Label Content="RAM: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Label Name="ramLabelHeader" Content="RAM: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Label Name="ramLabel" Content="RAM" HorizontalAlignment="Left" Cursor="Hand" MouseDown="ParametrClick"/>
 
-                    <Label Content="Motherboard: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Label Name="mbLabelHeader" Content="Motherboard: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Label Name="mbLabel" Content="Motherboard" HorizontalAlignment="Left" Cursor="Hand" MouseDown="ParametrClick"/>
 
-                    <Label Content="Paste: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Label Name="pasteLabelHeader" Content="Paste: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Label Name="pasteLabel" Content="Cheap" HorizontalAlignment="Left" Cursor="Hand" MouseDown="ParametrClick"/>
 
                     <Label Name="nextCleaningDate" Content="Date_text" Margin="0,8,0,0" FontWeight="Bold" HorizontalAlignment="Left"/>
@@ -95,7 +95,7 @@
         <!--///////////////// NOTES ///////////////-->
         <Image Name="CancelNotePicBTN" HorizontalAlignment="Right" Height="16" Width="16" Margin="0,27,27,0" VerticalAlignment="Top" ToolTip="Cancel" Source="Icons\DontSave.png" Cursor="Hand" MouseDown="CancelSaveNoteBTN" Grid.Column="2" Grid.RowSpan="2"/>
         <Image Name="SaveNotePicBTN" HorizontalAlignment="Right" Height="21" Width="21" Margin="0,25,6,0" VerticalAlignment="Top" ToolTip="Save changes" Source="Icons\SaveChange.png" Cursor="Hand" MouseDown="SaveNoteBTN" Grid.Column="2" Grid.RowSpan="2"/>
-        <Label Height="30" Width="80" Grid.Column="2" Margin="0,22,198,163" Content="Notes:" FontWeight="Bold" Grid.RowSpan="2"/>
+        <Label Name="noteLabel" Height="30" Width="80" Grid.Column="2" Margin="0,22,198,163" Content="Notes:" FontWeight="Bold" Grid.RowSpan="2"/>
         <TextBox Name="noteTextBox" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Margin="5,15,5,11" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="NoteTextBox_TextChanged"/>
         <Image Name="duplicatePC" Source="Icons/Duplicate.png" ToolTip="Duplicate computer" Cursor="Hand" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="265,5,0,0" VerticalAlignment="Top" Width="16" Grid.Row="1" MouseDown="DuplicatePC_MouseDown"/>
 

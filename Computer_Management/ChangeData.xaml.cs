@@ -14,6 +14,7 @@ namespace Computer_Management
         public ChangeData(MainWindow mw, Database database, string data, object sender)
         {
             InitializeComponent();
+            if (Settings.Default.IsDarkModeEnabled) { Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground); }
             Sender = sender;
             textBoxData.Text = data;
             this.mw = mw;

@@ -7,6 +7,7 @@ namespace Computer_Management
         public About()
         {
             InitializeComponent();
+            if (Settings.Default.IsDarkModeEnabled) { Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground); }
             Version.Content = "Version: " + System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
         }
 
