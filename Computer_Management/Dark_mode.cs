@@ -114,6 +114,15 @@ namespace Computer_Management
 
         public static void SetDarkMode(SettingsWindow settings_window, string background_color, string midground_color, string foreground_color)
         {
+            // --- Settings Window
+            settings_window.settingsWindow.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
+
+            settings_window.dataPathHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            settings_window.dataPathLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            settings_window.ToolTipTxtBox.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
+
+            settings_window.nextPasteHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            settings_window.sortingHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
 
         }
 
