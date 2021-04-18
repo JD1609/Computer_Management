@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Computer_Management"
         mc:Ignorable="d"
+        Name="changedataWindow"
         Title="Change Data" Icon="Icons/change_icon.png" Height="135" Width="357" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FF0097FF" KeyDown="Window_KeyDown">
     <Grid>
         <TextBox Name="textBoxData" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10" Height="20" Width="330"/>

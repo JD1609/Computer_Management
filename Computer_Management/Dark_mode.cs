@@ -142,7 +142,9 @@ namespace Computer_Management
 
         public static void SetDarkMode(ChangeData changeData_window, string background_color, string midground_color, string foreground_color)
         {
-
+            changeData_window.changedataWindow.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
+            changeData_window.textBoxData.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            changeData_window.textBoxData.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
         }
 
         public static void SetDarkMode(ShortcutsWindow shortcuts_window, string background_color, string midground_color, string foreground_color)
@@ -152,7 +154,8 @@ namespace Computer_Management
 
         public static void SetDarkMode(SureWindow sureWindow_window, string background_color, string midground_color, string foreground_color)
         {
-
+            sureWindow_window.mainText.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            sureWindow_window.surewindowWindow.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
         }
     }
 }
