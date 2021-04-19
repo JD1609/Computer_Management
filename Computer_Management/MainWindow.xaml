@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <!-- MENU -->
-        <Menu Name="menu" Background="White" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Margin="-5,-5,0,0">
+        <Menu Name="menu" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-5,-5,0,0">
             <MenuItem Name="menuDataHeader" Header="Data">
                 <MenuItem Name="menuItem_ImportPC" Header="Import PC" ToolTip="Import PC from external file" Click="ImportPC_Click"/>
                 <MenuItem Name="menuItem_ExportPC" Header="Export PC" ToolTip="Export PC to external file" Click="ExportPC_Click"/>
