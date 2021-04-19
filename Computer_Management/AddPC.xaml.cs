@@ -27,25 +27,40 @@ namespace Computer_Management
             datePicker.SelectedDate = DateTime.Today.AddMonths(3);
         }
 
+        private void EnableElements() 
+        {
+            mw.userLabel.IsEnabled = true;
+            mw.osLabel.IsEnabled = true;
+            mw.cpuLabel.IsEnabled = true;
+            mw.gpuLabel.IsEnabled = true;
+            mw.ramLabel.IsEnabled = true;
+            mw.mbLabel.IsEnabled = true;
+            mw.pasteLabel.IsEnabled = true;
+
+            mw.dustClearCheckBox.IsEnabled = true;
+            mw.pasteChangeCheckBox.IsEnabled = true;
+        }
+
+        // --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- |
         private void addPcBTN_Click(object sender, RoutedEventArgs e)
         {
 
             string user = userNameTxtBox.Text.Trim();
             bool sameName = false;
 
-            // --- DUPLICATED NAME CHECK --- |--- DUPLICATED NAME CHECK --- |--- DUPLICATED NAME CHECK --- |--- DUPLICATED NAME CHECK --- |--- DUPLICATED NAME CHECK --- |
-            foreach (Computer c in database.Computers) 
+            // --- DUPLICATED NAME CHECK ---
+            foreach (Computer c in database.Computers)
             {
                 if (c.UserName == user)
                     sameName = true;
             }
 
-            // --- ADDING PC --- | --- ADDING PC --- | --- ADDING PC --- | --- ADDING PC --- | --- ADDING PC --- | --- ADDING PC --- | --- ADDING PC --- | --- ADDING PC --- |
+            // --- ADDING PC ---
             if (sameName == true)
             {
                 MsgBoxEditor.EditInfoMessage("Choosen username is already in computer list!", "Name duplication");
             }
-            else 
+            else
             {
                 if (user.Length > 4)
                 {
@@ -59,7 +74,7 @@ namespace Computer_Management
                                 MsgBoxEditor.EditInfoMessage("Cleaning date must be in future!", "Wrong date");
                             else
                             {
-                                //  --- ADD PC --- |  --- ADD PC --- |  --- ADD PC --- |  --- ADD PC --- |  --- ADD PC --- |  --- ADD PC --- |  --- ADD PC --- |  --- ADD PC --- |
+                                //  --- ADD PC ---
                                 try
                                 {
                                     string os = operatingSystemTxtBox.Text.Trim();
@@ -87,14 +102,13 @@ namespace Computer_Management
 
                                     database.Computers.Add(new Computer(DateTime.Now, user, os, cpu, gpu, ram, mb, paste, note, datePicker.SelectedDate.Value));
 
-                                    mw.dustClearCheckBox.IsEnabled = true;
-                                    mw.pasteChangeCheckBox.IsEnabled = true;
+                                    EnableElements();
 
                                     Close();
                                 }
                                 catch { MsgBoxEditor.EditErrorMessage("An error has been occurred! Computer wasn't added...\nError[Ax00011001]", "Adding PC failed"); }
 
-                                // --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- | --- SAVE DATA --- |
+                                // --- SAVE DATA ---
                                 database.SaveData();
                                 database.ListCountCheck();
                                 Close();
@@ -109,8 +123,6 @@ namespace Computer_Management
                     MsgBoxEditor.EditInfoMessage("Username can't be shortly than 4 characters.", "");
             }
         }
-
-        // --- BUTTON --- | --- BUTTON --- | --- BUTTON --- | --- BUTTON --- |
         private async void thisPCBTN_Click(object sender, RoutedEventArgs e)
         {
             addPcBTN.IsEnabled = false;

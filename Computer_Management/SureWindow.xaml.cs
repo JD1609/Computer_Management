@@ -23,7 +23,7 @@ namespace Computer_Management
                 { mainText.Content = "Are you sure you want overwrite old backup?"; Title = "Save backup"; }
             if (Sender == "menuItem_LoadBackup")
                 { mainText.Content = "Are you sure you want load backup and\noverwrite current data?"; Title = "Load backup"; }
-            if (Sender == "deleteALL")
+            if (Sender == "menuItem_DeleteALL")
                 { mainText.Content = "Are you sure about deleting all data?"; Title = "Delete all data"; }
         }
 
@@ -32,7 +32,7 @@ namespace Computer_Management
             if (Sender == "removePC")
                 database.RemovePc();
 
-            if (Sender == "deleteALL")
+            if (Sender == "menuItem_DeleteALL")
             {
                 database.Computers.Clear();
                 database.SaveData();
@@ -40,13 +40,13 @@ namespace Computer_Management
                 database.ListCountCheck();
             }
 
-            if (Sender == "SaveBackup")
+            if (Sender == "menuItem_SaveBackup")
             {
                 try { database.SaveData(database.BackUpPath); MsgBoxEditor.EditInfoMessage("Backup successfully saved!", "Backup saved"); }
                 catch { MsgBoxEditor.EditErrorMessage("Saving backup failed...", "Error"); }
             }
 
-            if (Sender == "LoadBackup")
+            if (Sender == "menuItem_LoadBackup")
             {
                 try { database.Computers.Clear(); database.LoadData(database.BackUpPath); }
                 catch { MsgBoxEditor.EditErrorMessage("Loading backup failed...", "Error"); }
