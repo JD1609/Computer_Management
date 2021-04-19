@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <!-- MENU -->
-        <Menu Name="menu" Background="White" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="178" Margin="2,-5,0,0">
+        <Menu Name="menu" Background="White" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Margin="-5,-5,0,0">
             <MenuItem Name="menuDataHeader" Header="Data">
                 <MenuItem Name="menuItem_ImportPC" Header="Import PC" ToolTip="Import PC from external file" Click="ImportPC_Click"/>
                 <MenuItem Name="menuItem_ExportPC" Header="Export PC" ToolTip="Export PC to external file" Click="ExportPC_Click"/>
@@ -45,13 +45,15 @@
             </MenuItem>
         </Menu>
 
-        <!-- BUTTONS & LIST -->
-        <Label Name="pcListHeader" Content="Computers:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Width="178" Height="28" Grid.RowSpan="2" FontWeight="Bold"/>
-        <ListBox Name="pcList" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="358" Width="178" Margin="10,0,0,0" Grid.Row="1" Grid.RowSpan="2" SelectionChanged="PcList_SelectionChanged"/>
+        <!-- MANAGING BUTTONS & LIST -->
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Left" Width="190">
+            <Label Name="pcListHeader" Margin="0,-4,0,0" Content="Computers:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" FontWeight="Bold"/>
 
-        <Image Name="Refresh" HorizontalAlignment="Right" Height="16" Margin="0,14,53,0" VerticalAlignment="Top" Width="16" Source="Icons\Refresh.png" Cursor="Hand" ToolTip="Reload list" MouseDown="RefreshListBTN_Click"/>
-        <Image Name="addPC" HorizontalAlignment="Right" Height="16" Margin="0,14,33,0" VerticalAlignment="Top" Width="16" Source="Icons\Database-Add.png" MouseDown="AddBTN_Click" Cursor="Hand" ToolTip="Add computer"/>
-        <Image Name="removePC" HorizontalAlignment="Right" Height="16" Margin="0,14,13,0" VerticalAlignment="Top" Width="16" Source="Icons\Database-remove.png" Cursor="Hand" ToolTip="Remove computer" MouseDown="RemoveBTN_Click"/>
+            <Image Name="Refresh" HorizontalAlignment="Right" Margin="58,0,0,0" Height="16" VerticalAlignment="Center" Width="16" Source="Icons\Refresh.png" Cursor="Hand" ToolTip="Reload list" MouseDown="RefreshListBTN_Click"/>
+            <Image Name="addPC" HorizontalAlignment="Right" Margin="3,0,0,0" Height="16" VerticalAlignment="Center" Width="16" Source="Icons\Database-Add.png" MouseDown="AddBTN_Click" Cursor="Hand" ToolTip="Add computer"/>
+            <Image Name="removePC" HorizontalAlignment="Right" Margin="3,0,0,0" Height="16" VerticalAlignment="Center" Width="16" Source="Icons\Database-remove.png" Cursor="Hand" ToolTip="Remove computer" MouseDown="RemoveBTN_Click"/>
+        </StackPanel>
+        <ListBox Name="pcList" SelectedIndex="0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="358" Width="178" Grid.Row="1" Grid.RowSpan="2" SelectionChanged="PcList_SelectionChanged"/>
 
         <!--/////////////////// DATA ////////////////////-->
         <DockPanel Name="dataPanel" Margin="5,0,10,11" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
@@ -92,7 +94,7 @@
             </Border>
         </DockPanel>
 
-        <!--///////////////// NOTES ///////////////-->
+        <!-- NOTES -->
         <Image Name="CancelNotePicBTN" HorizontalAlignment="Right" Height="16" Width="16" Margin="0,27,27,0" VerticalAlignment="Top" ToolTip="Cancel" Source="Icons\DontSave.png" Cursor="Hand" MouseDown="CancelSaveNoteBTN" Grid.Column="2" Grid.RowSpan="2"/>
         <Image Name="SaveNotePicBTN" HorizontalAlignment="Right" Height="21" Width="21" Margin="0,25,6,0" VerticalAlignment="Top" ToolTip="Save changes" Source="Icons\SaveChange.png" Cursor="Hand" MouseDown="SaveNoteBTN" Grid.Column="2" Grid.RowSpan="2"/>
         <Label Name="noteLabel" Height="30" Width="80" Grid.Column="2" Margin="0,22,198,163" Content="Notes:" FontWeight="Bold" Grid.RowSpan="2"/>

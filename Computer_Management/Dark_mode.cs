@@ -65,7 +65,6 @@ namespace Computer_Management
             main_window.noteTextBox.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.noteTextBox.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
             main_window.noteLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
-
         }
 
         public static void SetDarkMode(AddPC addpc_window, string background_color, string midground_color, string foreground_color)
@@ -180,6 +179,68 @@ namespace Computer_Management
         {
             sureWindow_window.surewindowWindow.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
             sureWindow_window.mainText.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+        }
+        public static void Deactivate(MainWindow main_window)
+        {
+            // --- Main_Window
+            main_window.Background = Brushes.White;
+                // --- Menu header
+            main_window.menu.Background = Brushes.White;
+            main_window.menuDataHeader.Foreground = Brushes.Black;
+            main_window.menuBackupsHeader.Foreground = Brushes.Black;
+            main_window.menuOptionsHeader.Foreground = Brushes.Black;
+                // --- Data menu
+            main_window.menuItem_ImportPC.Background = (Brush)new BrushConverter().ConvertFromString("#FFF0F0F0");
+            main_window.menuItem_ImportPC.Foreground = Brushes.Black;            
+            main_window.menuItem_ExportPC.Background = (Brush)new BrushConverter().ConvertFromString("#FFF0F0F0");
+            main_window.menuItem_ExportPC.Foreground = Brushes.Black;
+            main_window.menuItem_DeleteALL.Background = (Brush)new BrushConverter().ConvertFromString("#FFF0F0F0");
+            main_window.menuItem_DeleteALL.Foreground = Brushes.Black;
+            main_window.menuItem_OpenFolder.Background = (Brush)new BrushConverter().ConvertFromString("#FFF0F0F0");
+            main_window.menuItem_OpenFolder.Foreground = Brushes.Black;
+                // --- Backup menu
+            main_window.menuItem_SaveBackup.Background = (Brush)new BrushConverter().ConvertFromString("#FFF0F0F0");
+            main_window.menuItem_SaveBackup.Foreground = Brushes.Black;
+            main_window.menuItem_SaveBackupTEF.Background = (Brush)new BrushConverter().ConvertFromString("#FFF0F0F0");
+            main_window.menuItem_SaveBackupTEF.Foreground = Brushes.Black;
+            main_window.menuItem_LoadBackup.Background = (Brush)new BrushConverter().ConvertFromString("#FFF0F0F0");
+            main_window.menuItem_LoadBackup.Foreground = Brushes.Black;
+            main_window.menuItem_LoadBackupFEF.Background = (Brush)new BrushConverter().ConvertFromString("#FFF0F0F0");
+            main_window.menuItem_LoadBackupFEF.Foreground = Brushes.Black;
+                //--- Options menu
+            main_window.menuItem_Settings.Background = (Brush)new BrushConverter().ConvertFromString("#FFF0F0F0");
+            main_window.menuItem_Settings.Foreground = Brushes.Black;
+            main_window.menuItem_Shortcuts.Background = (Brush)new BrushConverter().ConvertFromString("#FFF0F0F0");
+            main_window.menuItem_Shortcuts.Foreground = Brushes.Black;
+            main_window.menuItem_About.Background = (Brush)new BrushConverter().ConvertFromString("#FFF0F0F0");
+            main_window.menuItem_About.Foreground = Brushes.Black;
+                // --- PC list
+            main_window.pcListHeader.Foreground = Brushes.Black;
+            main_window.pcList.Foreground = Brushes.Black;
+            main_window.pcList.Background = Brushes.White;
+                // --- dataStackpanel
+            main_window.dataStackpanelBorder.BorderBrush = Brushes.Black;
+            main_window.userLabelHeader.Foreground = Brushes.Black;
+            main_window.userLabel.Foreground = Brushes.Black;
+            main_window.osLabelHeader.Foreground = Brushes.Black;
+            main_window.osLabel.Foreground = Brushes.Black;
+            main_window.cpuLabelHeader.Foreground = Brushes.Black;
+            main_window.cpuLabel.Foreground = Brushes.Black;
+            main_window.gpuLabelHeader.Foreground = Brushes.Black;
+            main_window.gpuLabel.Foreground = Brushes.Black;
+            main_window.ramLabelHeader.Foreground = Brushes.Black;
+            main_window.ramLabel.Foreground = Brushes.Black;
+            main_window.mbLabelHeader.Foreground = Brushes.Black;
+            main_window.mbLabel.Foreground = Brushes.Black;
+            main_window.pasteLabelHeader.Foreground = Brushes.Black;
+            main_window.pasteLabel.Foreground = Brushes.Black;
+            main_window.nextCleaningDate.Foreground = Brushes.Black;
+            main_window.dustClearCheckBox.Foreground = Brushes.Black;
+            main_window.pasteChangeCheckBox.Foreground = Brushes.Black;
+                // --- Note
+            main_window.noteTextBox.Foreground = Brushes.Black;
+            main_window.noteTextBox.Background = Brushes.White;
+            main_window.noteLabel.Foreground = Brushes.Black;
         }
     }
 }

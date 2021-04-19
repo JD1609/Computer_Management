@@ -176,6 +176,7 @@ namespace Computer_Management
 
         private void DuplicatePC_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            Dark_mode.Deactivate(this);
             if (pcList.SelectedItem != null)
                 new AddPC(this, database, "", ((Computer)pcList.SelectedItem).OS, ((Computer)pcList.SelectedItem).Cpu, ((Computer)pcList.SelectedItem).Gpu, ((Computer)pcList.SelectedItem).Ram, ((Computer)pcList.SelectedItem).Motherboard).Show();
             else { MsgBoxEditor.EditErrorMessage("You have not selected any PC to duplicate...!", "Error"); }
