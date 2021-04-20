@@ -126,7 +126,7 @@ namespace Computer_Management
 
         }
 
-        public static void SetDarkMode(About about_window, string background_color, string foreground_color)
+        public static void SetDarkMode(About about_window, string background_color, string foreground_color, string border_color)
         {
             // --- About Window
             about_window.aboutWindow.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
@@ -137,7 +137,7 @@ namespace Computer_Management
                 // --- Created By
             about_window.createdBy.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             about_window.createdByName.Foreground = (Brush)new BrushConverter().ConvertFromString("#FFFF7400");
-            about_window.createdByBorder.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF7400");
+            about_window.createdByBorder.BorderBrush = (Brush)new BrushConverter().ConvertFromString(border_color);
         }
 
         public static void SetDarkMode(ChangeData changeData_window, string background_color, string midground_color, string foreground_color)
@@ -148,11 +148,11 @@ namespace Computer_Management
             changeData_window.textBoxData.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
         }
 
-        public static void SetDarkMode(ShortcutsWindow shortcuts_window, string background_color, string foreground_color)
+        public static void SetDarkMode(ShortcutsWindow shortcuts_window, string background_color, string foreground_color, string border_color)
         {
             // --- ShortCuts Window
             shortcuts_window.shortcutsWindow.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
-            shortcuts_window.border.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF7400");
+            shortcuts_window.border.BorderBrush = (Brush)new BrushConverter().ConvertFromString(border_color);
                 // --- Headers
             shortcuts_window.importPCHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             shortcuts_window.exportPCHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);

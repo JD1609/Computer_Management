@@ -60,7 +60,14 @@ namespace Computer_Management
             SavePicBTN.Visibility = Visibility.Hidden;
             CancelNotePicBTN.Visibility = Visibility.Hidden;
             SaveNotePicBTN.Visibility = Visibility.Hidden;
-         }
+            if (Settings.Default.IsDarkModeEnabled)
+            {
+                darkModeSwitch_enabled_border.Visibility = Visibility.Hidden;
+                darkModeSwitch_enabled.Visibility = Visibility.Hidden;
+            }
+            else
+                darkModeSwitch_disabled.Visibility = Visibility.Visible;
+        }
 
         // --- LABEL CONTENTS, NOTES & TOOLTIPS --- | --- LABEL CONTENTS, NOTES & TOOLTIPS --- | --- LABEL CONTENTS, NOTES & TOOLTIPS --- |
         private void PcList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -420,6 +427,24 @@ namespace Computer_Management
             {
                 new SureWindow(database, "removePC").ShowDialog();
             }
+        }
+
+        private void darkModeSwitch_enabled_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Dark_mode.Deactivate(this);
+            darkModeSwitch_enabled.Visibility = Visibility.Hidden;
+            darkModeSwitch_enabled_border.Visibility = Visibility.Hidden;
+            darkModeSwitch_disabled.Visibility = Visibility.Visible;
+            Settings.Default.IsDarkModeEnabled = false;
+        }
+
+        private void darkModeSwitch_disabled_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Foreground, Settings.Default.Midground);
+            darkModeSwitch_enabled.Visibility = Visibility.Visible;
+            darkModeSwitch_enabled_border.Visibility = Visibility.Visible;
+            darkModeSwitch_disabled.Visibility = Visibility.Hidden;
+            Settings.Default.IsDarkModeEnabled = true;
         }
     }
 }

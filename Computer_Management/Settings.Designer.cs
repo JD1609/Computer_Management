@@ -97,13 +97,25 @@ namespace Computer_Management {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#ffffff")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFFF")]
         public string Foreground {
             get {
                 return ((string)(this["Foreground"]));
             }
             set {
                 this["Foreground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFF7400")]
+        public string BorderColor {
+            get {
+                return ((string)(this["BorderColor"]));
+            }
+            set {
+                this["BorderColor"] = value;
             }
         }
     }

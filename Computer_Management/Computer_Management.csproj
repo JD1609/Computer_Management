@@ -254,5 +254,9 @@
   <ItemGroup>
     <Resource Include="Icons\app_icon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\darkmodeSwitch_disabled.png" />
+    <Resource Include="Icons\darkmodeSwitch_enabled.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

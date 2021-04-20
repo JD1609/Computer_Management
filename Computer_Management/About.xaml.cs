@@ -8,7 +8,7 @@ namespace Computer_Management
         {
             InitializeComponent();
             string version = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
-            if (Settings.Default.IsDarkModeEnabled) { Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Foreground); }
+            if (Settings.Default.IsDarkModeEnabled) { Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Foreground, Settings.Default.BorderColor); }
             VersionLabel.Content = "Version: " + version.Remove(version.Length - 2);
         }
 

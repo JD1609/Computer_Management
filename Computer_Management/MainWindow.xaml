@@ -93,6 +93,12 @@
                 </StackPanel>
             </Border>
         </DockPanel>
+        
+        <!-- DarkMode switch -->
+        <Border Name="darkModeSwitch_enabled_border" CornerRadius="8" BorderBrush="White" BorderThickness="2" Grid.Column="2" HorizontalAlignment="Right" Height="20" Margin="0,-5,8,0">
+            <Image Name="darkModeSwitch_enabled" Height="17" Source="Icons\darkmodeSwitch_enabled.png" MouseDown="darkModeSwitch_enabled_MouseDown" />
+        </Border>
+        <Image Name="darkModeSwitch_disabled" Height="17" Grid.Column="2" HorizontalAlignment="Right" Margin="0,-5,10,0" Source="Icons\darkmodeSwitch_disabled.png" MouseDown="darkModeSwitch_disabled_MouseDown"/>
 
         <!-- NOTES -->
         <Image Name="CancelNotePicBTN" HorizontalAlignment="Right" Height="16" Width="16" Margin="0,27,27,0" VerticalAlignment="Top" ToolTip="Cancel" Source="Icons\DontSave.png" Cursor="Hand" MouseDown="CancelSaveNoteBTN" Grid.Column="2" Grid.RowSpan="2"/>

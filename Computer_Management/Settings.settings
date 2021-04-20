@@ -21,7 +21,10 @@
       <Value Profile="(Default)">#FF202936</Value>
     </Setting>
     <Setting Name="Foreground" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#ffffff</Value>
+      <Value Profile="(Default)">#FFFFFFFF</Value>
+    </Setting>
+    <Setting Name="BorderColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFF7400</Value>
     </Setting>
   </Settings>
 </SettingsFile>
