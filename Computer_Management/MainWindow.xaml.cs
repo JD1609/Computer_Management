@@ -40,8 +40,6 @@ namespace Computer_Management
             SettingsClass.Save();
 
             InitializeComponent();
-            
-            if (Settings.Default.IsDarkModeEnabled) { Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground); }
 
             database = new Database(this);
             try
@@ -60,13 +58,15 @@ namespace Computer_Management
             SavePicBTN.Visibility = Visibility.Hidden;
             CancelNotePicBTN.Visibility = Visibility.Hidden;
             SaveNotePicBTN.Visibility = Visibility.Hidden;
+
             if (Settings.Default.IsDarkModeEnabled)
+                Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground);
+            else 
             {
                 darkModeSwitch_enabled_border.Visibility = Visibility.Hidden;
                 darkModeSwitch_enabled.Visibility = Visibility.Hidden;
-            }
-            else
                 darkModeSwitch_disabled.Visibility = Visibility.Visible;
+            }
         }
 
         // --- LABEL CONTENTS, NOTES & TOOLTIPS --- | --- LABEL CONTENTS, NOTES & TOOLTIPS --- | --- LABEL CONTENTS, NOTES & TOOLTIPS --- |
@@ -432,18 +432,12 @@ namespace Computer_Management
         private void darkModeSwitch_enabled_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Dark_mode.Deactivate(this);
-            darkModeSwitch_enabled.Visibility = Visibility.Hidden;
-            darkModeSwitch_enabled_border.Visibility = Visibility.Hidden;
-            darkModeSwitch_disabled.Visibility = Visibility.Visible;
             Settings.Default.IsDarkModeEnabled = false;
         }
 
         private void darkModeSwitch_disabled_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Foreground, Settings.Default.Midground);
-            darkModeSwitch_enabled.Visibility = Visibility.Visible;
-            darkModeSwitch_enabled_border.Visibility = Visibility.Visible;
-            darkModeSwitch_disabled.Visibility = Visibility.Hidden;
+            Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground);
             Settings.Default.IsDarkModeEnabled = true;
         }
     }

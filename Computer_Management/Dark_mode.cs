@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 
 namespace Computer_Management
 {
@@ -6,6 +7,11 @@ namespace Computer_Management
     {
         public static void SetDarkMode(MainWindow main_window, string background_color, string midground_color, string foreground_color)
         {
+            // --- Switch
+            main_window.darkModeSwitch_enabled_border.Visibility = Visibility.Visible;
+            main_window.darkModeSwitch_enabled.Visibility = Visibility.Visible;
+            main_window.darkModeSwitch_disabled.Visibility = Visibility.Hidden;
+
             // --- Main_Window
             main_window.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
                 // --- Menu header
@@ -182,6 +188,11 @@ namespace Computer_Management
         }
         public static void Deactivate(MainWindow main_window)
         {
+            // --- Switch
+            main_window.darkModeSwitch_enabled_border.Visibility = Visibility.Hidden;
+            main_window.darkModeSwitch_enabled.Visibility = Visibility.Hidden;
+            main_window.darkModeSwitch_disabled.Visibility = Visibility.Visible;
+
             // --- Main_Window
             main_window.Background = Brushes.White;
                 // --- Menu header
