@@ -63,8 +63,10 @@ namespace Computer_Management
                 if (Settings.Default.SortingBy == 1)
                     mw.pcList.ItemsSource = Computers.OrderByDescending(c => c.Added);
                 if (Settings.Default.SortingBy == 2)
-                    mw.pcList.ItemsSource = Computers.OrderBy(c => c.UserName);
+                    mw.pcList.ItemsSource = Computers.OrderBy(c => c.Maintenance);
                 if (Settings.Default.SortingBy == 3)
+                    mw.pcList.ItemsSource = Computers.OrderBy(c => c.UserName);
+                if (Settings.Default.SortingBy == 4)
                     mw.pcList.ItemsSource = Computers.OrderByDescending(c => c.UserName);
 
                 mw.pcList.SelectedIndex = 0;

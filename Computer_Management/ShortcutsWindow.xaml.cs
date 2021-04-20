@@ -7,6 +7,7 @@ namespace Computer_Management
         public ShortcutsWindow()
         {
             InitializeComponent();
+            if (Settings.Default.IsDarkModeEnabled) { Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Foreground, Settings.Default.BorderColor); }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

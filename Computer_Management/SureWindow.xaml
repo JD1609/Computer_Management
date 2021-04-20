@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Computer_Management"
         mc:Ignorable="d"
         Icon="Icons\SureWindow_icon.png"
+        Name="surewindowWindow"
         Title="Window title" Height="135" Width="357" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFFDFDFD" Foreground="Black" KeyDown="Window_KeyDown">
     <Grid>
         <Label Name="mainText" Content="MainText" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="309" FontSize="14"/>
