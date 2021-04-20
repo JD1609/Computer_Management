@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Xml.Linq;
 
 namespace Computer_Management
 {
     public static class SettingsClass
     {
         private static string DefaultDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.xml");
-        private static string SettingsPath { get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.settings"); } }
+        private static string SettingsPath { get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.xml"); } }
         private static object zamek = new object();
         
         public static void Load(string s) 
@@ -102,11 +103,22 @@ namespace Computer_Management
 
         public static void Save() 
         {
-            using (StreamWriter sw = new StreamWriter(SettingsPath))
-            {
-                sw.WriteLine("{0};{1};{2}", Settings.Default.DataPath, Settings.Default.PasteReplaceMonth, Settings.Default.SortingBy);
-                sw.Flush();
-            }
+            XDocument settingsXML = new XDocument(new XElement("Settings"));
+
+            settingsXML.Add(new XElement("dataPath", Settings.Default.DataPath),
+                            new XElement("month", new XAttribute("number", Settings.Default.PasteReplaceMonth)),
+                            new XElement("sorting", new XAttribute("number", Settings.Default.SortingBy))
+                           );
+
+            XElement darkMode = new XElement("DarkMode", new XAttribute("enabled", Settings.Default.IsDarkModeEnabled),
+                                                new XElement("Background", new XAttribute("color", Settings.Default.Background)),
+                                                new XElement("Midground", new XAttribute("color", Settings.Default.Midground)),
+                                                new XElement("Foreground", new XAttribute("color", Settings.Default.Foreground)),
+                                                new XElement("Border", new XAttribute("color", Settings.Default.BorderColor))
+                                             );
+            settingsXML.Add(darkMode);
+            // + PASTAS -> make list
+            settingsXML.Save(SettingsPath);
         }
     }
 }
