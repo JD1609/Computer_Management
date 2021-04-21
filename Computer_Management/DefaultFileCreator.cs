@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace Computer_Management
@@ -9,7 +8,7 @@ namespace Computer_Management
     {
         private static string DefaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management");
         private static string DefaultDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.xml");
-        private static string SettingsPath { get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.settings"); } }
+        private static string SettingsPath { get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.xml"); } }
 
         public static void DataCheck() 
         {
@@ -22,19 +21,19 @@ namespace Computer_Management
             catch
             {
                 MsgBoxEditor.EditErrorMessage("Application couldn't be started...\nPlease check your authorization!\nError[0x00001001]", "Folder creating error");
-                App.Current.Shutdown();
+                System.Windows.Forms.Application.Exit();
             }
 
             // --- SETTINGS --- |
             try
             {
                 if (!File.Exists(SettingsPath))
-                    File.Create(SettingsPath);
+                    SettingsClass.CreateDefault();
             }
             catch
             {
-                MsgBoxEditor.EditErrorMessage("Application couldn't be started...\nPlease check your authorization!\nError[0x00001001]", "Settings creating error");
-                App.Current.Shutdown();
+                MsgBoxEditor.EditErrorMessage("Application couldn't be started...\nPlease check your authorization!\nError[0x00001010]", "Settings creating error");
+                System.Windows.Forms.Application.Exit();
             }
 
             // --- DATA FILE --- |
@@ -48,8 +47,8 @@ namespace Computer_Management
             }
             catch
             {
-                MsgBoxEditor.EditErrorMessage("Application couldn't be started...\nPlease check your authorization!\nError[0x00001010]", "Data file creating error");
-                Application.Exit();
+                MsgBoxEditor.EditErrorMessage("Application couldn't be started...\nPlease check your authorization!\nError[0x00001011]", "Data file creating error");
+                System.Windows.Forms.Application.Exit();
             }
         }
     }
