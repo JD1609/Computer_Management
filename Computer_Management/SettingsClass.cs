@@ -11,6 +11,9 @@ namespace Computer_Management
         {
             lock (zamek) 
             {
+                if (System.IO.File.Exists(SettingsPath))
+                    System.IO.File.Delete(SettingsPath);
+
                 string defaultDataPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "Computer management", "Data.xml");
 
                 XDocument defaultSettings = new XDocument(new XDeclaration("1.0", "UTF-8", null), new XElement("Settings"));
@@ -29,14 +32,16 @@ namespace Computer_Management
 
                 defaultSettings.Save(SettingsPath);
             }
-
             Load();
         }
+
         public static void Load() 
         {
-            XDocument XMLsettings = XDocument.Load(SettingsPath);
-            lock (zamek) 
+            bool b = true;
+            try 
             {
+                XDocument XMLsettings = XDocument.Load(SettingsPath);
+
                 Settings.Default.DataPath = XMLsettings.Element("Settings").Element("DataPath").Value;
                 Settings.Default.PasteReplaceMonth = byte.Parse(XMLsettings.Element("Settings").Element("Month").Attribute("number").Value);
                 Settings.Default.SortingBy = byte.Parse(XMLsettings.Element("Settings").Element("SortingBy").Attribute("number").Value);
@@ -47,8 +52,10 @@ namespace Computer_Management
                 Settings.Default.Foreground = XMLsettings.Element("Settings").Element("DarkMode").Element("Foreground").Attribute("color").Value;
                 Settings.Default.BorderColor = XMLsettings.Element("Settings").Element("DarkMode").Element("Border").Attribute("color").Value;
             }
+            catch { new SureWindow("LoadSettings").ShowDialog(); b = false; }
 
-            Settings.Default.Save();
+            if(b)
+                Settings.Default.Save();
         }
 
         public static void Save()

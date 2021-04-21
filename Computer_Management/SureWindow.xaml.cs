@@ -6,6 +6,13 @@ namespace Computer_Management
     {
         private Database database;
         private string Sender;
+
+        public SureWindow(string sender)
+        {
+            InitializeComponent();
+            Sender = sender;
+            SetMainText();
+        }
         public SureWindow(Database database, string sender)
         {
             InitializeComponent();
@@ -25,6 +32,8 @@ namespace Computer_Management
                 { mainText.Content = "Are you sure you want load backup and\noverwrite current data?"; Title = "Load backup"; }
             if (Sender == "menuItem_DeleteALL")
                 { mainText.Content = "Are you sure about deleting all data?"; Title = "Delete all data"; }
+            if (Sender == "LoadSettings")
+                { mainText.Content = "Settings file is corrupted...\nDo you want restore default settings?"; Title = "Restore settings"; }
         }
 
         private void Choice() 
@@ -57,6 +66,12 @@ namespace Computer_Management
                 MsgBoxEditor.EditInfoMessage("Backup uploaded successfully!", "Backup uploaded");
             }
 
+            if (Sender == "LoadSettings") 
+            {
+                SettingsClass.CreateDefault();
+                Sender = "Restored";
+            }
+                
             this.Close();
         }
 
@@ -68,7 +83,10 @@ namespace Computer_Management
 
         private void noBTN_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (Sender == "LoadSettings")
+                System.Environment.Exit(0);
+            else
+                this.Close();
         }
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -77,6 +95,12 @@ namespace Computer_Management
                 Choice();
             if (e.Key == System.Windows.Input.Key.Escape)
                 this.Close();
+        }
+
+        private void surewindowWindow_Closed(object sender, System.EventArgs e)
+        {
+            if (Sender == "LoadSettings")
+                System.Environment.Exit(0);
         }
     }
 }

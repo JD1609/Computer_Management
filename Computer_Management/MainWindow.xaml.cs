@@ -34,11 +34,10 @@ namespace Computer_Management
             filesThread.Join();
             
             Thread settingsThread = new Thread(SettingsClass.Load);
+            settingsThread.SetApartmentState(ApartmentState.STA);
             settingsThread.Start();
             settingsThread.Join();
             
-            SettingsClass.Save();
-
             InitializeComponent();
 
             database = new Database(this);

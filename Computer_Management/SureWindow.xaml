@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         Icon="Icons\SureWindow_icon.png"
         Name="surewindowWindow"
-        Title="Window title" Height="135" Width="357" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFFDFDFD" Foreground="Black" KeyDown="Window_KeyDown">
+        Title="Window title" Height="135" Width="357" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFFDFDFD" Foreground="Black" KeyDown="Window_KeyDown" Closed="surewindowWindow_Closed">
     <Grid>
         <Label Name="mainText" Content="MainText" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="309" FontSize="14"/>
-        <Button Name="yesBTN" Content="Yes" HorizontalAlignment="Left" Margin="163,65,0,0" VerticalAlignment="Top" Width="75" Click="yesBTN_Click"/>
-        <Button Name="noBTN" Content="No" HorizontalAlignment="Left" Margin="253,65,0,0" VerticalAlignment="Top" Width="75" Click="noBTN_Click"/>
-
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="10">
+            <Button Name="yesBTN" Content="Yes" Width="75" Click="yesBTN_Click"/>
+            <Button Name="noBTN" Content="No" Width="75" Margin="15,0,0,0" Click="noBTN_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
