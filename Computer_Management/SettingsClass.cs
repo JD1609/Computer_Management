@@ -1,15 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace Computer_Management
 {
     public static class SettingsClass
     {
-        private static string DefaultDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Data.xml");
-        private static string SettingsPath { get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.xml"); } }
-        private static object zamek = new object();
-        
+        private static string DefaultDataPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "Computer management", "Data.xml");
+        private static string SettingsPath { get { return System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "Computer management", "Settings.xml"); } }
+
         public static void Load() 
         {
             Settings.Default.DataPath = DefaultDataPath;
