@@ -32,11 +32,11 @@ namespace Computer_Management
             Thread filesThread = new Thread(DefaultFileCreator.DataCheck);
             filesThread.Start();
             filesThread.Join();
-
-            Thread settingsThread = new Thread(SettingsClass.CorrectSettings);
+            
+            Thread settingsThread = new Thread(SettingsClass.Load);
             settingsThread.Start();
             settingsThread.Join();
-
+            
             SettingsClass.Save();
 
             InitializeComponent();
@@ -240,6 +240,20 @@ namespace Computer_Management
             try { database.SaveData(); }
             catch { MsgBoxEditor.EditErrorMessage("Changing note failed...\nError[0xD0110100]", "Error"); }
         }
+            // --- DarkMode switch
+        private void darkModeSwitch_enabled_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Dark_mode.Deactivate(this);
+            Settings.Default.IsDarkModeEnabled = false;
+            SettingsClass.Save();
+        }
+
+        private void darkModeSwitch_disabled_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground);
+            Settings.Default.IsDarkModeEnabled = true;
+            SettingsClass.Save();
+        }
 
         // --- CHECKBOXES --- | --- CHECKBOXES --- | --- CHECKBOXES --- | --- CHECKBOXES --- | --- CHECKBOXES --- | --- CHECKBOXES --- | --- CHECKBOXES --- |
         private void PasteChangeCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -427,18 +441,6 @@ namespace Computer_Management
             {
                 new SureWindow(database, "removePC").ShowDialog();
             }
-        }
-
-        private void darkModeSwitch_enabled_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Dark_mode.Deactivate(this);
-            Settings.Default.IsDarkModeEnabled = false;
-        }
-
-        private void darkModeSwitch_disabled_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground);
-            Settings.Default.IsDarkModeEnabled = true;
         }
     }
 }
