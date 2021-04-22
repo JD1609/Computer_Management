@@ -32,41 +32,38 @@ namespace Computer_Management
 
         public void Change(string sender, string data) 
         {
-            if (sender == "osLabel") 
+            switch (sender) 
             {
-                OS = data;
-            }
-            if (sender == "cpuLabel") 
-            {
-                Cpu = data;
-            }
-            if (sender == "gpuLabel") 
-            {
-                Gpu = data;
-            }
-            if (sender == "ramLabel") 
-            {
-                Ram = data;
-            }
-            if (sender == "mbLabel") 
-            {
-                Motherboard = data;
-            }
-            if (sender == "pasteLabel") 
-            {
-                Paste = data;
-            }
-            if (sender == "changeNote") 
-            {
-                Note = data;
-            }
-            if (sender == "date")
-            {
-                Maintenance = DateTime.Parse(data);
-            }
-            if (sender == "dust")
-            {
-                DustClean = bool.Parse(data);
+                case "osLabel":
+                    OS = data;
+                    break;
+                case "cpuLabel":
+                    Cpu = data;
+                    break;
+                case "gpuLabel":
+                    Gpu = data;
+                    break;
+                case "ramLabel":
+                    Ram = data;
+                    break;
+                case "mbLabel":
+                    Motherboard = data;
+                    break;
+                case "pasteLabel":
+                    Paste = data;
+                    break;
+                case "changeNote":
+                    Note = data;
+                    break;
+                case "date":
+                    Maintenance = DateTime.Parse(data);
+                    break;
+                case "dust":
+                    DustClean = bool.Parse(data);
+                    break;
+                default:
+                    MsgBoxEditor.EditErrorMessage("Something went wrong...", "Changing error");
+                    break;
             }
         }
 
