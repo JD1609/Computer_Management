@@ -25,6 +25,8 @@ namespace Computer_Management
             changeDataPathLabel.Visibility = Visibility.Hidden;
             string dataPath = Settings.Default.DataPath;
             if (Settings.Default.DataPath.Length > 45) { ToolTipTxtBox.ToolTip = dataPath; dataPathLabel.ToolTip = dataPath; }
+            if (Settings.Default.AfterStartUp)
+                startUpCheckBox.IsChecked = true;
         }
 
         private void dataPathClick(object sender, MouseButtonEventArgs e)
@@ -61,6 +63,7 @@ namespace Computer_Management
             sortingComboBox.SelectedIndex = 0;
             if (Settings.Default.DataPath != dataPathLabel.Content.ToString())
                 changeDataPathLabel.Visibility = Visibility.Visible;
+            startUpCheckBox.IsChecked = false;
         }
         private void OkBTN_Click(object sender, RoutedEventArgs e)
         {
@@ -72,6 +75,16 @@ namespace Computer_Management
             Database database = new Database(mw);
             database.LoadData(Settings.Default.DataPath);
             this.Close();
+        }
+
+        private void startUpCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.AfterStartUp = true;
+        }
+
+        private void startUpCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.AfterStartUp = false;
         }
     }
 }

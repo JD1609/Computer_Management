@@ -26,5 +26,8 @@
     <Setting Name="BorderColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFFF7400</Value>
     </Setting>
+    <Setting Name="AfterStartUp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

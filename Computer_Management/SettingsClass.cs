@@ -20,7 +20,8 @@ namespace Computer_Management
 
                 defaultSettings.Element("Settings").Add(new XElement("DataPath", defaultDataPath),
                                 new XElement("Month", new XAttribute("number", 2)),
-                                new XElement("SortingBy", new XAttribute("number", 0), new XComment("0 - Newest\n\t1 - Oldest\n\t2 - Maintenance\n\t3 - Name/Ascending\n\t4 - Name/Descending"))
+                                new XElement("SortingBy", new XAttribute("number", 0), new XComment("0 - Newest\n\t1 - Oldest\n\t2 - Maintenance\n\t3 - Name/Ascending\n\t4 - Name/Descending")),
+                                new XElement("AfterStartUp", new XAttribute("bool", Settings.Default.AfterStartUp))
                                );
 
                 defaultSettings.Element("Settings").Add(new XElement("DarkMode", new XAttribute("enabled", false),
@@ -45,6 +46,7 @@ namespace Computer_Management
                 Settings.Default.DataPath = XMLsettings.Element("Settings").Element("DataPath").Value;
                 Settings.Default.PasteReplaceMonth = byte.Parse(XMLsettings.Element("Settings").Element("Month").Attribute("number").Value);
                 Settings.Default.SortingBy = byte.Parse(XMLsettings.Element("Settings").Element("SortingBy").Attribute("number").Value);
+                Settings.Default.AfterStartUp = bool.Parse(XMLsettings.Element("Settings").Element("AfterStartUp").Attribute("bool").Value);
 
                 Settings.Default.IsDarkModeEnabled = bool.Parse(XMLsettings.Element("Settings").Element("DarkMode").Attribute("enabled").Value);
                 Settings.Default.Background = XMLsettings.Element("Settings").Element("DarkMode").Element("Background").Attribute("color").Value;
@@ -66,7 +68,8 @@ namespace Computer_Management
             {
                 XMLsettings.Element("Settings").Add(new XElement("DataPath", Settings.Default.DataPath),
                             new XElement("Month", new XAttribute("number", Settings.Default.PasteReplaceMonth)),
-                            new XElement("SortingBy", new XAttribute("number", Settings.Default.SortingBy), new XComment("0 - Newest\n\t1 - Oldest\n\t2 - Maintenance\n\t3 - Name/Ascending\n\t4 - Name/Descending"))
+                            new XElement("SortingBy", new XAttribute("number", Settings.Default.SortingBy), new XComment("0 - Newest\n\t1 - Oldest\n\t2 - Maintenance\n\t3 - Name/Ascending\n\t4 - Name/Descending")),
+                            new XElement("AfterStartUp", new XAttribute("bool", Settings.Default.AfterStartUp))
                            );
 
                 XMLsettings.Element("Settings").Add(new XElement("DarkMode", new XAttribute("enabled", Settings.Default.IsDarkModeEnabled),

@@ -118,5 +118,17 @@ namespace Computer_Management {
                 this["BorderColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AfterStartUp {
+            get {
+                return ((bool)(this["AfterStartUp"]));
+            }
+            set {
+                this["AfterStartUp"] = value;
+            }
+        }
     }
 }
