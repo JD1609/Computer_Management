@@ -100,7 +100,7 @@ namespace Computer_Management
                                     string paste = pasteTypeComboBox.SelectedItem.ToString();
                                     string note = noteTextBox.Text;
 
-                                    database.Computers.Add(new Computer(DateTime.Now, user, os, cpu, gpu, ram, mb, paste, note, datePicker.SelectedDate.Value));
+                                    database.Computers.Add(new Computer(DateTime.Now, user, os, cpu, gpu, ram, mb, paste, note, false, datePicker.SelectedDate.Value));
 
                                     EnableElements();
 

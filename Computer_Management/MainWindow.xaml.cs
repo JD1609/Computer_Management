@@ -120,6 +120,21 @@ namespace Computer_Management
                 pasteLabel.Content = computer.Paste;
 
                 nextCleaningDate.Content = "Next maintenance: " + ((Computer)pcList.SelectedItem).Maintenance.ToString("dd.MM. yyyy");
+
+                if (computer.DustClean && computer.Maintenance >= DateTime.Today)
+                {
+                    dustClearCheckBox.IsChecked = true;
+                    dustClearCheckBox.IsEnabled = false;
+                    CancelPicBTN.Visibility = Visibility.Hidden;
+                    SavePicBTN.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    dustClearCheckBox.IsChecked = false;
+                    dustClearCheckBox.IsEnabled = true;
+                    CancelPicBTN.Visibility = Visibility.Hidden;
+                    SavePicBTN.Visibility = Visibility.Hidden;
+                }
                 // --- NOTE ---
                 CachedNote = computer.Note;
                 noteTextBox.Text = computer.Note;
@@ -200,24 +215,26 @@ namespace Computer_Management
             CancelPicBTN.Visibility = Visibility.Hidden;
             SavePicBTN.Visibility = Visibility.Hidden;
 
-            if (PasteChange == true || DustClean == true) 
+            if (PasteChange == true) 
             {
+                // --- Maintenance
                 int i = Settings.Default.PasteReplaceMonth;
                 nextCleaningDate.Content = "Next maintenance: " + DateTime.Today.AddMonths(i + 1).ToString("dd.MM. yyyy");
                 ((Computer)pcList.SelectedItem).Change("date", DateTime.Today.AddMonths(i + 1).ToString("dd.MM. yyyy"));
-
-                if (PasteChange == true) 
-                {
-                    pasteLabel.Content = pasteType.SelectedItem.ToString();
-                    ((Computer)pcList.SelectedItem).Change("pasteLabel", pasteType.SelectedItem.ToString().Trim());
-                }
+                // --- Changing paste
+                pasteLabel.Content = pasteType.SelectedItem.ToString();
+                ((Computer)pcList.SelectedItem).Change("pasteLabel", pasteType.SelectedItem.ToString().Trim());
+                pasteChangeCheckBox.IsChecked = false;
+            }
+            if (DustClean == true) 
+            {
+                ((Computer)pcList.SelectedItem).Change("dust", DustClean.ToString());
+                dustClearCheckBox.IsChecked = true;
+                dustClearCheckBox.IsEnabled = false;
             }
 
             try { database.SaveData(); }
             catch { MsgBoxEditor.EditErrorMessage("Something went wrong...\nError[0xD0110010]", "Changing note failed"); }
-            
-            pasteChangeCheckBox.IsChecked = false;
-            dustClearCheckBox.IsChecked = false;
         }
 
         private void CancelSaveNoteBTN(object sender, MouseButtonEventArgs e)
@@ -259,6 +276,7 @@ namespace Computer_Management
         {
             CancelPicBTN.Visibility = Visibility.Visible;
             SavePicBTN.Visibility = Visibility.Visible;
+            dustClearCheckBox.IsChecked = true;
             pasteType.IsEnabled = true;
             PasteChange = true;
         }

@@ -92,6 +92,7 @@ namespace Computer_Management
             string mb = "";
             string paste = "Cheap";
             DateTime maintenance = DateTime.Today.AddMonths(3);
+            bool dustClean = false;
 
             foreach (XElement c in dataDocument.Element("Computers").Elements("Computer"))
             {
@@ -107,8 +108,9 @@ namespace Computer_Management
                 foreach (XElement row in c.Element("Note").Elements("Row"))
                     note += row.Value.Trim() + "\n";
                 maintenance = DateTime.Parse(c.Element("Maintenance").Value);
+                dustClean = bool.Parse(c.Attribute("dustClean").Value);
 
-                Computers.Add(new Computer(added, user, os, cpu, gpu, ram, mb, paste, note, maintenance));
+                Computers.Add(new Computer(added, user, os, cpu, gpu, ram, mb, paste, note, dustClean, maintenance));
             }
 
             ListCountCheck();
@@ -139,7 +141,7 @@ namespace Computer_Management
                         noteRows.Add(new XElement("Row", s.Trim()));
                     }
 
-                    dataDocument.Element("Computers").Add(new XElement("Computer", new XAttribute("Username", c.UserName), new XAttribute("Added", c.Added),
+                    dataDocument.Element("Computers").Add(new XElement("Computer", new XAttribute("Username", c.UserName), new XAttribute("Added", c.Added), new XAttribute("dustClean", c.DustClean),
                                         new XElement("OS", c.OS),
                                         new XElement("CPU", c.Cpu),
                                         new XElement("GPU", c.Gpu),

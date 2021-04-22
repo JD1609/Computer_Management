@@ -13,8 +13,9 @@ namespace Computer_Management
         public string Paste { get; private set; }
         public string Note { get; private set; }
         public DateTime Maintenance { get; private set; }
+        public bool DustClean { get; private set; }
 
-        public Computer(DateTime added, string user, string os, string cpu, string gpu, string ram, string mb, string paste, string note, DateTime maintenance) 
+        public Computer(DateTime added, string user, string os, string cpu, string gpu, string ram, string mb, string paste, string note, bool dustClean, DateTime maintenance) 
         {
             Added = added;
             UserName = user;
@@ -26,6 +27,7 @@ namespace Computer_Management
             Paste = paste;
             Note = note;
             Maintenance = maintenance;
+            DustClean = dustClean;
         }
 
         public void Change(string sender, string data) 
@@ -58,9 +60,13 @@ namespace Computer_Management
             {
                 Note = data;
             }
-            if (sender == "date") 
+            if (sender == "date")
             {
                 Maintenance = DateTime.Parse(data);
+            }
+            if (sender == "dust")
+            {
+                DustClean = bool.Parse(data);
             }
         }
 
