@@ -8,8 +8,9 @@
         WindowStartupLocation="CenterScreen"
         Title="Settings" Height="229" Width="420" ResizeMode="NoResize" Background="WhiteSmoke" Icon="Icons/Settings_icon.png" Name="settingsWindow">
 
-    <Grid>
-        <Grid.RowDefinitions>
+    <Border BorderBrush="White" BorderThickness="0.5,0,0.5,0.5">
+        <Grid>
+            <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -55,4 +56,5 @@
             <Button Name="OkBTN" Content="OK" Margin="10,0,0,0" Width="65" Height="22" Click="OkBTN_Click"/>
         </StackPanel>
     </Grid>
+    </Border>
 </Window>

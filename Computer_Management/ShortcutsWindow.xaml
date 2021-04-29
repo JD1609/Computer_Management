@@ -7,42 +7,44 @@
         mc:Ignorable="d"
         Name="shortcutsWindow"
         Title="Shortcuts" Height="353" Width="315" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFFDFDFD">
-    <Grid Margin="15">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="95*"/>
-            <RowDefinition Height="18*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="127*"/>
-            <ColumnDefinition Width="152*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0">
-            <Label Name="importPCHeader" Content="Import PC" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Left"/>
-            <Label Name="exportPCHeader" Content="Export PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Name="openFolderHeader" Content="Open data folder" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Name="deleteAllHeader" Content="Delete ALL data" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Name="addPCHeader" Content="Add PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Name="removePCHeader" Content="Remove PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Name="duplicatePCHeader" Content="Duplicate PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Name="importBackupHeader" Content="Import backup" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Name="exportBackupHeader" Content="Export backup" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-        </StackPanel>
+    <Border BorderBrush="White" BorderThickness="0.5,0,0.5,0.5">
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="95*"/>
+                <RowDefinition Height="18*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="127*"/>
+                <ColumnDefinition Width="152*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0">
+                <Label Name="importPCHeader" Content="Import PC" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Left"/>
+                <Label Name="exportPCHeader" Content="Export PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Name="openFolderHeader" Content="Open data folder" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Name="deleteAllHeader" Content="Delete ALL data" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Name="addPCHeader" Content="Add PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Name="removePCHeader" Content="Remove PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Name="duplicatePCHeader" Content="Duplicate PC" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Name="importBackupHeader" Content="Import backup" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Name="exportBackupHeader" Content="Export backup" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            </StackPanel>
 
-        <DockPanel Grid.Column="1" Grid.Row="0">
-            <Border Name="border" BorderBrush="Black" BorderThickness="0.3,0,0,0">
-                <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                    <Label Name="importPCLabel" Content="CTRL+I" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Name="exportPCLabel" Content="CTRL+E" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Name="openFolderLabel" Content="CTRL+F" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Name="deleteAllLabel" Content="CTRL+D" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Name="addPCLabel" Content="CTRL+A" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Name="removePCLabel" Content="CTRL+R" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Name="duplicatePCLabel" Content="CTRL+C" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Name="importBackupLabel" Content="CTRL+SHIFT+I" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Label Name="exportBackupLabel" Content="CTRL+SHIFT+E" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                </StackPanel>
-            </Border>
-        </DockPanel>
-        <Button Content="OK" Width="80" Height="23" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="1" Click="Button_Click"/>
-    </Grid>
+            <DockPanel Grid.Column="1" Grid.Row="0">
+                <Border Name="border" BorderBrush="Black" BorderThickness="0.3,0,0,0">
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <Label Name="importPCLabel" Content="CTRL+I" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Name="exportPCLabel" Content="CTRL+E" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Name="openFolderLabel" Content="CTRL+F" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Name="deleteAllLabel" Content="CTRL+D" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Name="addPCLabel" Content="CTRL+A" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Name="removePCLabel" Content="CTRL+R" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Name="duplicatePCLabel" Content="CTRL+C" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Name="importBackupLabel" Content="CTRL+SHIFT+I" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Label Name="exportBackupLabel" Content="CTRL+SHIFT+E" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </StackPanel>
+                </Border>
+            </DockPanel>
+            <Button Content="OK" Width="80" Height="23" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="1" Click="Button_Click"/>
+        </Grid>
+    </Border>
 </Window>

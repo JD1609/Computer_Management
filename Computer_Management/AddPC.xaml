@@ -7,66 +7,68 @@
         mc:Ignorable="d"
         Icon="Icons\add_pc_icon.png"
         Title="Add computer" WindowStartupLocation="CenterScreen" Height="450" Width="800" ResizeMode="CanMinimize" Name="addPCwindow" KeyDown="addPCwindow_KeyDown">
-    <Grid Margin="5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="250*"/>
-            <ColumnDefinition Width="421*"/>
-        </Grid.ColumnDefinitions>
-        
-        <!-- LABELS-->
-        <DockPanel Grid.ColumnSpan="2">
-            <StackPanel>
-                <Label Name="specificationLabel" Content="Specifications:" FontWeight="Bold" FontSize="20"/>
-                <Label Name="usernameLabel" Content="User Name:" Margin="0,10,0,0" FontSize="13"/>
-                <Label Name="osLabel" Content="OS:" Margin="0,14,0,0" FontSize="13"/>
-                <Label Name="cpuLabel" Content="Processor:" Margin="0,14,0,0" FontSize="13"/>
-                <Label Name="gpuLabel" Content="Graphic card:" Margin="0,14,0,0" FontSize="13"/>
-                <Label Name="ramLabel" Content="RAM:" Margin="0,14,0,0" FontSize="13"/>
-                <Label Name="mbLabel" Content="Motherboard:" Margin="0,14,0,0" FontSize="13"/>
-                <Label Name="pasteLabel" Content="Paste:" Margin="0,14,0,0" FontSize="13"/>
-                <Label Name="maintenanceLabel" Content="Maintenance:" Margin="0,14,0,0" FontSize="13"/>
-            </StackPanel>
-        </DockPanel>
+    <Border BorderBrush="White" BorderThickness="0.5,0,0.5,0.5">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="250*"/>
+                <ColumnDefinition Width="421*"/>
+            </Grid.ColumnDefinitions>
 
-        <!-- TEXT BOXES -->
-        <DockPanel Grid.Column="1">
-            <StackPanel Name="textBoxStackPanel">
-                <Image Name="thisPCBTN" Height="23" Width="23" Margin="0,7,10,-30" HorizontalAlignment="Right" Source="Icons\thisPC.png" MouseDown="thisPCBTN_Click" Cursor="Hand" ToolTip="Load HW of this PC"/>
-                <TextBox Name="userNameTxtBox" Margin="10,50,10,8" Height="25" VerticalContentAlignment="Center"/>
-                <TextBox Name="operatingSystemTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
-                <TextBox Name="cpuTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
-                <TextBox Name="gpuTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
-                <TextBox Name="ramTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
-                <TextBox Name="mbTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
-                <ComboBox Name="pasteTypeComboBox" Margin="10,8,10,8" Height="25" SelectedIndex="0" VerticalContentAlignment="Center" BorderBrush="Black"/>
+            <!-- LABELS-->
+            <DockPanel Grid.ColumnSpan="2">
+                <StackPanel>
+                    <Label Name="specificationLabel" Content="Specifications:" FontWeight="Bold" FontSize="20"/>
+                    <Label Name="usernameLabel" Content="User Name:" Margin="0,10,0,0" FontSize="13"/>
+                    <Label Name="osLabel" Content="OS:" Margin="0,14,0,0" FontSize="13"/>
+                    <Label Name="cpuLabel" Content="Processor:" Margin="0,14,0,0" FontSize="13"/>
+                    <Label Name="gpuLabel" Content="Graphic card:" Margin="0,14,0,0" FontSize="13"/>
+                    <Label Name="ramLabel" Content="RAM:" Margin="0,14,0,0" FontSize="13"/>
+                    <Label Name="mbLabel" Content="Motherboard:" Margin="0,14,0,0" FontSize="13"/>
+                    <Label Name="pasteLabel" Content="Paste:" Margin="0,14,0,0" FontSize="13"/>
+                    <Label Name="maintenanceLabel" Content="Maintenance:" Margin="0,14,0,0" FontSize="13"/>
+                </StackPanel>
+            </DockPanel>
 
-                <DatePicker Name="datePicker" Margin="10,8,10,8" VerticalContentAlignment="Center"/>
-                
-            </StackPanel>
-        </DockPanel>
-        
-        <!-- NOTES -->
-        <DockPanel Grid.Column="2">
-            <StackPanel Margin="15,0,15,0">
-                <Label Name="notesLabel" Content="Notes:" FontWeight="Bold" FontSize="20"/>
-                <TextBox Name="noteTextBox" Height="311" Margin="0,13,0,0" TextWrapping="Wrap" AcceptsReturn="True" TextChanged="noteTextBox_TextChanged"/>
-                <Button Name="addPcBTN" Content="Save computer" Margin="0,10,0,0" HorizontalAlignment="Right" Width="200" Height="25" Click="addPcBTN_Click" />
-            </StackPanel>
-        </DockPanel>
+            <!-- TEXT BOXES -->
+            <DockPanel Grid.Column="1">
+                <StackPanel Name="textBoxStackPanel">
+                    <Image Name="thisPCBTN" Height="23" Width="23" Margin="0,7,10,-30" HorizontalAlignment="Right" Source="Icons\thisPC.png" MouseDown="thisPCBTN_Click" Cursor="Hand" ToolTip="Load HW of this PC"/>
+                    <TextBox Name="userNameTxtBox" Margin="10,50,10,8" Height="25" VerticalContentAlignment="Center"/>
+                    <TextBox Name="operatingSystemTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
+                    <TextBox Name="cpuTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
+                    <TextBox Name="gpuTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
+                    <TextBox Name="ramTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
+                    <TextBox Name="mbTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
+                    <ComboBox Name="pasteTypeComboBox" Margin="10,8,10,8" Height="25" SelectedIndex="0" VerticalContentAlignment="Center" BorderBrush="Black"/>
 
-        <!-- LOADING BAR -->
-        <Border Name="loadingBorder" Background="#FF00B9FF" Margin="0,-10,0,0" CornerRadius="5" BorderBrush="Black" BorderThickness="1.5" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Grid Margin="20">
-                <Border CornerRadius="2" BorderBrush="Black" BorderThickness="1">
-                    <ProgressBar Name="loadingProgressBar" BorderBrush="Black" BorderThickness="0.5" Maximum="100" Height="30" Width="220"/>
-                </Border>
-                <TextBlock Text="Loading data..." VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
-            </Grid>
-        </Border>
-    </Grid>
+                    <DatePicker Name="datePicker" Margin="10,8,10,8" VerticalContentAlignment="Center"/>
+
+                </StackPanel>
+            </DockPanel>
+
+            <!-- NOTES -->
+            <DockPanel Grid.Column="2">
+                <StackPanel Margin="15,0,15,0">
+                    <Label Name="notesLabel" Content="Notes:" FontWeight="Bold" FontSize="20"/>
+                    <TextBox Name="noteTextBox" Height="311" Margin="0,13,0,0" TextWrapping="Wrap" AcceptsReturn="True" TextChanged="noteTextBox_TextChanged"/>
+                    <Button Name="addPcBTN" Content="Save computer" Margin="0,10,0,0" HorizontalAlignment="Right" Width="200" Height="25" Click="addPcBTN_Click" />
+                </StackPanel>
+            </DockPanel>
+
+            <!-- LOADING BAR -->
+            <Border Name="loadingBorder" Background="#FF00B9FF" Margin="0,-10,0,0" CornerRadius="5" BorderBrush="Black" BorderThickness="1.5" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid Margin="20">
+                    <Border CornerRadius="2" BorderBrush="Black" BorderThickness="1">
+                        <ProgressBar Name="loadingProgressBar" BorderBrush="Black" BorderThickness="0.5" Maximum="100" Height="30" Width="220"/>
+                    </Border>
+                    <TextBlock Text="Loading data..." VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
 </Window>
 
