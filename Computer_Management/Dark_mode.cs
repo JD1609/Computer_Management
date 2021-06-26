@@ -129,7 +129,7 @@ namespace Computer_Management
 
             settings_window.nextPasteHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             settings_window.sortingHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
-            settings_window.startUpHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            settings_window.startUpCheckBox.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
 
         }
 

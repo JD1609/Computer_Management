@@ -86,5 +86,10 @@ namespace Computer_Management
         {
             Settings.Default.AfterStartUp = false;
         }
+
+        private void PasteEditBTN_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

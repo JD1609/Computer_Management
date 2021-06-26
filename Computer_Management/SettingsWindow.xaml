@@ -6,55 +6,58 @@
         xmlns:local="clr-namespace:Computer_Management"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Settings" Height="229" Width="420" ResizeMode="NoResize" Background="WhiteSmoke" Icon="Icons/Settings_icon.png" Name="settingsWindow">
+        Title="Settings" Height="230" Width="420" ResizeMode="NoResize" Background="WhiteSmoke" Icon="Icons/Settings_icon.png" Name="settingsWindow">
 
     <Border BorderBrush="White" BorderThickness="0.5,0,0.5,0.5">
         <Grid>
             <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="10,10,10,0">
-            <!-- DataPath-->
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                <Label Name="dataPathHeader" Content="Data path: "/>
-                <TextBox Name="ToolTipTxtBox" Margin="0,4,0,0" Width="285" Height="20" VerticalAlignment="Top" TextWrapping="Wrap" IsEnabled="False" Background="White"/>
-                <Label Name="dataPathLabel" Margin="-285,0,0,0" VerticalAlignment="Top" Width="284" Height="26" Foreground="Black" MouseDoubleClick="dataPathClick" Content="This is place for datapath"/>
-                <Image Name="dataPathPic" Height="15" Width="15" Margin="10,6,0,0" VerticalAlignment="Top" ToolTip="Choose folder" Source="Icons/Folder_icon.png" Cursor="Hand" MouseDown="dataPathPic_MouseDown"/>
+            <StackPanel Grid.Row="0" Margin="10,10,10,0">
+                <!-- DataPath-->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                    <Label Name="dataPathHeader" Content="Data path: "/>
+                    <TextBox Name="ToolTipTxtBox" Margin="0,4,0,0" Width="285" Height="20" VerticalAlignment="Top" TextWrapping="Wrap" IsEnabled="False" Background="White"/>
+                    <Label Name="dataPathLabel" Margin="-285,0,0,0" VerticalAlignment="Top" Width="284" Height="26" Foreground="Black" MouseDoubleClick="dataPathClick" Content="This is place for datapath"/>
+                    <Image Name="dataPathPic" Height="15" Width="15" Margin="10,6,0,0" VerticalAlignment="Top" ToolTip="Choose folder" Source="Icons/Folder_icon.png" Cursor="Hand" MouseDown="dataPathPic_MouseDown"/>
+                </StackPanel>
+                
+                <Label Name="changeDataPathLabel" Content="After change data path you should refresh PC list!" Margin="75,-13,0,3" FontSize="9" Foreground="Red" FontWeight="Bold"/>
+                
+                <!--Next paste replace-->
+                <StackPanel Orientation="Horizontal" Margin="0,-10,0,0">
+                    <Label Name="nextPasteHeader" Content="Next paste replace for:"/>
+                    <ComboBox Name="monthsComboBox" Margin="6,3,0,0" Width="130" Height="22"/>
+                </StackPanel>
+                
+                <!--Sorting by-->
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Label Name="sortingHeader" Content="Sorting computers by: "/>
+                    <ComboBox Name="sortingComboBox" Margin="5,3,0,0" Width="130" Height="22">
+                        <ComboBoxItem Content="Newest"/>
+                        <ComboBoxItem Content="Oldest"/>
+                        <ComboBoxItem Content="Maintenance"/>
+                        <ComboBoxItem Content="Name/Ascending"/>
+                        <ComboBoxItem Content="Name/Descending"/>
+                    </ComboBox>
+                </StackPanel>
+                <!-- After startup -->
+                <StackPanel>
+                    <CheckBox Name="startUpCheckBox" Margin="5,10,0,0" Content="Check dates after startup" Checked="startUpCheckBox_Checked" Unchecked="startUpCheckBox_Unchecked"/>
+                </StackPanel>
             </StackPanel>
-            
-            <Label Name="changeDataPathLabel" Content="After change data path you should refresh PC list!" Margin="75,-13,0,3" FontSize="9" Foreground="Red" FontWeight="Bold"/>
-            
-            <!--Next paste replace-->
-            <StackPanel Orientation="Horizontal" Margin="0,-10,0,0">
-                <Label Name="nextPasteHeader" Content="Next paste replace for:"/>
-                <ComboBox Name="monthsComboBox" Margin="6,3,0,0" Width="130" Height="22"/>
-            </StackPanel>
-            
-            <!--Sorting by-->
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <Label Name="sortingHeader" Content="Sorting computers by: "/>
-                <ComboBox Name="sortingComboBox" Margin="5,3,0,0" Width="130" Height="22">
-                    <ComboBoxItem Content="Newest"/>
-                    <ComboBoxItem Content="Oldest"/>
-                    <ComboBoxItem Content="Maintenance"/>
-                    <ComboBoxItem Content="Name/Ascending"/>
-                    <ComboBoxItem Content="Name/Descending"/>
-                </ComboBox>
-            </StackPanel>
-            <!-- After startup -->
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <Label Name="startUpHeader" Content="Check dates after startup"/>
-                <CheckBox Name="startUpCheckBox" Margin="5,7,0,0" Checked="startUpCheckBox_Checked" Unchecked="startUpCheckBox_Unchecked"/>
-            </StackPanel>
-        </StackPanel>
 
         <!--Buttons-->
-        <StackPanel Grid.Row="1" Margin="0,0,15,5" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="RDBTN" Content="Restore default" Margin="10,0,0,0" Width="100" Height="22" Click="RDBTN_Click"/>
-            <Button Name="OkBTN" Content="OK" Margin="10,0,0,0" Width="65" Height="22" Click="OkBTN_Click"/>
-        </StackPanel>
-    </Grid>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,5,5,0">
+                <Button Name="PasteEditBTN" Content="Edit pastes..." Width="90" Height="22" Click="PasteEditBTN_Click"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5,5,10,0">
+                <Button Name="RDBTN" Content="Restore default" Margin="5" Width="100" Height="22" Click="RDBTN_Click"/>
+                <Button Name="OkBTN" Content="OK" Margin="5" Width="65" Height="22" Click="OkBTN_Click"/>
+            </StackPanel>
+        </Grid>
     </Border>
 </Window>
