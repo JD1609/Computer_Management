@@ -39,7 +39,7 @@
             <!-- TEXT BOXES -->
             <DockPanel Grid.Column="1">
                 <StackPanel Name="textBoxStackPanel">
-                    <Image Name="thisPCBTN" Height="23" Width="23" Margin="0,7,10,-30" HorizontalAlignment="Right" Source="Icons\thisPC.png" MouseDown="thisPCBTN_Click" Cursor="Hand" ToolTip="Load HW of this PC"/>
+                    <Image Name="thisPCBTN" Height="23" Width="23" Margin="0,7,10,-30" HorizontalAlignment="Right" Source="Icons\thisPC.png" MouseDown="thisPCBTN_Click" Cursor="Hand" ToolTip="Load local HW [CTRL+L]"/>
                     <ComboBox Name="deviceTypeComboBox" Margin="10,50,10,8" Height="25" SelectedIndex="0" VerticalContentAlignment="Center"/>
                     <TextBox Name="userNameTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>
                     <TextBox Name="operatingSystemTxtBox" Margin="10,8,10,8" Height="25" VerticalContentAlignment="Center"/>

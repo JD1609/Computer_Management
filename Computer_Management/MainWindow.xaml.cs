@@ -399,7 +399,7 @@ namespace Computer_Management
         }
 
         // --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- | --- ENVIROMENT --- |
-        // --- SHORTCUTS --- ||
+            // --- SHORTCUTS --- ||
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.LeftShift) && Keyboard.IsKeyDown(Key.I)) //Import backup from external file

@@ -46,31 +46,31 @@ namespace Computer_Management
             {
                 case "userLabel":
                     titleLabel.Content = "User:";
-                    loadComponent.ToolTip += "user";
+                    loadComponent.ToolTip += "user [CTRL+L]";
                     break;
                 case "osLabel":
                     titleLabel.Content = "Operating system:";
-                    loadComponent.ToolTip += "operating system";
+                    loadComponent.ToolTip += "operating system [CTRL+L]";
                     break;
                 case "cpuLabel":
                     titleLabel.Content = "Processor:";
-                    loadComponent.ToolTip += "processor";
+                    loadComponent.ToolTip += "processor [CTRL+L]";
                     break;
                 case "gpuLabel":
                     titleLabel.Content = "Graphic card:";
-                    loadComponent.ToolTip += "graphic card";
+                    loadComponent.ToolTip += "graphic card [CTRL+L]";
                     break;
                 case "ramLabel":
                     titleLabel.Content = "RAM:";
-                    loadComponent.ToolTip += "RAM";
+                    loadComponent.ToolTip += "RAM [CTRL+L]";
                     break;
                 case "diskLabel":
                     titleLabel.Content = "Disk:";
-                    loadComponent.ToolTip += "disk";
+                    loadComponent.ToolTip += "disk [CTRL+L]";
                     break;
                 case "mbLabel":
                     titleLabel.Content = "Motherboard:";
-                    loadComponent.ToolTip += "motherboard";
+                    loadComponent.ToolTip += "motherboard [CTRL+L]";
                     break;
                 case "pasteLabel":
                     titleLabel.Content = "Paste:";

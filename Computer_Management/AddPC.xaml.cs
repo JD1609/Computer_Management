@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
@@ -129,7 +130,9 @@ namespace Computer_Management
                     MsgBoxEditor.EditInfoMessage("Username can't be shortly than 4 characters.", "");
             }
         }
-        private async void thisPCBTN_Click(object sender, RoutedEventArgs e)
+
+        // --- LOAD COMPONENTS --- 
+        private async void LoadComponents() 
         {
             addPcBTN.IsEnabled = false;
             textBoxStackPanel.IsEnabled = false;
@@ -144,7 +147,7 @@ namespace Computer_Management
                 await Task.Delay(1);
                 loadingProgressBar.Value += 5;
                 await Task.Delay(1);
-                loadingProgressBar.Value += 7;
+                loadingProgressBar.Value += 6;
                 await Task.Delay(1);
             }
 
@@ -154,7 +157,7 @@ namespace Computer_Management
                 await Task.Delay(1);
                 loadingProgressBar.Value += 5;
                 await Task.Delay(1);
-                loadingProgressBar.Value += 7;
+                loadingProgressBar.Value += 6;
                 await Task.Delay(1);
             }
 
@@ -164,7 +167,7 @@ namespace Computer_Management
                 await Task.Delay(1);
                 loadingProgressBar.Value += 5;
                 await Task.Delay(1);
-                loadingProgressBar.Value += 7;
+                loadingProgressBar.Value += 6;
                 await Task.Delay(1);
             }
 
@@ -174,7 +177,7 @@ namespace Computer_Management
                 await Task.Delay(1);
                 loadingProgressBar.Value += 5;
                 await Task.Delay(1);
-                loadingProgressBar.Value += 7;
+                loadingProgressBar.Value += 6;
                 await Task.Delay(1);
             }
 
@@ -184,7 +187,17 @@ namespace Computer_Management
                 await Task.Delay(1);
                 loadingProgressBar.Value += 5;
                 await Task.Delay(1);
-                loadingProgressBar.Value += 7;
+                loadingProgressBar.Value += 6;
+                await Task.Delay(1);
+            }
+
+            diskTxtBox.Text = HwFinder.GetHDD();
+            {
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 5;
+                await Task.Delay(1);
+                loadingProgressBar.Value += 6;
                 await Task.Delay(1);
             }
 
@@ -194,7 +207,7 @@ namespace Computer_Management
                 await Task.Delay(1);
                 loadingProgressBar.Value += 5;
                 await Task.Delay(1);
-                loadingProgressBar.Value += 7;
+                loadingProgressBar.Value += 6;
                 await Task.Delay(100);
             }
 
@@ -203,6 +216,11 @@ namespace Computer_Management
             textBoxStackPanel.IsEnabled = true;
             noteTextBox.IsEnabled = true;
             addPcBTN.IsEnabled = true;
+        }
+
+        private void thisPCBTN_Click(object sender, RoutedEventArgs e)
+        {
+            LoadComponents();
         }
 
         private void noteTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -214,9 +232,13 @@ namespace Computer_Management
 
         private void addPCwindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.Escape))
+            if (Keyboard.IsKeyDown(Key.Escape))
             {
                 this.Close();
+            }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.L))
+            {
+                LoadComponents();
             }
         }
     }
