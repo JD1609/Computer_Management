@@ -85,13 +85,13 @@ namespace Computer_Management
             dataDocument = XDocument.Load(dataPath);
             DateTime added = DateTime.Now;
             Computer.Type type = Computer.Type.PC;
-            string user = "";
-            string os = "";
-            string cpu = "";
-            string gpu = "";
-            string ram = "";
-            string disk = "";
-            string mb = "";
+            string user = "Unknown";
+            string os = "Unknown";
+            string cpu = "Unknown";
+            string gpu = "Unknown";
+            string ram = "Unknown";
+            string disk = "Unknown";
+            string mb = "Unknown";
             string paste = "Cheap";
             DateTime maintenance = DateTime.Today.AddMonths(3);
             bool dustClean = false;
@@ -99,9 +99,9 @@ namespace Computer_Management
             foreach (XElement c in dataDocument.Element("Computers").Elements("Computer"))
             {
                 string note = "";
-                added = DateTime.Parse(c.Attribute("Added").Value);
+                added = DateTime.Parse(c.Attribute("added").Value);
 
-                switch (c.Attribute("Type").Value)
+                switch (c.Attribute("type").Value)
                 {
                     case "PC":
                         type = Computer.Type.PC;
@@ -161,18 +161,20 @@ namespace Computer_Management
                         noteRows.Add(new XElement("Row", s.Trim()));
                     }
 
-                    dataDocument.Element("Computers").Add(new XElement("Computer", new XAttribute("Type", c.DeviceType), new XAttribute("Added", c.Added), new XAttribute("dustClean", c.DustClean),
-                                        new XElement("Username", c.UserName),
-                                        new XElement("OS", c.OS),
-                                        new XElement("CPU", c.Cpu),
-                                        new XElement("GPU", c.Gpu),
-                                        new XElement("RAM", c.Ram),
-                                        new XElement("Disk", c.Disk),
-                                        new XElement("Motherboard", c.Motherboard),
-                                        new XElement("Paste", c.Paste),
-                                        noteRows,
-                                        new XElement("Maintenance", c.Maintenance)
-                                        ));
+                    dataDocument.Element("Computers").Add(new XElement("Computer", new XAttribute("type", c.DeviceType),
+                                                                                   new XAttribute("added", c.Added),
+                                                                                   new XAttribute("dustClean", c.DustClean),
+                                                                                        new XElement("Username", c.UserName),
+                                                                                        new XElement("OS", c.OS),
+                                                                                        new XElement("CPU", c.Cpu),
+                                                                                        new XElement("GPU", c.Gpu),
+                                                                                        new XElement("RAM", c.Ram),
+                                                                                        new XElement("Disk", c.Disk),
+                                                                                        new XElement("Motherboard", c.Motherboard),
+                                                                                        new XElement("Paste", c.Paste),
+                                                                                        noteRows,
+                                                                                        new XElement("Maintenance", c.Maintenance)
+                                                                                        ));
                 }
             }
         }
@@ -201,12 +203,14 @@ namespace Computer_Management
                     noteRows.Add(new XElement("Row", s));
                 }
 
-                dataDocument.Add(new XElement("Computers", new XElement("Computer", new XAttribute("Username", ((Computer)mw.pcList.SelectedItem).UserName),
-                                                                                    new XAttribute("Added", ((Computer)mw.pcList.SelectedItem).Added),
+                dataDocument.Add(new XElement("Computers", new XElement("Computer", new XAttribute("type", ((Computer)mw.pcList.SelectedItem).DeviceType),
+                                                                                    new XAttribute("added", ((Computer)mw.pcList.SelectedItem).Added),
+                                                                                    new XAttribute("dustClean", ((Computer)mw.pcList.SelectedItem).Added),
                                                                                          new XElement("OS", ((Computer)mw.pcList.SelectedItem).OS),
                                                                                          new XElement("CPU", ((Computer)mw.pcList.SelectedItem).Cpu),
                                                                                          new XElement("GPU", ((Computer)mw.pcList.SelectedItem).Gpu),
                                                                                          new XElement("RAM", ((Computer)mw.pcList.SelectedItem).Ram),
+                                                                                         new XElement("Disk", ((Computer)mw.pcList.SelectedItem).Disk),
                                                                                          new XElement("Motherboard", ((Computer)mw.pcList.SelectedItem).Motherboard),
                                                                                          new XElement("Paste", ((Computer)mw.pcList.SelectedItem).Paste),
                                                                                          noteRows,

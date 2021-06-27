@@ -29,6 +29,19 @@ namespace Computer_Management
             datePicker.SelectedDate = DateTime.Today.AddMonths(3);
         }
 
+        private void EnableComponents() 
+        {
+            mw.osLabel.IsEnabled = true;
+            mw.cpuLabel.IsEnabled = true;
+            mw.gpuLabel.IsEnabled = true;
+            mw.ramLabel.IsEnabled = true;
+            mw.diskLabel.IsEnabled = true;
+            mw.mbLabel.IsEnabled = true;
+            mw.pasteLabel.IsEnabled = true;
+            mw.dataStackpanel.IsEnabled = true;
+            mw.noteTextBox.IsEnabled = true;
+        }
+
         // --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- |
         private void addPcBTN_Click(object sender, RoutedEventArgs e)
         {
@@ -100,6 +113,7 @@ namespace Computer_Management
 
                                 // --- SAVE DATA ---
                                 database.SaveData();
+                                EnableComponents();
                                 database.ListCountCheck();
                                 Close();
                             }
