@@ -32,7 +32,7 @@ namespace Computer_Management
             {
                 Computers.Clear();
                 mw.pcList.ItemsSource = Computers;
-                mw.userLabel.Content = null;
+                mw.diskLabel.Content = null;
                 mw.osLabel.Content = null;
                 mw.osLabel.IsEnabled = false;
                 mw.cpuLabel.Content = null;
@@ -84,11 +84,13 @@ namespace Computer_Management
         {
             dataDocument = XDocument.Load(dataPath);
             DateTime added = DateTime.Now;
+            Computer.Type type = Computer.Type.PC;
             string user = "";
             string os = "";
             string cpu = "";
             string gpu = "";
             string ram = "";
+            string disk = "";
             string mb = "";
             string paste = "Cheap";
             DateTime maintenance = DateTime.Today.AddMonths(3);
@@ -98,11 +100,29 @@ namespace Computer_Management
             {
                 string note = "";
                 added = DateTime.Parse(c.Attribute("Added").Value);
-                user = c.Attribute("Username").Value;
+
+                switch (c.Attribute("Type").Value)
+                {
+                    case "PC":
+                        type = Computer.Type.PC;
+                        break;
+                    case "NTB":
+                        type = Computer.Type.NTB;
+                        break;
+                    case "NAS":
+                        type = Computer.Type.NTB;
+                        break;
+                    case "SRVR":
+                        type = Computer.Type.SRVR;
+                        break;
+                }
+
+                user = c.Element("Username").Value;
                 os = c.Element("OS").Value;
                 cpu = c.Element("CPU").Value;
                 gpu = c.Element("GPU").Value;
                 ram = c.Element("RAM").Value;
+                disk = c.Element("Disk").Value;
                 mb = c.Element("Motherboard").Value;
                 paste = c.Element("Paste").Value;
                 foreach (XElement row in c.Element("Note").Elements("Row"))
@@ -110,7 +130,7 @@ namespace Computer_Management
                 maintenance = DateTime.Parse(c.Element("Maintenance").Value);
                 dustClean = bool.Parse(c.Attribute("dustClean").Value);
 
-                Computers.Add(new Computer(added, user, os, cpu, gpu, ram, mb, paste, note, dustClean, maintenance));
+                Computers.Add(new Computer(added, type, user, os, cpu, gpu, ram, disk, mb, paste, note, dustClean, maintenance));
             }
 
             ListCountCheck();
@@ -141,11 +161,13 @@ namespace Computer_Management
                         noteRows.Add(new XElement("Row", s.Trim()));
                     }
 
-                    dataDocument.Element("Computers").Add(new XElement("Computer", new XAttribute("Username", c.UserName), new XAttribute("Added", c.Added), new XAttribute("dustClean", c.DustClean),
+                    dataDocument.Element("Computers").Add(new XElement("Computer", new XAttribute("Type", c.DeviceType), new XAttribute("Added", c.Added), new XAttribute("dustClean", c.DustClean),
+                                        new XElement("Username", c.UserName),
                                         new XElement("OS", c.OS),
                                         new XElement("CPU", c.Cpu),
                                         new XElement("GPU", c.Gpu),
                                         new XElement("RAM", c.Ram),
+                                        new XElement("Disk", c.Disk),
                                         new XElement("Motherboard", c.Motherboard),
                                         new XElement("Paste", c.Paste),
                                         noteRows,

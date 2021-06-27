@@ -9,7 +9,7 @@ namespace Computer_Management
     {
         private Database database;
         private MainWindow mw;
-        public AddPC(MainWindow mw, Database database, string username, string os, string cpu, string gpu, string ram, string mb)
+        public AddPC(MainWindow mw, Database database, string username, string os, string cpu, string gpu, string ram, string disk, string mb)
         {
             InitializeComponent();
             if (Settings.Default.IsDarkModeEnabled) { Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground); }
@@ -17,34 +17,21 @@ namespace Computer_Management
             loadingProgressBar.Value = 0;
             this.database = database;
             this.mw = mw;
+            deviceTypeComboBox.ItemsSource = Enum.GetValues(typeof(Computer.Type));
             pasteTypeComboBox.ItemsSource = database.Pastas;
             userNameTxtBox.Text = username;
             operatingSystemTxtBox.Text = os;
             cpuTxtBox.Text = cpu;
             gpuTxtBox.Text = gpu;
             ramTxtBox.Text = ram;
+            diskTxtBox.Text = disk;
             mbTxtBox.Text = mb;
             datePicker.SelectedDate = DateTime.Today.AddMonths(3);
-        }
-
-        private void EnableElements() 
-        {
-            mw.userLabel.IsEnabled = true;
-            mw.osLabel.IsEnabled = true;
-            mw.cpuLabel.IsEnabled = true;
-            mw.gpuLabel.IsEnabled = true;
-            mw.ramLabel.IsEnabled = true;
-            mw.mbLabel.IsEnabled = true;
-            mw.pasteLabel.IsEnabled = true;
-
-            mw.dustClearCheckBox.IsEnabled = true;
-            mw.pasteChangeCheckBox.IsEnabled = true;
         }
 
         // --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- |
         private void addPcBTN_Click(object sender, RoutedEventArgs e)
         {
-
             string user = userNameTxtBox.Text.Trim();
             bool sameName = false;
 
@@ -79,32 +66,35 @@ namespace Computer_Management
                                 {
                                     string os = operatingSystemTxtBox.Text.Trim();
                                     if (os == "")
-                                        os = "None";
+                                        os = "Unknown";
 
                                     string cpu = cpuTxtBox.Text.Trim();
                                     if (cpu == "")
-                                        cpu = "None";
+                                        cpu = "Unknown";
 
                                     string gpu = gpuTxtBox.Text.Trim();
                                     if (gpu == "")
-                                        gpu = "None";
+                                        gpu = "Unknown";
 
                                     string ram = ramTxtBox.Text.Trim();
                                     if (ram == "")
-                                        ram = "None";
+                                        ram = "Unknown";
+
+                                    string disk = diskTxtBox.Text.Trim();
+                                    if (disk == "")
+                                        disk = "Unknown";
 
                                     string mb = mbTxtBox.Text.Trim();
                                     if (mb == "")
-                                        mb = "None";
+                                        mb = "Unknown";
 
+                                    Computer.Type type = (Computer.Type)deviceTypeComboBox.SelectedItem;
                                     string paste = pasteTypeComboBox.SelectedItem.ToString();
                                     string note = noteTextBox.Text;
 
-                                    database.Computers.Add(new Computer(DateTime.Now, user, os, cpu, gpu, ram, mb, paste, note, false, datePicker.SelectedDate.Value));
+                                    database.Computers.Add(new Computer(DateTime.Now, type, user, os, cpu, gpu, ram, disk, mb, paste, note, false, datePicker.SelectedDate.Value));
 
-                                    EnableElements();
-
-                                    Close();
+                                    this.Close();
                                 }
                                 catch { MsgBoxEditor.EditErrorMessage("An error has been occurred! Computer wasn't added...\nError[Ax00011001]", "Adding PC failed"); }
 

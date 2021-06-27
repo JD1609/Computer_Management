@@ -92,11 +92,6 @@ namespace Computer_Management
                 noteTextBox.IsEnabled = true;
                 Computer computer = (Computer)pcList.SelectedItem;
 
-                if (computer.UserName.Contains('_'))
-                    userLabel.Content = "_" + computer.UserName;
-                else
-                    userLabel.Content = computer.UserName;
-
                 osLabel.Content = computer.OS;
                 if (osLabel.Content.ToString().Length > 44)
                     osLabel.ToolTip = computer.OS;
@@ -112,6 +107,10 @@ namespace Computer_Management
                 ramLabel.Content = computer.Ram;
                 if (ramLabel.Content.ToString().Length > 44)
                     ramLabel.ToolTip = computer.Ram;
+
+                diskLabel.Content = computer.Disk;
+                if (diskLabel.Content.ToString().Length > 44)
+                    diskLabel.ToolTip = computer.Disk;
 
                 mbLabel.Content = computer.Motherboard;
                 if (mbLabel.Content.ToString().Length > 44)
@@ -178,7 +177,7 @@ namespace Computer_Management
         // --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- | --- BUTTONS --- |
         private void AddBTN_Click(object sender, RoutedEventArgs e)
         {
-            new AddPC(this, database, "", "", "", "", "", "").Show();
+            new AddPC(this, database, "", "", "", "", "", "", "").Show();
         }
 
         private void RemoveBTN_Click(object sender, MouseButtonEventArgs e)
@@ -198,7 +197,7 @@ namespace Computer_Management
         private void DuplicatePC_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (pcList.SelectedItem != null)
-                new AddPC(this, database, "", ((Computer)pcList.SelectedItem).OS, ((Computer)pcList.SelectedItem).Cpu, ((Computer)pcList.SelectedItem).Gpu, ((Computer)pcList.SelectedItem).Ram, ((Computer)pcList.SelectedItem).Motherboard).Show();
+                new AddPC(this, database, "", ((Computer)pcList.SelectedItem).OS, ((Computer)pcList.SelectedItem).Cpu, ((Computer)pcList.SelectedItem).Gpu, ((Computer)pcList.SelectedItem).Ram, ((Computer)pcList.SelectedItem).Disk, ((Computer)pcList.SelectedItem).Motherboard).Show();
             else { MsgBoxEditor.EditErrorMessage("You have not selected any PC to duplicate...!", "Error"); }
         }
 
@@ -430,7 +429,7 @@ namespace Computer_Management
             if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.C)) //Duplicate current PC
             {
                 if (pcList.SelectedItem != null)
-                    new AddPC(this, database, "", ((Computer)pcList.SelectedItem).OS, ((Computer)pcList.SelectedItem).Cpu, ((Computer)pcList.SelectedItem).Gpu, ((Computer)pcList.SelectedItem).Ram, ((Computer)pcList.SelectedItem).Motherboard).Show();
+                    new AddPC(this, database, "", ((Computer)pcList.SelectedItem).OS, ((Computer)pcList.SelectedItem).Cpu, ((Computer)pcList.SelectedItem).Gpu, ((Computer)pcList.SelectedItem).Ram, ((Computer)pcList.SelectedItem).Disk, ((Computer)pcList.SelectedItem).Motherboard).Show();
                 else { MsgBoxEditor.EditErrorMessage("You have not selected any PC to duplicate...!", "Error"); }
             }
             if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.E)) //Export PC
@@ -452,7 +451,7 @@ namespace Computer_Management
             }
             if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.A)) //Add PC
             {
-                new AddPC(this, database, "", "", "", "", "", "").Show();
+                new AddPC(this, database, "", "", "", "", "", "", "").Show();
             }
             if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.R)) //Delete current selected pc
             {

@@ -50,8 +50,6 @@ namespace Computer_Management
             main_window.pcList.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
             // --- dataStackpanel
             main_window.dataStackpanelBorder.BorderBrush = (Brush)new BrushConverter().ConvertFromString(foreground_color);
-            main_window.userLabelHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
-            main_window.userLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.osLabelHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.osLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.cpuLabelHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
@@ -60,6 +58,8 @@ namespace Computer_Management
             main_window.gpuLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.ramLabelHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.ramLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            main_window.diskLabelHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            main_window.diskLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.mbLabelHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.mbLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             main_window.pasteLabelHeader.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
@@ -80,6 +80,7 @@ namespace Computer_Management
             // --- Label stackPanel
                 // --- Specification Header
             addpc_window.specificationLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            addpc_window.typeLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
 
             addpc_window.usernameLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             addpc_window.userNameTxtBox.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
@@ -100,6 +101,10 @@ namespace Computer_Management
             addpc_window.ramLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             addpc_window.ramTxtBox.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             addpc_window.ramTxtBox.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
+
+            addpc_window.diskLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            addpc_window.diskTxtBox.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
+            addpc_window.diskTxtBox.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
 
             addpc_window.mbLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             addpc_window.mbTxtBox.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
@@ -232,8 +237,6 @@ namespace Computer_Management
             main_window.pcList.Background = Brushes.White;
                 // --- dataStackpanel
             main_window.dataStackpanelBorder.BorderBrush = Brushes.Black;
-            main_window.userLabelHeader.Foreground = Brushes.Black;
-            main_window.userLabel.Foreground = Brushes.Black;
             main_window.osLabelHeader.Foreground = Brushes.Black;
             main_window.osLabel.Foreground = Brushes.Black;
             main_window.cpuLabelHeader.Foreground = Brushes.Black;
@@ -242,6 +245,8 @@ namespace Computer_Management
             main_window.gpuLabel.Foreground = Brushes.Black;
             main_window.ramLabelHeader.Foreground = Brushes.Black;
             main_window.ramLabel.Foreground = Brushes.Black;
+            main_window.diskLabelHeader.Foreground = Brushes.Black;
+            main_window.diskLabel.Foreground = Brushes.Black;
             main_window.mbLabelHeader.Foreground = Brushes.Black;
             main_window.mbLabel.Foreground = Brushes.Black;
             main_window.pasteLabelHeader.Foreground = Brushes.Black;

@@ -53,15 +53,12 @@
             <Image Name="addPC" HorizontalAlignment="Right" Margin="3,0,0,0" Height="16" VerticalAlignment="Center" Width="16" Source="Icons\Database-Add.png" MouseDown="AddBTN_Click" Cursor="Hand" ToolTip="Add computer"/>
             <Image Name="removePC" HorizontalAlignment="Right" Margin="3,0,0,0" Height="16" VerticalAlignment="Center" Width="16" Source="Icons\Database-remove.png" Cursor="Hand" ToolTip="Remove computer" MouseDown="RemoveBTN_Click"/>
         </StackPanel>
-        <ListBox Name="pcList" SelectedIndex="0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="358" Width="178" Grid.Row="1" Grid.RowSpan="2" SelectionChanged="PcList_SelectionChanged"/>
+        <ListBox Name="pcList" FontFamily="Consolas" SelectedIndex="0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="358" Width="178" Grid.Row="1" Grid.RowSpan="2" SelectionChanged="PcList_SelectionChanged"/>
 
         <!--/////////////////// DATA ////////////////////-->
         <DockPanel Name="dataPanel" Margin="5,0,10,11" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
             <Border Name="dataStackpanelBorder" BorderBrush="Black" BorderThickness="0.3" Padding="5,0,5,0">
                 <StackPanel Name="dataStackpanel" Orientation="Vertical">
-
-                    <Label Name="userLabelHeader" Content="User: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
-                    <Label Name="userLabel" Content="User" HorizontalAlignment="Left"/>
 
                     <Label Name="osLabelHeader" Content="Operating system: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Label Name="osLabel" Content="OS" HorizontalAlignment="Left" Cursor="Hand" MouseDown="ParametrClick"/>
@@ -74,6 +71,9 @@
 
                     <Label Name="ramLabelHeader" Content="RAM: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Label Name="ramLabel" Content="RAM" HorizontalAlignment="Left" Cursor="Hand" MouseDown="ParametrClick"/>
+
+                    <Label Name="diskLabelHeader" Content="Disk: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <Label Name="diskLabel" Content="Disk" HorizontalAlignment="Left" Cursor="Hand" MouseDown="ParametrClick"/>
 
                     <Label Name="mbLabelHeader" Content="Motherboard: " Margin="0,0,0,-10" FontWeight="Bold" HorizontalAlignment="Left"/>
                     <Label Name="mbLabel" Content="Motherboard" HorizontalAlignment="Left" Cursor="Hand" MouseDown="ParametrClick"/>

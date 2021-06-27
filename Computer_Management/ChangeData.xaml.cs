@@ -10,12 +10,14 @@ namespace Computer_Management
         private MainWindow mw;
         private Database database;
         private object Sender { get; set; }
+        private string RecievedData { get; set; }
 
         public ChangeData(MainWindow mw, Database database, string data, object sender)
         {
             InitializeComponent();
             if (Settings.Default.IsDarkModeEnabled) { Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground); }
             Sender = sender;
+            RecievedData = data;
             textBoxData.Text = data;
             this.mw = mw;
             this.database = database;
@@ -36,33 +38,32 @@ namespace Computer_Management
         public void SetTitle()
         {
             string sndrName = ((Label)Sender).Name;
-            if (sndrName == "userLabel")
+            switch (sndrName) 
             {
-                labelTxt.Content = "User:";
-            }
-            if (sndrName == "osLabel")
-            {
-                labelTxt.Content = "Operating system:";
-            }
-            if (sndrName == "cpuLabel")
-            {
-                labelTxt.Content = "Processor:";
-            }
-            if (sndrName == "gpuLabel")
-            {
-                labelTxt.Content = "Graphic card:";
-            }
-            if (sndrName == "ramLabel")
-            {
-                labelTxt.Content = "RAM:";
-            }
-            if (sndrName == "mbLabel")
-            {
-                labelTxt.Content = "Motherboard:";
-            }
-            if (sndrName == "pasteLabel")
-            {
-                labelTxt.Content = "Paste:";
+                case "userLabel":
+                    labelTxt.Content = "User:";
+                    break;
+                case "osLabel":
+                    labelTxt.Content = "Operating system:";
+                    break;
+                case "cpuLabel":
+                    labelTxt.Content = "Processor:";
+                    break;
+                case "gpuLabel":
+                    labelTxt.Content = "Graphic card:";
+                    break;
+                case "ramLabel":
+                    labelTxt.Content = "RAM:";
+                    break;
+                case "diskLabel":
+                    labelTxt.Content = "Disk:";
+                    break;
+                case "mbLabel":
+                    labelTxt.Content = "Motherboard:";
+                    break;
+                case "pasteLabel":
+                    labelTxt.Content = "Paste:";
+                    break;
             }
         }
 
@@ -109,15 +110,18 @@ namespace Computer_Management
                 MsgBoxEditor.EditInfoMessage("Component can not contains \';\' symbol", "");
             else 
             {
-                Change();
-                Close();
+                if (textBoxData.Text == RecievedData)
+                    this.Close();
+                else
+                    Change();
+                    this.Close();
             }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
-                Close();
+                this.Close();
 
             if (e.Key == Key.Enter)
             {
