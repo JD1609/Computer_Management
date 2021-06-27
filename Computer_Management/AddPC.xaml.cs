@@ -28,8 +28,8 @@ namespace Computer_Management
             mbTxtBox.Text = mb;
             datePicker.SelectedDate = DateTime.Today.AddMonths(3);
         }
-
-        private void EnableComponents() 
+        
+        private void EnableComponents() // After 'database.ListCountCheck()' can be components disabled 
         {
             mw.osLabel.IsEnabled = true;
             mw.cpuLabel.IsEnabled = true;
@@ -113,7 +113,9 @@ namespace Computer_Management
 
                                 // --- SAVE DATA ---
                                 database.SaveData();
+
                                 EnableComponents();
+
                                 database.ListCountCheck();
                                 Close();
                             }

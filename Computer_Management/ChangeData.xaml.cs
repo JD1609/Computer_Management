@@ -17,6 +17,10 @@ namespace Computer_Management
             InitializeComponent();
             if (Settings.Default.IsDarkModeEnabled) { Dark_mode.SetDarkMode(this, Settings.Default.Background, Settings.Default.Midground, Settings.Default.Foreground); }
             Sender = sender;
+            if (((Label)Sender).Name == "pasteLabel") 
+            {
+                loadComponent.Visibility = Visibility.Hidden;
+            }
             RecievedData = data;
             textBoxData.Text = data;
             this.mw = mw;
@@ -41,28 +45,36 @@ namespace Computer_Management
             switch (sndrName) 
             {
                 case "userLabel":
-                    labelTxt.Content = "User:";
+                    titleLabel.Content = "User:";
+                    loadComponent.ToolTip += "user";
                     break;
                 case "osLabel":
-                    labelTxt.Content = "Operating system:";
+                    titleLabel.Content = "Operating system:";
+                    loadComponent.ToolTip += "operating system";
                     break;
                 case "cpuLabel":
-                    labelTxt.Content = "Processor:";
+                    titleLabel.Content = "Processor:";
+                    loadComponent.ToolTip += "processor";
                     break;
                 case "gpuLabel":
-                    labelTxt.Content = "Graphic card:";
+                    titleLabel.Content = "Graphic card:";
+                    loadComponent.ToolTip += "graphic card";
                     break;
                 case "ramLabel":
-                    labelTxt.Content = "RAM:";
+                    titleLabel.Content = "RAM:";
+                    loadComponent.ToolTip += "RAM";
                     break;
                 case "diskLabel":
-                    labelTxt.Content = "Disk:";
+                    titleLabel.Content = "Disk:";
+                    loadComponent.ToolTip += "disk";
                     break;
                 case "mbLabel":
-                    labelTxt.Content = "Motherboard:";
+                    titleLabel.Content = "Motherboard:";
+                    loadComponent.ToolTip += "motherboard";
                     break;
                 case "pasteLabel":
-                    labelTxt.Content = "Paste:";
+                    titleLabel.Content = "Paste:";
+                    loadComponent.ToolTip += "paste";
                     break;
             }
         }
@@ -118,10 +130,61 @@ namespace Computer_Management
             }
         }
 
+        // --- LOADING COMPONENT --- | --- LOADING COMPONENT --- | --- LOADING COMPONENT --- | --- LOADING COMPONENT --- | --- LOADING COMPONENT --- | --- LOADING COMPONENT --- |
+        private void loadComponent_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            switch (((Label)Sender).Name)
+            {
+                case "osLabel":
+                    textBoxData.Text = HwFinder.GetOS();
+                    break;
+                case "cpuLabel":
+                    textBoxData.Text = HwFinder.GetCpu();
+                    break;
+                case "gpuLabel":
+                    textBoxData.Text = HwFinder.GetGpu();
+                    break;
+                case "ramLabel":
+                    textBoxData.Text = HwFinder.GetRam();
+                    break;
+                case "diskLabel":
+                    textBoxData.Text = HwFinder.GetHDD();
+                    break;
+                case "mbLabel":
+                    textBoxData.Text = HwFinder.GetMB();
+                    break;
+            }
+        }
+
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
                 this.Close();
+
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.L))
+            {
+                switch (((Label)Sender).Name)
+                {
+                    case "osLabel":
+                        textBoxData.Text = HwFinder.GetOS();
+                        break;
+                    case "cpuLabel":
+                        textBoxData.Text = HwFinder.GetCpu();
+                        break;
+                    case "gpuLabel":
+                        textBoxData.Text = HwFinder.GetGpu();
+                        break;
+                    case "ramLabel":
+                        textBoxData.Text = HwFinder.GetRam();
+                        break;
+                    case "diskLabel":
+                        textBoxData.Text = HwFinder.GetHDD();
+                        break;
+                    case "mbLabel":
+                        textBoxData.Text = HwFinder.GetMB();
+                        break;
+                }
+            }
 
             if (e.Key == Key.Enter)
             {

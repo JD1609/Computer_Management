@@ -101,6 +101,12 @@ namespace Computer_Management
             return ramName + " " + ramCap + " " + ramType + " " + "@" + ramClock + "Mhz";
         }
 
+        public static string GetHDD() 
+        {
+            //... make code here
+            return "";
+        }
+
         public static string GetMB()
         {
             string mbName = "";

@@ -158,6 +158,8 @@ namespace Computer_Management
             changeData_window.changedataWindow.Background = (Brush)new BrushConverter().ConvertFromString(background_color);
             changeData_window.textBoxData.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
             changeData_window.textBoxData.Background = (Brush)new BrushConverter().ConvertFromString(midground_color);
+                // --- ChangeData Title
+                changeData_window.titleLabel.Foreground = (Brush)new BrushConverter().ConvertFromString(foreground_color);
         }
 
         public static void SetDarkMode(ShortcutsWindow shortcuts_window, string background_color, string foreground_color, string border_color)
