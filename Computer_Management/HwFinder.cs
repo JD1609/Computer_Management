@@ -103,8 +103,14 @@ namespace Computer_Management
 
         public static string GetHDD() 
         {
-            //... make code here
-            return "";
+            string hddName = "";
+            ManagementObjectSearcher HDD = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            foreach(ManagementObject mo in HDD.Get()) 
+            {
+                hddName += mo["Model"].ToString();
+            }
+
+            return hddName;
         }
 
         public static string GetMB()
