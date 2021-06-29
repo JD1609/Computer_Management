@@ -77,10 +77,9 @@ namespace Computer_Management
 
         public override string ToString()
         {
-            int i = 21;//32;
+            int i = 21;
             string s = "";
-            i -= UserName.Length;
-            i -= DeviceType.ToString().Length;
+            i -= UserName.Length + DeviceType.ToString().Length;
             for (int a = 0; a < i; a++)
             {
                 s += " ";

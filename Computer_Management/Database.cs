@@ -110,7 +110,7 @@ namespace Computer_Management
                         type = Computer.Type.NTB;
                         break;
                     case "NAS":
-                        type = Computer.Type.NTB;
+                        type = Computer.Type.NAS;
                         break;
                     case "SRVR":
                         type = Computer.Type.SRVR;
