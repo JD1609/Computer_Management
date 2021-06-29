@@ -65,7 +65,7 @@ namespace Computer_Management
             {
                 if (user.Length > 4)
                 {
-                    if (user.Length < 26)
+                    if (user.Length < 20)
                     {
                         try
                         {
@@ -124,7 +124,7 @@ namespace Computer_Management
                         catch { MsgBoxEditor.EditInfoMessage("Wrong selected date.\nPlease enter date in format: DD.MM.YYYY", ""); }
                     }
                     else
-                        MsgBoxEditor.EditInfoMessage("Username can't be longer than 25 characters.", "");
+                        MsgBoxEditor.EditInfoMessage("Username can't be longer than 20 characters.", "");
                 }
                 else
                     MsgBoxEditor.EditInfoMessage("Username can't be shortly than 4 characters.", "");

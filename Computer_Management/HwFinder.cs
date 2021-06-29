@@ -107,10 +107,10 @@ namespace Computer_Management
             ManagementObjectSearcher HDD = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
             foreach(ManagementObject mo in HDD.Get()) 
             {
-                hddName += mo["Model"].ToString();
+                hddName += mo["Model"].ToString() + "; ";
             }
 
-            return hddName;
+            return hddName.Remove(hddName.Length - 2, 2);
         }
 
         public static string GetMB()
