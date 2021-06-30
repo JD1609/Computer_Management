@@ -136,7 +136,7 @@ namespace Computer_Management
                 }
                 // --- NOTE ---
                 CachedNote = computer.Note;
-                noteTextBox.Text = computer.Note;
+                noteTextBox.Text = computer.Note.Trim();
             }
             else { }
         }
